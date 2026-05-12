@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --color-electric: #0066FF;
+  --color-electric-hover: #005ce6;
+  --color-apple-gray: #F5F5F7;
+  --color-apple-text: #1D1D1F;
+  --color-apple-text-muted: #86868B;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans bg-white text-[var(--color-apple-text)] antialiased;
+}
