@@ -1,5 +1,8 @@
 import { motion } from 'motion/react';
-import { ExternalLink, Github, Globe } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import netlifyIcon from '../../assets/icons/netlify.svg';
+import cloudflareIcon from '../../assets/icons/cloudflare.svg';
+import vercelIcon from '../../assets/icons/vercel.svg';
 
 export default function Deployment() {
   return (
@@ -17,7 +20,7 @@ export default function Deployment() {
             className="p-8 rounded-3xl bg-apple-gray border border-gray-100 flex flex-col items-center group"
           >
             <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-105 transition-transform">
-              <Globe className="w-8 h-8 text-[#00C7B7]" />
+              <img src={netlifyIcon} alt="Netlify Logo" className="w-9 h-9 object-contain" />
             </div>
             <h4 className="text-xl font-bold text-apple-text mb-2 tracking-tight">Netlify</h4>
             <span className="text-[11px] font-bold px-3 py-1 bg-[#00C7B7]/10 text-[#00A396] rounded-full mb-4 uppercase tracking-wider">最佳极速方案</span>
@@ -32,7 +35,7 @@ export default function Deployment() {
             className="p-8 rounded-3xl bg-apple-gray border border-gray-100 flex flex-col items-center group relative overflow-hidden"
           >
             <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-105 transition-transform">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 15.5C16.5 13.567 14.933 12 13 12C12.44 12 11.91 12.13 11.439 12.355C10.74 10.428 8.878 9 6.667 9C3.537 9 1 11.537 1 14.667C1 17.797 3.537 20.334 6.667 20.334H17.834C20.686 20.334 23 18.02 23 15.167C23 12.314 20.686 10 17.834 10C17.472 10 17.12 10.038 16.784 10.11C16.892 10.55 16.95 11.015 16.95 11.5C16.95 12.97 16.31 14.29 15.297 15.204C15.65 15.39 16.06 15.5 16.5 15.5Z" fill="#F38020"/></svg>
+              <img src={cloudflareIcon} alt="Cloudflare Logo" className="w-10 h-10 object-contain" />
             </div>
             <h4 className="text-xl font-bold text-apple-text mb-2 tracking-tight">Cloudflare Pages</h4>
             <span className="text-[11px] font-bold px-3 py-1 bg-[#F38020]/10 text-[#F38020] rounded-full mb-4 uppercase tracking-wider">全球边缘加速</span>
@@ -47,7 +50,7 @@ export default function Deployment() {
             className="p-8 rounded-3xl bg-apple-gray border border-gray-100 flex flex-col items-center group"
           >
             <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-105 transition-transform">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M12 2L2 19.7778H22L12 2Z" fill="black"/></svg>
+              <img src={vercelIcon} alt="Vercel Logo" className="w-8 h-8 object-contain" />
             </div>
             <h4 className="text-xl font-bold text-apple-text mb-2 tracking-tight">Vercel</h4>
             <span className="text-[11px] font-bold px-3 py-1 bg-black/10 text-black rounded-full mb-4 uppercase tracking-wider">全栈工程标准</span>
