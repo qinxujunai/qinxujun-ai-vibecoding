@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { ExternalLink } from 'lucide-react';
 import codexIcon from '../../assets/icons/codex.svg';
-import claudeIcon from '../../assets/icons/claude.svg';
+import claudeCodeIcon from '../../assets/icons/claude-code.svg';
 import v0Icon from '../../assets/icons/v0.svg';
 
 export default function Tools() {
@@ -29,7 +29,7 @@ export default function Tools() {
             <div>
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-12 h-12 shadow-sm rounded-2xl overflow-hidden border border-gray-100 flex-shrink-0">
-                  <img src={codexIcon} alt="Codex Logo" className="w-full h-full object-cover" />
+                  <img src={codexIcon} alt="Codex Logo" className="w-full h-full object-contain" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xl font-bold text-apple-text tracking-tight">Codex</span>
@@ -54,7 +54,7 @@ export default function Tools() {
             <div>
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-12 h-12 flex items-center justify-center rounded-2xl shadow-sm bg-white border border-gray-100 flex-shrink-0">
-                  <img src={claudeIcon} alt="Claude Logo" className="w-6 h-6" />
+                  <img src={claudeCodeIcon} alt="Claude Logo" className="w-7 h-7 object-contain" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xl font-bold text-apple-text tracking-tight">Claude Code</span>
@@ -88,11 +88,11 @@ export default function Tools() {
             <div>
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-12 h-12 flex items-center justify-center rounded-2xl shadow-sm bg-white border border-gray-100 flex-shrink-0 overflow-hidden">
-                  <img src={v0Icon} alt="v0 Logo" className="w-full h-full object-cover" />
+                  <img src={v0Icon} alt="v0 Logo" className="w-8 h-8 object-contain" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xl font-bold tracking-tight">v0 (by Vercel)</span>
-                  <span className="text-[12px] font-mono text-gray-400 mt-0.5">Generative UI Engine</span>
+                  <span className="text-[12px] font-mono text-gray-400 mt-0.5">AI App Builder</span>
                 </div>
               </div>
               <h4 className="text-2xl font-bold mb-4 tracking-tight">零阻力视觉界面编译器</h4>
@@ -110,4 +110,3 @@ export default function Tools() {
     </section>
   );
 }
-
