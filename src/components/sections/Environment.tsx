@@ -1,7 +1,38 @@
 import { motion } from 'motion/react';
 import { Terminal, GitBranch, Server } from 'lucide-react';
+import TerminalCommand from '../ui/TerminalCommand';
 
 export default function Environment() {
+  const cards = [
+    {
+      icon: <Server className="w-8 h-8 text-electric" />,
+      title: 'Node.js 运行时',
+      desc: 'React、Vite、npm 和大多数前端工具链都依赖 Node.js。先把 LTS 版本装好，后面的安装、构建、部署才有稳定底座。',
+      command: 'winget install OpenJS.NodeJS.LTS',
+      url: 'https://nodejs.org/en/download',
+      accentClass: 'text-electric',
+      dark: false,
+    },
+    {
+      icon: <GitBranch className="w-8 h-8 text-[#FF5F56]" />,
+      title: 'Git 版本控制',
+      desc: 'Git 是 AI 编程的安全绳。每一次大模型修改前，都应该有可回退的检查点，让试错变成工程流程，而不是冒险。',
+      command: 'winget install --id Git.Git -e --source winget',
+      url: 'https://git-scm.com/install/windows',
+      accentClass: 'text-[#FF5F56]',
+      dark: false,
+    },
+    {
+      icon: <Terminal className="w-8 h-8 text-white" />,
+      title: '终端基础 (Terminal)',
+      desc: 'Claude Code、Codex CLI 和部署命令都从终端启动。Windows 推荐 PowerShell；macOS 推荐 Terminal 或 iTerm。',
+      command: 'claude',
+      url: 'https://claude.com/product/claude-code',
+      accentClass: 'text-[#D97757]',
+      dark: true,
+    },
+  ];
+
   return (
     <section id="environment" className="py-24 md:py-32 bg-white border-t border-gray-100/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,65 +48,33 @@ export default function Environment() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ y: -6 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col items-center text-center group transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
-          >
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform duration-300">
-              <Server className="w-8 h-8 text-electric" />
-            </div>
-            <h4 className="text-xl font-bold mb-3">Node.js 运行时</h4>
-            <p className="text-[14px] text-apple-text-muted mb-6 leading-relaxed">
-              现代前端框架（React/Vite）的物理引擎。你必须在本地安装 Node.js (≥ 20.x 版本)，以提供核心模块解析和 npm 包管理器能力。
-            </p>
-            <div className="mt-auto bg-black rounded-lg p-3 w-full text-left">
-              <code className="text-xs font-mono text-gray-300"><span className="text-[#3b82f6]">$</span> node -v<br/><span className="text-[#22c55e]">v20.10.0</span></code>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            whileHover={{ y: -6 }}
-            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col items-center text-center group transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
-          >
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform duration-300">
-              <GitBranch className="w-8 h-8 text-[#FF5F56]" />
-            </div>
-            <h4 className="text-xl font-bold mb-3">Git 版本控制</h4>
-            <p className="text-[14px] text-apple-text-muted mb-6 leading-relaxed">
-              AI 编程中最重要的“撤销胶囊”。在让大模型批量重构代码前，必须建立 Git 检查点，这是防止上下文污染无法挽回的底线原则。
-            </p>
-            <div className="mt-auto bg-black rounded-lg p-3 w-full text-left">
-              <code className="text-xs font-mono text-gray-300"><span className="text-[#3b82f6]">$</span> git checkout -b feature<br/><span className="text-[#22c55e]">Switched to a new branch</span></code>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            whileHover={{ y: -6 }}
-            className="p-8 rounded-[2rem] bg-apple-text flex flex-col items-center text-center group transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.16)]"
-          >
-            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform duration-300">
-              <Terminal className="w-8 h-8 text-white" />
-            </div>
-            <h4 className="text-xl font-bold mb-3 text-white">终端基础 (Terminal)</h4>
-            <p className="text-[14px] text-gray-300 mb-6 leading-relaxed">
-              它是唤醒 Claude Code 等 CLI 的入口。对于 macOS：按 <code className="bg-white/20 px-1 rounded">Cmd + 空格</code> 搜索「终端」；对于 Windows：按 <code className="bg-white/20 px-1 rounded">Win</code> 键搜索「PowerShell」。
-            </p>
-            <div className="mt-auto bg-black/50 border border-white/10 rounded-lg p-3 w-full text-left">
-              <code className="text-xs font-mono text-gray-300"><span className="text-gray-500"># 在打开的窗口中输入:</span><br/><span className="text-[#22c55e]">claude</span></code>
-            </div>
-          </motion.div>
+          {cards.map((card, idx) => (
+            <motion.div
+              key={card.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6 }}
+              className={`p-8 rounded-[2rem] flex flex-col items-center text-center group transition-shadow duration-300 ${card.dark ? 'bg-apple-text hover:shadow-[0_18px_50px_rgba(0,0,0,0.16)]' : 'bg-apple-gray hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]'}`}
+            >
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform duration-300 ${card.dark ? 'bg-white/10' : 'bg-white'}`}>
+                {card.icon}
+              </div>
+              <h4 className={`text-xl font-bold mb-3 ${card.dark ? 'text-white' : 'text-apple-text'}`}>{card.title}</h4>
+              <p className={`text-[14px] mb-6 leading-relaxed ${card.dark ? 'text-gray-300' : 'text-apple-text-muted'}`}>
+                {card.desc}
+              </p>
+              <TerminalCommand
+                caption={card.dark ? '# 在终端里启动' : '# 一行安装到本地'}
+                command={card.command}
+                officialUrl={card.url}
+                officialLabel="官方安装"
+                accentClass={card.accentClass}
+                className="mt-auto w-full"
+              />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

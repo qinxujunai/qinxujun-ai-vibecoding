@@ -27,9 +27,17 @@ function TerminalLine({
   );
 }
 
+const terminalSteps = [
+  ['$', 'claude --model opus'],
+  ['>', 'Interview the user before writing code.'],
+  ['•', 'Read(README.md, AGENTS.md, package.json)'],
+  ['•', 'Plan(scope, risks, tests)'],
+  ['✓', 'Build passed · browser checked · ready to ship'],
+];
+
 export default function Hero() {
   return (
-    <section className="relative flex flex-col items-center overflow-hidden px-4 pt-32 pb-20 text-center md:pt-40 md:pb-32">
+    <section className="relative flex flex-col items-center overflow-hidden px-4 pt-28 pb-16 text-center md:pt-32 md:pb-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -68,11 +76,11 @@ export default function Hero() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="relative mt-16 w-full max-w-5xl overflow-hidden rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] ring-1 ring-gray-900/5 md:mt-20"
+        className="relative mt-14 w-full max-w-5xl overflow-hidden rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] ring-1 ring-gray-900/5 md:mt-16"
       >
         <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/10 to-transparent" />
 
-        <div className="h-[372px] w-full overflow-hidden bg-[#070707] text-left text-white sm:h-[410px] md:h-[460px]">
+        <div className="h-[340px] w-full overflow-hidden bg-[#070707] text-left text-white sm:h-[360px] md:h-[390px]">
           <div className="flex h-11 items-center gap-2 border-b border-white/10 bg-[#111111] px-4">
             <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
             <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
@@ -105,40 +113,15 @@ export default function Hero() {
             </div>
 
             <div className="space-y-2.5">
-              <TerminalLine marker="$">
-                claude --model opus
-              </TerminalLine>
-              <TerminalLine marker=">">
-                Refactor Hero.tsx into a compact Claude Code terminal mockup.
-              </TerminalLine>
-              <TerminalLine marker="⏺">
-                Read(<span className="text-white">src/components/sections/Hero.tsx</span>)
-              </TerminalLine>
-              <TerminalLine marker="⏺">
-                Edit(<span className="text-white">Hero.tsx</span>) · replace long dashboard with CLI session
-              </TerminalLine>
-              <TerminalLine marker="⎿" muted>
-                Permission required · update one file · no external image assets
-              </TerminalLine>
+              {terminalSteps.map(([marker, text], idx) => (
+                <TerminalLine key={idx} marker={marker} muted={idx === 4}>
+                  {text}
+                </TerminalLine>
+              ))}
             </div>
 
-            <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-black/35">
-              <div className="flex items-center justify-between border-b border-white/10 px-3 py-2 text-[11px] text-white/48">
-                <span>src/components/sections/Hero.tsx</span>
-                <span className="text-emerald-300">review diff</span>
-              </div>
-              <div className="space-y-1 p-3 text-[11px] md:text-[12px]">
-                <div className="rounded bg-rose-400/10 px-2 py-1 text-rose-200">- oversized dashboard-style mockup</div>
-                <div className="rounded bg-emerald-400/10 px-2 py-1 text-emerald-100">+ short terminal transcript, tool calls, approval line</div>
-              </div>
-            </div>
-
-            <div className="mt-4 flex items-center gap-2 text-white/50">
-              <span>?</span>
-              <span>Approve edits?</span>
-              <span className="rounded bg-white/10 px-2 py-0.5 text-white/76">Yes</span>
-              <span className="rounded bg-white/5 px-2 py-0.5">No</span>
-              <span className="h-4 w-2 animate-pulse bg-white/70" />
+            <div className="mt-5 rounded-xl border border-emerald-300/15 bg-emerald-300/5 px-3 py-2.5 text-[12px] text-emerald-100">
+              Ship only after the plan, build, browser check, and human review all agree.
             </div>
           </div>
         </div>

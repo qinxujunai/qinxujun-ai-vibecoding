@@ -22,8 +22,8 @@ export default function App() {
       <main>
         <Hero />
         <Concept />
-        <Environment />
         <Tools />
+        <Environment />
         <ContextEngine />
         <Workflow />
         <Prompts />
