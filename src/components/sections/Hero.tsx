@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import claudeIcon from '../../assets/icons/claude.svg';
+import type { ReactNode } from 'react';
 
 function ClaudeMark() {
   return (
@@ -16,7 +17,7 @@ function TerminalLine({
   muted = false,
 }: {
   marker: string;
-  children: React.ReactNode;
+  children: ReactNode;
   muted?: boolean;
 }) {
   return (
@@ -37,7 +38,7 @@ const terminalSteps = [
 
 export default function Hero() {
   return (
-    <section className="relative flex flex-col items-center overflow-hidden px-4 pt-28 pb-16 text-center md:pt-32 md:pb-24">
+    <section className="relative flex flex-col items-center overflow-hidden px-4 pt-32 pb-20 text-center md:pt-36 md:pb-28">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -64,10 +65,10 @@ export default function Hero() {
             阅读核心理念
           </a>
           <a
-            href="#tools"
+            href="#environment"
             className="group flex w-full items-center justify-center gap-2 rounded-full bg-apple-gray px-8 py-3.5 text-[17px] font-semibold text-apple-text transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-200 hover:shadow-lg hover:shadow-black/5 active:translate-y-0 sm:w-auto"
           >
-            探索工具矩阵 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            搭好底层环境 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
       </motion.div>
@@ -76,7 +77,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="relative mt-14 w-full max-w-5xl overflow-hidden rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] ring-1 ring-gray-900/5 md:mt-16"
+        className="relative mt-20 w-full max-w-5xl overflow-hidden rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] ring-1 ring-gray-900/5 md:mt-24"
       >
         <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/10 to-transparent" />
 
