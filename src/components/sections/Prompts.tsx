@@ -30,7 +30,7 @@ function PromptCard({ title, desc, content }: { title: string, desc: string, con
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]">
       <div className="p-6 md:px-8 md:py-6 border-b border-gray-100 flex justify-between items-center bg-white">
         <div>
           <h4 className="text-[19px] font-bold text-apple-text mb-1 tracking-tight">{title}</h4>

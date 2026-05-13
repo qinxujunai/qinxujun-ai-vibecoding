@@ -13,17 +13,17 @@ export default function Navbar() {
           <div className="w-2.5 h-2.5 rounded-full bg-apple-text"></div>
           <span className="font-bold text-[17px] text-apple-text tracking-tight">ai.vibecoding</span>
         </div>
-        <div className="hidden md:flex items-center gap-8 text-[13px] font-medium text-apple-text-muted">
-          <a href="#concept" className="hover:text-apple-text transition-colors">第一性原理</a>
-          <a href="#environment" className="hover:text-apple-text transition-colors">前置环境</a>
-          <a href="#tools" className="hover:text-apple-text transition-colors">基建级工具</a>
-          <a href="#workflow" className="hover:text-apple-text transition-colors">高阶工作流</a>
-          <a href="#prompts" className="hover:text-apple-text transition-colors">核心指令库</a>
+        <div className="hidden md:flex items-center gap-2 text-[13px] font-medium text-apple-text-muted">
+          <a href="#concept" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">第一性原理</a>
+          <a href="#environment" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">前置环境</a>
+          <a href="#tools" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">基建级工具</a>
+          <a href="#workflow" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">高阶工作流</a>
+          <a href="#prompts" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">核心指令库</a>
         </div>
         <div>
-          <button className="text-[13px] bg-apple-text text-white px-5 py-1.5 rounded-full font-medium hover:bg-black transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-black">
-            开始项目
-          </button>
+          <a href="#prompts" className="inline-flex text-[13px] bg-apple-text text-white px-5 py-1.5 rounded-full font-medium shadow-sm shadow-black/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-black hover:shadow-md hover:shadow-black/15 active:translate-y-0 focus:ring-2 focus:ring-offset-2 focus:ring-black">
+            获取指令
+          </a>
         </div>
       </div>
     </motion.nav>

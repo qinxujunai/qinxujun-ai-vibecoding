@@ -18,8 +18,8 @@ export default function Concept() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-            <div className="w-10 h-10 border border-gray-200 text-apple-text rounded-full flex items-center justify-center mb-6">
+          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} whileHover={{ y: -4 }} className="group">
+            <div className="w-10 h-10 border border-gray-200 text-apple-text rounded-full flex items-center justify-center mb-6 transition-all duration-300 group-hover:border-apple-text group-hover:shadow-sm">
               <span className="font-mono text-sm font-semibold">01</span>
             </div>
             <h4 className="text-[19px] font-bold mb-3 tracking-tight">语言即架构</h4>
@@ -28,8 +28,8 @@ export default function Concept() {
             </p>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-            <div className="w-10 h-10 bg-apple-text text-white rounded-full flex items-center justify-center mb-6">
+          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} whileHover={{ y: -4 }} className="group">
+            <div className="w-10 h-10 bg-apple-text text-white rounded-full flex items-center justify-center mb-6 transition-all duration-300 group-hover:shadow-md group-hover:shadow-black/10">
               <span className="font-mono text-sm font-semibold">02</span>
             </div>
             <h4 className="text-[19px] font-bold mb-3 tracking-tight">专注状态与业务</h4>
@@ -38,8 +38,8 @@ export default function Concept() {
             </p>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
-            <div className="w-10 h-10 border border-gray-200 text-apple-text rounded-full flex items-center justify-center mb-6">
+          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} whileHover={{ y: -4 }} className="group">
+            <div className="w-10 h-10 border border-gray-200 text-apple-text rounded-full flex items-center justify-center mb-6 transition-all duration-300 group-hover:border-apple-text group-hover:shadow-sm">
               <span className="font-mono text-sm font-semibold">03</span>
             </div>
             <h4 className="text-[19px] font-bold mb-3 tracking-tight">确定性的护城河</h4>
