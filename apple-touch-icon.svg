@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="ai.vibecoding">
+  <rect width="180" height="180" rx="42" fill="#1D1D1F"/>
+  <circle cx="52" cy="50" r="15" fill="#F5F5F7"/>
+  <path d="M54 124h64" fill="none" stroke="#0066FF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M118 78v46" fill="none" stroke="#0066FF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M70 78l23 23-23 23" fill="none" stroke="#F5F5F7" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
