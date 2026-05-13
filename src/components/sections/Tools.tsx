@@ -1,36 +1,15 @@
-import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Check, Copy, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import codexIcon from '../../assets/icons/codex.svg';
 import claudeIcon from '../../assets/icons/claude.svg';
 import v0Icon from '../../assets/icons/v0.svg';
+import TerminalCommand from '../ui/TerminalCommand';
 
-const claudeInstallCommand = 'npm install -g @anthropic-ai/claude-code';
+const claudeInstallCommand = 'winget install Anthropic.ClaudeCode';
 const claudeCodeOfficialUrl =
   'https://claude.com/product/claude-code?utm_source=google&utm_medium=paid_search_coder&utm_campaign=acq_code_us_q3&utm_term=claude%20code&gclsrc=aw.ds&gad_source=1&gad_campaignid=23253558478&gbraid=0AAAAA99jmquYOUDyoNZF4KOi6hbTqAYz2&gclid=CjwKCAjwn4vQBhBsEiwAq3hhN3s4NMPDp7C6tivDusoCXUVs_Z072QAIEPeAHR2-uLTyYQbqu5xhBhoCu18QAvD_BwE';
 
 export default function Tools() {
-  const [copiedClaudeInstall, setCopiedClaudeInstall] = useState(false);
-
-  const copyClaudeInstall = async () => {
-    try {
-      await navigator.clipboard.writeText(claudeInstallCommand);
-    } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = claudeInstallCommand;
-      textarea.setAttribute('readonly', '');
-      textarea.style.position = 'fixed';
-      textarea.style.top = '-9999px';
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-    }
-
-    setCopiedClaudeInstall(true);
-    window.setTimeout(() => setCopiedClaudeInstall(false), 1800);
-  };
-
   return (
     <section id="tools" className="py-24 md:py-32 bg-apple-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +26,7 @@ export default function Tools() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-8">
           
-          {/* OpenAI Codex */}
+          {/* Codex */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             whileHover={{ y: -6 }}
@@ -61,12 +40,12 @@ export default function Tools() {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xl font-bold text-apple-text tracking-tight">Codex</span>
-                  <span className="text-[12px] font-mono text-apple-text-muted mt-0.5">OpenAI Coding Agent</span>
+                  <span className="text-[12px] font-mono text-apple-text-muted mt-0.5">Codex Coding Agent</span>
                 </div>
               </div>
               <h4 className="text-2xl font-bold mb-4 tracking-tight">致力于构建与交付产品的智能体</h4>
               <p className="text-apple-text-muted text-[15px] leading-relaxed mb-10">
-                由 ChatGPT 提供技术支持。它不再是从原点提供自动补全的引擎，而是已经进化成为主导研发链路、以闭环交付为导向的全天候核心编程代理。
+                它不再只是自动补全，而是能围绕代码库阅读、计划、修改、验证与复盘的工程代理。真正的价值不在于写得快，而在于把交付路径拉进可审查的闭环。
               </p>
             </div>
             <a href="https://chatgpt.com/zh-Hans-CN/codex/" target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-2 text-[14px] font-semibold text-white bg-apple-text hover:bg-black px-5 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10 active:scale-95 mt-auto">
@@ -95,33 +74,14 @@ export default function Tools() {
                 抛开繁重的 UI 面板，Anthropic 官方出品的 CLI Agent 可以直接穿梭于你的本地目录之间。它极其擅长多文件时序逻辑梳理、海量 Repo 排错与执行端到端的跨组件重构。
               </p>
             </div>
-            <div className="bg-[#1C1C1E] rounded-3xl p-5 mt-auto shadow-xl ring-1 ring-white/10 relative overflow-hidden transition-all duration-300 group-hover:scale-[1.01] hover:ring-[#D97757]/30">
-              <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#D97757]/30 to-transparent"></div>
-              <div className="flex items-center justify-between gap-3 mb-4">
-                <div className="flex gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
-                </div>
-                <a href={claudeCodeOfficialUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-semibold text-[#D97757] transition-colors hover:bg-[#D97757]/10">
-                  官方安装 <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-              <code className="text-[13px] font-mono flex flex-col gap-1.5 leading-relaxed">
-                <span className="text-gray-500"># 安装 Claude Code 到本地</span>
-                <button
-                  type="button"
-                  onClick={copyClaudeInstall}
-                  className="group/copy flex w-full items-center justify-between gap-3 rounded-xl bg-white/[0.04] px-3 py-2 text-left text-white ring-1 ring-white/10 transition-all duration-300 hover:bg-white/[0.07] hover:ring-[#D97757]/40"
-                  title="复制 Claude Code 安装命令"
-                >
-                  <span className="min-w-0 break-all">$ {claudeInstallCommand}</span>
-                  <span className="shrink-0 text-[#D97757] transition-transform duration-300 group-hover/copy:scale-110">
-                    {copiedClaudeInstall ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                  </span>
-                </button>
-              </code>
-            </div>
+            <TerminalCommand
+              caption="# 安装 Claude Code 到本地"
+              command={claudeInstallCommand}
+              officialUrl={claudeCodeOfficialUrl}
+              officialLabel="官方安装"
+              accentClass="text-[#D97757]"
+              className="mt-auto group-hover:scale-[1.01]"
+            />
           </motion.div>
 
           {/* v0 by Vercel */}

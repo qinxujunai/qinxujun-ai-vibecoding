@@ -17,3 +17,33 @@ html {
 body {
   @apply font-sans bg-white text-[var(--color-apple-text)] antialiased;
 }
+
+.command-scroll {
+  scrollbar-width: none;
+  scrollbar-color: rgb(255 255 255 / 0.32) transparent;
+}
+
+.command-scroll::-webkit-scrollbar {
+  height: 0;
+}
+
+.group\/terminal:hover .command-scroll,
+.command-scroll:focus {
+  scrollbar-width: thin;
+}
+
+.group\/terminal:hover .command-scroll::-webkit-scrollbar,
+.command-scroll:focus::-webkit-scrollbar {
+  height: 4px;
+}
+
+.group\/terminal:hover .command-scroll::-webkit-scrollbar-thumb,
+.command-scroll:focus::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.32);
+}
+
+.group\/terminal:hover .command-scroll::-webkit-scrollbar-track,
+.command-scroll:focus::-webkit-scrollbar-track {
+  background: transparent;
+}

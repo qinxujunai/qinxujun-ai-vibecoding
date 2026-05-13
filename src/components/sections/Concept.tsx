@@ -1,6 +1,27 @@
 import { motion } from 'motion/react';
 
 export default function Concept() {
+  const principles = [
+    {
+      id: '01',
+      title: '提出问题的能力',
+      desc: '自然语言编程的起点不是“写个页面”，而是把模糊想法采访成目标、用户、边界与验收标准。问题定义得越清楚，模型越像工程伙伴，而不是许愿池。',
+      active: false,
+    },
+    {
+      id: '02',
+      title: '组织上下文的能力',
+      desc: 'README、AGENTS.md、Skills、MCP、截图、日志和历史决策都不是附件，它们是模型的工作记忆。上下文越结构化，输出越接近你的真实意图。',
+      active: true,
+    },
+    {
+      id: '03',
+      title: '交付确定性的能力',
+      desc: '模型负责执行，人负责边界。计划、原子修改、构建、浏览器验收和复盘，把概率性的生成结果压进可验证的工程闭环。',
+      active: false,
+    },
+  ];
+
   return (
     <section id="concept" className="py-24 md:py-32 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,35 +39,23 @@ export default function Concept() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} whileHover={{ y: -4 }} className="group">
-            <div className="w-10 h-10 border border-gray-200 text-apple-text rounded-full flex items-center justify-center mb-6 transition-all duration-300 group-hover:border-apple-text group-hover:shadow-sm">
-              <span className="font-mono text-sm font-semibold">01</span>
-            </div>
-            <h4 className="text-[19px] font-bold mb-3 tracking-tight">语言即架构</h4>
-            <p className="text-apple-text-muted text-[15px] leading-relaxed">
-              AI 编程并非简单的代码自动补全。它要求我们将自然语言升维：用精确的指令描述数据流向、组件边界与错误处理逻辑。如无必要，勿增实体。
-            </p>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} whileHover={{ y: -4 }} className="group">
-            <div className="w-10 h-10 bg-apple-text text-white rounded-full flex items-center justify-center mb-6 transition-all duration-300 group-hover:shadow-md group-hover:shadow-black/10">
-              <span className="font-mono text-sm font-semibold">02</span>
-            </div>
-            <h4 className="text-[19px] font-bold mb-3 tracking-tight">专注状态与业务</h4>
-            <p className="text-apple-text-muted text-[15px] leading-relaxed">
-              当拼写语法和 API 记忆不再是瓶颈，工程师 100% 的精力应当回归系统设计的本质：思考业务边界、状态机流转与底层数据安全。
-            </p>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} whileHover={{ y: -4 }} className="group">
-            <div className="w-10 h-10 border border-gray-200 text-apple-text rounded-full flex items-center justify-center mb-6 transition-all duration-300 group-hover:border-apple-text group-hover:shadow-sm">
-              <span className="font-mono text-sm font-semibold">03</span>
-            </div>
-            <h4 className="text-[19px] font-bold mb-3 tracking-tight">确定性的护城河</h4>
-            <p className="text-apple-text-muted text-[15px] leading-relaxed">
-              大模型的输出天然带有概率性盲区，而工程环境需要绝对的确定性。我们必须引入审计、原子化修改与自动化校验，在这两者之间建立硬性防线。
-            </p>
-          </motion.div>
+          {principles.map((item, idx) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 + idx * 0.1 }}
+              whileHover={{ y: -4 }}
+              className="group"
+            >
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-6 transition-all duration-300 ${item.active ? 'bg-apple-text text-white group-hover:shadow-md group-hover:shadow-black/10' : 'border border-gray-200 text-apple-text group-hover:border-apple-text group-hover:shadow-sm'}`}>
+                <span className="font-mono text-sm font-semibold">{item.id}</span>
+              </div>
+              <h4 className="text-[19px] font-bold mb-3 tracking-tight">{item.title}</h4>
+              <p className="text-apple-text-muted text-[15px] leading-relaxed">{item.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

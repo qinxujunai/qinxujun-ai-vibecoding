@@ -15,8 +15,8 @@ export default function Navbar() {
         </div>
         <div className="hidden md:flex items-center gap-2 text-[13px] font-medium text-apple-text-muted">
           <a href="#concept" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">第一性原理</a>
-          <a href="#environment" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">前置环境</a>
           <a href="#tools" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">基建级工具</a>
+          <a href="#environment" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">前置环境</a>
           <a href="#workflow" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">高阶工作流</a>
           <a href="#prompts" className="rounded-full px-3 py-1.5 transition-all duration-300 hover:bg-apple-gray hover:text-apple-text">核心指令库</a>
         </div>

@@ -58,7 +58,7 @@ export default function ContextEngine() {
             </p>
           </motion.div>
 
-          {/* Autonomous Agents */}
+          {/* Subagents & Hooks */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -70,13 +70,13 @@ export default function ContextEngine() {
             <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-8 ring-1 ring-gray-900/5 group-hover:scale-105 transition-transform duration-300">
               <Code2 className="w-7 h-7 text-[#FF5F56]" />
             </div>
-            <h4 className="text-xl font-bold mb-3 tracking-tight">自主架构环境</h4>
+            <h4 className="text-xl font-bold mb-3 tracking-tight">子代理与钩子</h4>
             <div className="text-[11px] font-mono text-[#FF5F56] flex gap-2 mb-4">
-               <span className="px-2 py-1 bg-[#FF5F56]/10 rounded border border-[#FF5F56]/20">OpenHands</span>
-               <span className="px-2 py-1 bg-[#FF5F56]/10 rounded border border-[#FF5F56]/20">SWE-bench</span>
+               <span className="px-2 py-1 bg-[#FF5F56]/10 rounded border border-[#FF5F56]/20">Subagents</span>
+               <span className="px-2 py-1 bg-[#FF5F56]/10 rounded border border-[#FF5F56]/20">Hooks</span>
             </div>
             <p className="text-[14px] text-apple-text-muted leading-relaxed">
-              底层基建正在从 Copilot (辅助编码) 演进为 Agent (任务接管)。以 Devin 或开源 OpenHands (前 OpenDevin) 为代表的云端沙盒环境配合顶级评测基准 (SWE-bench / Harness)，让模型具备独立思考、操作 Shell 循环并自行编写测试的完备闭环能力。
+              复杂任务不要塞给一个无限膨胀的上下文窗口。让代码审查、测试修复、性能排查各自进入专门的子代理；再用 hooks 把构建、审计和阻断条件嵌入工作流，让协作从“聊天”变成工程流水线。
             </p>
           </motion.div>
         </div>
