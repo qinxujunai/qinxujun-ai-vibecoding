@@ -22,7 +22,9 @@ export default function ContextEngine() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col group relative overflow-hidden"
+            whileHover={{ y: -6 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col group relative overflow-hidden transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
           >
             <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-8 ring-1 ring-gray-900/5 group-hover:scale-105 transition-transform duration-300">
               <Database className="w-7 h-7 text-electric" />
@@ -40,7 +42,8 @@ export default function ContextEngine() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col group relative overflow-hidden"
+            whileHover={{ y: -6 }}
+            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col group relative overflow-hidden transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
           >
             <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-8 ring-1 ring-gray-900/5 group-hover:scale-105 transition-transform duration-300">
               <ShieldCheck className="w-7 h-7 text-apple-text" />
@@ -61,7 +64,8 @@ export default function ContextEngine() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col group relative overflow-hidden"
+            whileHover={{ y: -6 }}
+            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col group relative overflow-hidden transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
           >
             <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-8 ring-1 ring-gray-900/5 group-hover:scale-105 transition-transform duration-300">
               <Code2 className="w-7 h-7 text-[#FF5F56]" />

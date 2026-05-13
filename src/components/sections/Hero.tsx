@@ -51,13 +51,13 @@ export default function Hero() {
         <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
           <a
             href="#concept"
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-apple-text px-8 py-3.5 text-[17px] font-semibold text-white shadow-md shadow-black/10 transition-colors hover:bg-black sm:w-auto"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-apple-text px-8 py-3.5 text-[17px] font-semibold text-white shadow-md shadow-black/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-black hover:shadow-lg hover:shadow-black/15 active:translate-y-0 sm:w-auto"
           >
             阅读核心理念
           </a>
           <a
             href="#tools"
-            className="group flex w-full items-center justify-center gap-2 rounded-full bg-apple-gray px-8 py-3.5 text-[17px] font-semibold text-apple-text transition-colors hover:bg-gray-200 sm:w-auto"
+            className="group flex w-full items-center justify-center gap-2 rounded-full bg-apple-gray px-8 py-3.5 text-[17px] font-semibold text-apple-text transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-200 hover:shadow-lg hover:shadow-black/5 active:translate-y-0 sm:w-auto"
           >
             探索工具矩阵 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>

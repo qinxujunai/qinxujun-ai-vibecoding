@@ -1,10 +1,36 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
-import { ExternalLink } from 'lucide-react';
+import { Check, Copy, ExternalLink } from 'lucide-react';
 import codexIcon from '../../assets/icons/codex.svg';
-import claudeCodeIcon from '../../assets/icons/claude-code.svg';
+import claudeIcon from '../../assets/icons/claude.svg';
 import v0Icon from '../../assets/icons/v0.svg';
 
+const claudeInstallCommand = 'npm install -g @anthropic-ai/claude-code';
+const claudeCodeOfficialUrl =
+  'https://claude.com/product/claude-code?utm_source=google&utm_medium=paid_search_coder&utm_campaign=acq_code_us_q3&utm_term=claude%20code&gclsrc=aw.ds&gad_source=1&gad_campaignid=23253558478&gbraid=0AAAAA99jmquYOUDyoNZF4KOi6hbTqAYz2&gclid=CjwKCAjwn4vQBhBsEiwAq3hhN3s4NMPDp7C6tivDusoCXUVs_Z072QAIEPeAHR2-uLTyYQbqu5xhBhoCu18QAvD_BwE';
+
 export default function Tools() {
+  const [copiedClaudeInstall, setCopiedClaudeInstall] = useState(false);
+
+  const copyClaudeInstall = async () => {
+    try {
+      await navigator.clipboard.writeText(claudeInstallCommand);
+    } catch {
+      const textarea = document.createElement('textarea');
+      textarea.value = claudeInstallCommand;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.top = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+
+    setCopiedClaudeInstall(true);
+    window.setTimeout(() => setCopiedClaudeInstall(false), 1800);
+  };
+
   return (
     <section id="tools" className="py-24 md:py-32 bg-apple-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,11 +50,13 @@ export default function Tools() {
           {/* OpenAI Codex */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="bg-white rounded-[2rem] p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col justify-between group"
+            whileHover={{ y: -6 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-white rounded-[2rem] p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 flex flex-col justify-between group transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
           >
             <div>
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 shadow-sm rounded-2xl overflow-hidden border border-gray-100 flex-shrink-0">
+                <div className="w-12 h-12 shadow-sm rounded-2xl overflow-hidden border border-gray-100 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
                   <img src={codexIcon} alt="Codex Logo" className="w-full h-full object-contain" />
                 </div>
                 <div className="flex flex-col">
@@ -41,7 +69,7 @@ export default function Tools() {
                 由 ChatGPT 提供技术支持。它不再是从原点提供自动补全的引擎，而是已经进化成为主导研发链路、以闭环交付为导向的全天候核心编程代理。
               </p>
             </div>
-            <a href="https://chatgpt.com/zh-Hans-CN/codex/" target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-2 text-[14px] font-semibold text-white bg-apple-text hover:bg-black px-5 py-3 rounded-full transition-transform active:scale-95 mt-auto">
+            <a href="https://chatgpt.com/zh-Hans-CN/codex/" target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-2 text-[14px] font-semibold text-white bg-apple-text hover:bg-black px-5 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10 active:scale-95 mt-auto">
               下载桌面客户端 <ExternalLink className="w-3 h-3" />
             </a>
           </motion.div>
@@ -49,12 +77,13 @@ export default function Tools() {
           {/* Claude Code */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            className="bg-[#FAFAFA] rounded-[2rem] p-8 md:p-10 border border-gray-200 shadow-sm flex flex-col justify-between group"
+            whileHover={{ y: -6 }}
+            className="bg-[#FAFAFA] rounded-[2rem] p-8 md:p-10 border border-gray-200 shadow-sm flex flex-col justify-between group transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(217,119,87,0.12)]"
           >
             <div>
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 flex items-center justify-center rounded-2xl shadow-sm bg-white border border-gray-100 flex-shrink-0">
-                  <img src={claudeCodeIcon} alt="Claude Logo" className="w-7 h-7 object-contain" />
+                <div className="w-12 h-12 flex items-center justify-center rounded-2xl shadow-sm bg-white border border-gray-100 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+                  <img src={claudeIcon} alt="Claude Logo" className="w-7 h-7 object-contain" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xl font-bold text-apple-text tracking-tight">Claude Code</span>
@@ -66,16 +95,31 @@ export default function Tools() {
                 抛开繁重的 UI 面板，Anthropic 官方出品的 CLI Agent 可以直接穿梭于你的本地目录之间。它极其擅长多文件时序逻辑梳理、海量 Repo 排错与执行端到端的跨组件重构。
               </p>
             </div>
-            <div className="bg-[#1C1C1E] rounded-3xl p-5 mt-auto shadow-xl ring-1 ring-white/10 relative overflow-hidden">
-               <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#D97757]/30 to-transparent"></div>
-              <div className="flex gap-2 mb-4">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+            <div className="bg-[#1C1C1E] rounded-3xl p-5 mt-auto shadow-xl ring-1 ring-white/10 relative overflow-hidden transition-all duration-300 group-hover:scale-[1.01] hover:ring-[#D97757]/30">
+              <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#D97757]/30 to-transparent"></div>
+              <div className="flex items-center justify-between gap-3 mb-4">
+                <div className="flex gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
+                </div>
+                <a href={claudeCodeOfficialUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-semibold text-[#D97757] transition-colors hover:bg-[#D97757]/10">
+                  官方安装 <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
-              <code className="text-[13px] font-mono flex flex-col gap-1.5 overflow-x-auto leading-relaxed">
-                <span className="text-gray-500"># 唤醒你的系统代理</span>
-                <span className="text-white">$ claude</span>
+              <code className="text-[13px] font-mono flex flex-col gap-1.5 leading-relaxed">
+                <span className="text-gray-500"># 安装 Claude Code 到本地</span>
+                <button
+                  type="button"
+                  onClick={copyClaudeInstall}
+                  className="group/copy flex w-full items-center justify-between gap-3 rounded-xl bg-white/[0.04] px-3 py-2 text-left text-white ring-1 ring-white/10 transition-all duration-300 hover:bg-white/[0.07] hover:ring-[#D97757]/40"
+                  title="复制 Claude Code 安装命令"
+                >
+                  <span className="min-w-0 break-all">$ {claudeInstallCommand}</span>
+                  <span className="shrink-0 text-[#D97757] transition-transform duration-300 group-hover/copy:scale-110">
+                    {copiedClaudeInstall ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </span>
+                </button>
               </code>
             </div>
           </motion.div>
@@ -83,11 +127,12 @@ export default function Tools() {
           {/* v0 by Vercel */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-            className="bg-black rounded-[2rem] p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-gray-800 flex flex-col justify-between group text-white"
+            whileHover={{ y: -6 }}
+            className="bg-black rounded-[2rem] p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-gray-800 flex flex-col justify-between group text-white transition-shadow duration-300 hover:shadow-[0_20px_60px_rgba(0,0,0,0.22)]"
           >
             <div>
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 flex items-center justify-center rounded-2xl shadow-sm bg-white border border-gray-100 flex-shrink-0 overflow-hidden">
+                <div className="w-12 h-12 flex items-center justify-center rounded-2xl shadow-sm bg-white border border-gray-100 flex-shrink-0 overflow-hidden transition-transform duration-300 group-hover:scale-105">
                   <img src={v0Icon} alt="v0 Logo" className="w-8 h-8 object-contain" />
                 </div>
                 <div className="flex flex-col">
@@ -100,7 +145,7 @@ export default function Tools() {
                 完美闭环的起点。跳过传统的 Figma 线框图设计阶层，用自然语言将光影、色调与页面结构直接编译为生产级的 React / Tailwind 组件。视觉驱动与逻辑解耦，是最高阶 Vibe Coding 的起手式。
               </p>
             </div>
-            <a href="https://v0.dev/" target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-2 text-[14px] font-semibold text-black bg-white hover:bg-gray-200 px-5 py-3 rounded-full transition-transform active:scale-95 mt-auto">
+            <a href="https://v0.dev/" target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-2 text-[14px] font-semibold text-black bg-white hover:bg-gray-200 px-5 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-white/10 active:scale-95 mt-auto">
               启动生成式 UI <ExternalLink className="w-3 h-3" />
             </a>
           </motion.div>

@@ -21,7 +21,9 @@ export default function Environment() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col items-center text-center group"
+            whileHover={{ y: -6 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col items-center text-center group transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
           >
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform duration-300">
               <Server className="w-8 h-8 text-electric" />
@@ -40,7 +42,8 @@ export default function Environment() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col items-center text-center group"
+            whileHover={{ y: -6 }}
+            className="p-8 rounded-[2rem] bg-apple-gray flex flex-col items-center text-center group transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
           >
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform duration-300">
               <GitBranch className="w-8 h-8 text-[#FF5F56]" />
@@ -59,7 +62,8 @@ export default function Environment() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="p-8 rounded-[2rem] bg-apple-text flex flex-col items-center text-center group"
+            whileHover={{ y: -6 }}
+            className="p-8 rounded-[2rem] bg-apple-text flex flex-col items-center text-center group transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.16)]"
           >
             <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform duration-300">
               <Terminal className="w-8 h-8 text-white" />

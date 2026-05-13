@@ -17,7 +17,8 @@ export default function Deployment() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <motion.div 
             whileHover={{ y: -5 }}
-            className="p-8 rounded-3xl bg-apple-gray border border-gray-100 flex flex-col items-center group"
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="p-8 rounded-3xl bg-apple-gray border border-gray-100 flex flex-col items-center group transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
           >
             <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-105 transition-transform">
               <img src={netlifyIcon} alt="Netlify Logo" className="w-9 h-9 object-contain" />
@@ -32,7 +33,8 @@ export default function Deployment() {
 
           <motion.div 
             whileHover={{ y: -5 }}
-            className="p-8 rounded-3xl bg-apple-gray border border-gray-100 flex flex-col items-center group relative overflow-hidden"
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="p-8 rounded-3xl bg-apple-gray border border-gray-100 flex flex-col items-center group relative overflow-hidden transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
           >
             <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-105 transition-transform">
               <img src={cloudflareIcon} alt="Cloudflare Logo" className="w-10 h-10 object-contain" />
@@ -47,7 +49,8 @@ export default function Deployment() {
 
           <motion.div 
             whileHover={{ y: -5 }}
-            className="p-8 rounded-3xl bg-apple-gray border border-gray-100 flex flex-col items-center group"
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="p-8 rounded-3xl bg-apple-gray border border-gray-100 flex flex-col items-center group transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
           >
             <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm mb-6 group-hover:scale-105 transition-transform">
               <img src={vercelIcon} alt="Vercel Logo" className="w-8 h-8 object-contain" />
