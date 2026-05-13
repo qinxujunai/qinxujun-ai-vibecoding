@@ -22,11 +22,15 @@ function copyToClipboard(text: string) {
   const copied = document.execCommand('copy');
   document.body.removeChild(textarea);
 
-  if (!copied && navigator.clipboard?.writeText) {
-    return navigator.clipboard.writeText(text);
+  if (copied) {
+    return Promise.resolve(true);
   }
 
-  return Promise.resolve();
+  if (navigator.clipboard?.writeText) {
+    return navigator.clipboard.writeText(text).then(() => true).catch(() => false);
+  }
+
+  return Promise.resolve(false);
 }
 
 export default function TerminalCommand({

@@ -1,75 +1,126 @@
 # ai.vibecoding
 
-> **"自然语言不再是沟通和解释工具，它是编译下一代软件架构体系的最强武器。"** 
-> 
-> —— Qin Xujun
+> 用自然语言，构建确定性的应用世界。
+>
+> The art of Vibe Coding.
 
-<div align="center">
-  <img src="https://img.shields.io/badge/Paradigm-Vibe%20Coding-0071E3?style=for-the-badge" alt="Vibe Coding Paradigm"/>
-  <img src="https://img.shields.io/badge/Stack-React%2018%20%7C%20Tailwind%20v4-black?style=for-the-badge" alt="Tech Stack"/>
-  <img src="https://img.shields.io/badge/Architecture-Apple--Grade%20Aesthetics-F5F5F7?style=for-the-badge&logoColor=black&labelColor=black&color=F5F5F7" alt="Apple-Grade Aesthetics"/>
-</div>
+[线上站点](https://qinxujun-ai-vibecoding.netlify.app) · [GitHub 仓库](https://github.com/qinxujunai/qinxujun-ai-vibecoding)
 
-<br/>
+## 项目定位
 
-**ai.vibecoding** 是一个专注于探索、实践与布道“自然语言驱动软件工程（Vibe Coding）”的开源级产品指南站。本项目致力于打破通过实体键盘逐行敲击的古典开发流，转向一套高确定性、低折损率、并由第一原理约束的 AI 深度主导工程流水线。
+`ai.vibecoding` 是秦徐俊关于自然语言编程、AI Agent 工作流、上下文工程与确定性交付的产品指南站。
 
----
+它不是工具列表，也不是提示词堆砌，而是一条完整的工程叙事：
 
-## 核心认知与哲学 (Core Philosophy)
+1. 先理解第一性原理：自然语言只有被边界、上下文和验收标准约束后，才会变成可靠产物。
+2. 先配置底层环境：Node.js、Git、终端是所有 AI 编程代理的运行底座。
+3. 再选择工具矩阵：Codex、Claude Code、v0 各自负责不同阶段的工程能力。
+4. 再建立上下文引擎：AGENTS.md、Skills、MCP、子代理与钩子让模型拥有可复用的工作记忆。
+5. 最后进入工作流与指令库：访谈、装载、计划、执行、验证、提交和部署。
 
-1. **强上下文引擎 (Powerful Context Engine)**：脱离系统的物理运行状态并向模型灌输单调 Prompt 是无效的。我们需要通过 MCP (Model Context Protocol)、开源云沙盒及完善的项目配置底座来为模型装上大脑。
-2. **防偏离指令基建 (Anticorruption Infrastructure)**：通过确立诸如 `AGENTS.md` 和 `.cursorrules` 的架构强规约配置文件，收敛大语言模型的发散天性，构建企业级的“免疫防线”。
-3. **极简美学 (Apple-grade Aesthetics)**：代码的输出不能以粗糙堆满图表为代价，必须遵循海量留白、绝对克制的色调隔离与精确的矢量呈现。不牺牲毫厘的高冷秩序美。
+## 技术栈
 
----
+- React 19
+- TypeScript
+- Vite 6
+- Tailwind CSS v4
+- motion/react
+- lucide-react
+- Netlify 静态部署
 
-## 一键式环境部署 (Zero-Friction Start)
+## 本地启动
 
-为追求顶级开发者体验，我们内嵌了一键拉起脚手架。在保证本机节点存在 Node.js $\ge$ 20.x 的状态下，无需翻阅文档，通过双击运行系统平台脚本：
+Windows 推荐直接双击根目录的 `start.bat`。脚本会进入项目目录、安装依赖、启动 Vite 服务，并打开浏览器访问：
 
-- **macOS / Linux 体系**:
-  请直接运行根目录的 `start.sh` 或于终端流中输入:
-  ```bash
-  sh start.sh
-  ```
+```text
+http://localhost:3000
+```
 
-- **Windows 体系**:
-  单击双击启动 `start.bat` 激活终端安装并渲染视口。
+也可以手动执行：
 
-> 🛈 *脚本会自动对你宿中心的 Node 集群予以探测，静默分析并灌入 NPM 模块集，同时以监听 `0.0.0.0` 全端曝光的方式向浏览器推流渲染。*
+```bash
+npm install
+npm run dev
+```
 
----
+macOS / Linux 可运行：
 
-## 构建基石分布 (Architectural Layout)
+```bash
+sh start.sh
+```
 
-项目本身是由极致精简架构与极高代码密度写就的，全屏无依赖繁重图片：
+## 构建验证
 
-* **核心展区 (`/src/components/sections/`)**
-  * `Hero.tsx` —— 含有一帧不差在 WebGL/CSS 级别用代码原样复刻的 *Claude Code CLI Agent 流* 交互窗口。
-  * `ContextEngine.tsx` —— 定义系统接管底层硬件、读取数据的神经桥梁集（如 MCP 协议与 OpenHands 框架）。
-  * `Tools.tsx` —— 剥去伪信并罗列当前全球最尖端的代码编译引擎入口 (Codex / o1 系列与 Claude)。
-  * `Workflow.tsx` —— 一幅借助绝对定位生成的网格式防御型全栈操作链路图。
-* **规则防盗门 (`AGENTS.md`)**
-  * 对于**人类开发者**：这是你理解项目设计语言边界的核心宪章。
-  * 对于接力编程的 **AI 助理引擎**（如 GitHub Copilot, Cursor）：它是强行校正它们编程行为、保证样式无衰变的绝对法典。
+每次交付前必须运行：
 
----
+```bash
+npm run build
+```
 
-## 组件图表占位处理协定 (Mockup Replacement Policy)
+构建产物输出到 `dist/`。`dist/`、`node_modules/`、`.netlify/`、`.env*` 等本地生成或敏感文件不会提交。
 
-如果你准备 Fork 并维护你的版本库或要求 AI 客制化本界面，请注意我们刻意移除了笨重的占位图像。
+## 页面结构
 
-**如何更新内部代码模拟流图：**
-1. 请勿动用 `<img />` 去顶用替换已构建的精致前端黑板和流程线代码段，这是粗俗的。这些精良且响应式的代码 UI 能够通过在对应 `tsx` 里搜索固定类名（例如 `TerminalMockup` 的颜色控制 `text-emerald-400`）快速定位。
-2. 我们预设这层外壳为占位骨架。当有日你取得了授权或高质量产品实机图想要替换它们时，只要保持包裹在 `div` 定位器或 Aspect-ratio 边界内引入资源，这些结构即可丝滑褪除无感并入标准化的影像显示层，不会引发灾难般的 UI 截断漏轴。
+```text
+Hero
+Concept
+Environment
+Tools
+ContextEngine
+Workflow
+Prompts
+Deployment
+Manifesto
+Footer
+```
 
----
+这个顺序刻意把“前置环境”放在“工具矩阵”之前：用户先知道底层环境为什么重要，再下载和使用 Codex、Claude Code、v0 等工具，路径更符合真实上手流程。
 
-<div align="center">
-  <p style="color: #666; font-size: 13px; margin-top: 2rem;">
-    Designed & Engineered by 秦徐俊 (Qin Xujun)
-    <br/>
-    Built strictly for those who define the next era.
-  </p>
-</div>
+## 核心资产
+
+- `src/components/sections/Hero.tsx`：首页 Claude Code 终端模拟首屏。
+- `src/components/sections/Environment.tsx`：Node.js、Git、Terminal 前置环境。
+- `src/components/sections/Tools.tsx`：Codex、Claude Code、v0 工具矩阵。
+- `src/components/sections/Workflow.tsx`：六段防御性交付管线。
+- `src/components/sections/Prompts.tsx`：四步 Prompt Playbook。
+- `src/components/layout/Footer.tsx`：联系秦徐俊的二维码弹窗。
+- `src/assets/icons/`：本地化品牌图标资产。
+- `public/favicon.svg`：浏览器标签页品牌图标。
+
+## AI Agent 协作规则
+
+本项目以 `AGENTS.md` 作为跨 Agent 的共享宪章。Claude Code 通过 `CLAUDE.md` 导入 `AGENTS.md`，避免同一套规则在多个文件里重复维护。
+
+关键原则：
+
+- 修改前先读项目结构、README、AGENTS.md、package.json、启动脚本和相关组件。
+- 不做无关重构，不破坏既有 UI 动效。
+- 所有品牌图标优先使用本地化官方或准官方资产，不热链随机图片。
+- 所有交付必须跑通 `npm run build`。
+- 涉及真实页面体验时，用浏览器验证桌面和移动端关键路径。
+
+## 部署
+
+当前生产站点部署在 Netlify：
+
+```text
+https://qinxujun-ai-vibecoding.netlify.app
+```
+
+配置见 `netlify.toml`：
+
+```toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+```
+
+生产部署命令：
+
+```bash
+npx netlify deploy --prod --build
+```
+
+## 维护者
+
+Designed & Engineered by Qin Xujun.

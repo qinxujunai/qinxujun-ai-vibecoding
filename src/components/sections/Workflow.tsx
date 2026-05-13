@@ -1,14 +1,12 @@
 import { motion } from 'motion/react';
-import ZoomableImage from '../ui/ZoomableImage';
-import { BookOpen, CheckSquare, Edit3, Image as ImageIcon, Search, ShieldCheck, Rocket } from 'lucide-react';
 
 const steps = [
-  { id: "01", title: "Alignment (自然语言 PRD)", desc: "停止用干瘪的指令拼凑功能。先用人话勾勒商业意图与交互体验，让 AI 和你共同对齐核心业务边界和防偏离策略。" },
-  { id: "02", title: "Constitution (宪章与防腐层)", desc: "强制让大模型以 .cursorrules 或 AGENTS.md 的形式，输出包含架构红线、视觉基因的宪章。锁定全局审美与技术流派底线。" },
-  { id: "03", title: "Decomposition (沙盘推演)", desc: "模型须输出包含确切修改范围的大脑执行计划树。在核心路径未被人类审查确认前，严禁任何一行破坏性代码越界。" },
-  { id: "04", title: "Execution (原子级修改)", desc: "将浩瀚的重写意志，转化为单文件的局部修剪。要求智能体遵循单一职责去修改树节点，拒绝“大锅饭”式的全盘翻盘。" },
-  { id: "05", title: "Self-Healing (零预警编译)", desc: "你只需要下发指令。模型必须能够自主执行 npm run build，并在发生 TS 灾难或构建断链时，通过终端回路接管错误并完成自愈修复。" },
-  { id: "06", title: "Calibration (多模态校准)", desc: "上传最终界面的渲染图，让视觉模型进行对抗查漏，像苛刻的设计总监一样，校准微观的色差、间距失调与阴影膨胀。" },
+  { id: "01", title: "Interview (访谈对话)", desc: "先问问题，不写代码。把模糊需求压缩成目标用户、业务边界、验收标准与 AGENTS.md 草案。" },
+  { id: "02", title: "Context (上下文装载)", desc: "读取 README、AGENTS.md、package.json、启动脚本和相关源码，把项目事实、规则与风险装进同一张 Context Map。" },
+  { id: "03", title: "Plan Gate (计划闸门)", desc: "在改动前锁定文件责任、用户可见变化、动效守恒和测试路径。计划未经确认，不允许进入实现。" },
+  { id: "04", title: "Atomic Patch (原子修改)", desc: "把大任务拆成小补丁，沿着组件边界精确落点，拒绝无关重构和全盘翻新。" },
+  { id: "05", title: "Verify Loop (构建自愈)", desc: "运行 npm run build，遇到类型、构建或依赖错误先自修复。没有新鲜验证证据，不声明完成。" },
+  { id: "06", title: "Ship Review (浏览器验收)", desc: "用真实浏览器检查页面、移动端宽度、复制、弹窗、外链与控制台日志，再提交、推送和部署。" },
 ];
 
 export default function Workflow() {
@@ -25,11 +23,11 @@ export default function Workflow() {
           >
             <h2 className="text-[11px] font-semibold text-apple-text-muted tracking-[0.3em] uppercase mb-4">防御性交付管线</h2>
             <h3 className="text-3xl md:text-5xl font-bold text-apple-text tracking-tight mb-6 leading-[1.15]">
-              将概率，<br />
-              转化为绝对的确定性。
+              先立边界，<br />
+              再把概率压成确定性。
             </h3>
             <p className="text-apple-text-muted text-lg mb-10">
-              不要直接运行未经审查的代码。遵守这条严格的六段防线验证流，是保证现代 AI 编程项目不走向失控的唯一途径。
+              AI 写代码很快，但交付靠流程。真正可靠的自然语言编程，是让每一次修改都穿过访谈、上下文、计划、构建和浏览器验收这几道闸门。
             </p>
             
             <div className="space-y-8">
@@ -61,26 +59,26 @@ export default function Workflow() {
 
                 <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100 z-10 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
                   <div className="w-4 h-4 rounded-full bg-apple-text border-4 border-white shadow-sm ring-1 ring-gray-200"></div>
-                  <div className="font-mono text-xs text-apple-text-muted">Chat Interface</div>
-                  <div className="ml-auto text-sm font-semibold tracking-tight">01_Alignment</div>
+                  <div className="font-mono text-xs text-apple-text-muted">Interview</div>
+                  <div className="ml-auto text-sm font-semibold tracking-tight">01_AGENTS</div>
                 </div>
 
                 <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100 z-10 ml-5 relative transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
                   <div className="w-4 h-4 rounded-full bg-apple-text border-4 border-white shadow-sm ring-1 ring-gray-200"></div>
-                  <div className="font-mono text-xs text-apple-text-muted">AGENTS.md</div>
-                  <div className="ml-auto text-sm font-semibold tracking-tight">02_Constitution</div>
+                  <div className="font-mono text-xs text-apple-text-muted">Context Map</div>
+                  <div className="ml-auto text-sm font-semibold tracking-tight">02_Context</div>
                 </div>
 
                 <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-electric z-10 ml-10 relative transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
-                  <div className="absolute -left-3 top-1/2 -translate-y-1/2 px-2 py-0.5 bg-electric text-white text-[10px] font-bold rounded-md whitespace-nowrap hidden sm:block">Human Check</div>
+                  <div className="absolute -left-3 top-1/2 -translate-y-1/2 px-2 py-0.5 bg-electric text-white text-[10px] font-bold rounded-md whitespace-nowrap hidden sm:block">Review Gate</div>
                   <div className="w-4 h-4 rounded-full bg-electric border-4 border-white overflow-visible"></div>
                   <div className="font-mono text-xs text-electric/70">Diff Plan</div>
-                  <div className="ml-auto text-sm font-bold text-electric tracking-tight">03_Decompose</div>
+                  <div className="ml-auto text-sm font-bold text-electric tracking-tight">03_Plan</div>
                 </div>
 
                 <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100 z-10 ml-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
                   <div className="w-4 h-4 rounded-full bg-apple-text border-4 border-white shadow-sm ring-1 ring-gray-200"></div>
-                  <div className="font-mono text-xs text-apple-text-muted">AST Patching</div>
+                  <div className="font-mono text-xs text-apple-text-muted">Atomic Patch</div>
                   <div className="ml-auto text-sm font-semibold tracking-tight">04_Edit</div>
                 </div>
 
@@ -91,14 +89,14 @@ export default function Workflow() {
                       Auto-recover
                     </span>
                   </div>
-                  <div className="font-mono text-xs text-apple-text-muted">CLI Self-Repair</div>
-                  <div className="ml-auto text-sm font-semibold tracking-tight">05_Heal</div>
+                  <div className="font-mono text-xs text-apple-text-muted">Build Repair</div>
+                  <div className="ml-auto text-sm font-semibold tracking-tight">05_Verify</div>
                 </div>
                 
                 <div className="flex items-center gap-4 bg-black text-white p-4 rounded-2xl shadow-lg border border-gray-800 z-10 mt-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
                   <div className="w-4 h-4 rounded-full bg-white border-4 border-black"></div>
-                  <div className="font-mono text-xs text-gray-400">Vision Model</div>
-                  <div className="ml-auto text-sm font-semibold tracking-tight">06_Calibrate</div>
+                  <div className="font-mono text-xs text-gray-400">Browser QA</div>
+                  <div className="ml-auto text-sm font-semibold tracking-tight">06_Ship</div>
                 </div>
               </div>
             </div>
