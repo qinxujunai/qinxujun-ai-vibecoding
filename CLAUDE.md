@@ -2,4 +2,5 @@
 
 ## Claude Code
 
-本仓库的共享规则以 AGENTS.md 为唯一源。若本文件与 AGENTS.md 冲突，以 AGENTS.md 为准。
+本仓库的协作规则以 `AGENTS.md` 为准。
+如果这里和 `AGENTS.md` 有冲突，始终遵循 `AGENTS.md`。

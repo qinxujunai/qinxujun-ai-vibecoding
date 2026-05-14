@@ -1,7 +1,7 @@
-import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
-import claudeIcon from '../../assets/icons/claude.svg';
 import type { ReactNode } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
+import claudeIcon from '../../assets/icons/claude.svg';
 
 function ClaudeMark() {
   return (
@@ -52,9 +52,8 @@ export default function Hero() {
         </h1>
 
         <p className="mx-auto mb-10 max-w-2xl text-xl leading-relaxed font-medium text-apple-text-muted md:text-2xl">
-          The art of Vibe Coding.
-          <br className="hidden md:block" />
-          从基建矩阵到坚不可摧的工程交付工作流，带你掌握下一代软件的结构学。
+          <span className="block">The art of Vibe Coding.</span>
+          <span className="block">从基建矩阵到坚不可摧的工程交付工作流，带你掌握下一代软件的结构学。</span>
         </p>
 
         <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
@@ -104,13 +103,13 @@ export default function Hero() {
             </div>
 
             <div className="mb-4 rounded-xl border border-white/10 bg-white/[0.035] p-3.5 text-white/80 md:p-4">
-              <div className="text-white/52">╭────────────────────────────╮</div>
+              <div className="text-white/52">┌───────────────────────────┐</div>
               <div>
                 <span className="text-white/52">│</span>
-                <span className="px-2 text-[#F3E8DF]">✶ Welcome to Claude Code</span>
+                <span className="px-2 text-[#F3E8DF]">* Welcome to Claude Code</span>
                 <span className="text-white/52">│</span>
               </div>
-              <div className="text-white/52">╰────────────────────────────╯</div>
+              <div className="text-white/52">└───────────────────────────┘</div>
             </div>
 
             <div className="space-y-2.5">
