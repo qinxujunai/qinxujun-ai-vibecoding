@@ -1,6 +1,6 @@
 # ai.vibecoding
 
-> 用自然语言，构建确定性的应用世界。
+> 用自然语言，创造可运行的作品。
 >
 > The art of Vibe Coding.
 
@@ -11,6 +11,8 @@
 `ai.vibecoding` 是一个静态展示站，用来讲清楚自然语言编程、AI Agent 工作流、上下文工程与确定性交付之间的关系。
 
 它不是工具罗列页，也不是 Prompt 资料堆。它的目标是用一条完整的叙事路径，把“先理解、再约束、后实现、最后验证”的工程观讲清楚。
+
+当前站点包含中英文切换、日夜模式、可复制指令、二维码联系弹窗，以及一套面向 Agent 协作的核心指令库。所有页面文案统一维护在 `src/content/site.tsx`，避免界面、文档和提示词各写一份导致漂移。
 
 ## 技术栈
 
@@ -70,11 +72,22 @@ Manifesto
 Footer
 ```
 
+核心文件：
+
+- `src/content/site.tsx`：全站中英文内容、提示词正文、工具卡片和页脚文案。
+- `src/context/SiteSettings.tsx`：语言、主题、`html lang`、SEO meta 和本地偏好。
+- `src/index.css`：Tailwind v4 入口和主题变量。
+- `src/components/sections/Hero.tsx`：首页文案与 Claude Code 终端模拟。
+- `src/components/layout/Navbar.tsx`：品牌回顶部、语言切换、日夜模式切换。
+- `src/components/layout/Footer.tsx`：联系入口、二维码弹窗和页脚收尾。
+
 ## 协作约束
 
 - `AGENTS.md` 是项目协作规则的单一事实源。
 - `CLAUDE.md` 只负责把 Claude Code 指向 `AGENTS.md`，不再维护重复规则。
 - 这个仓库当前是纯静态前端站点，不依赖后端服务、Express、Gemini SDK 或运行时环境变量。
+- 如果要改文案、提示词或双语内容，优先改 `src/content/site.tsx`，再同步 `PROMPTS.md` 中的说明。
+- 如果要改主题，优先改 `src/index.css` 的 CSS variables，不要把颜色散落到组件里。
 - 任何交付都必须至少经过一次 `npm run build`。
 
 ## 编码约定
@@ -89,6 +102,12 @@ Footer
 
 ```text
 https://qinxujun-ai-vibecoding.netlify.app
+```
+
+GitHub Pages 镜像：
+
+```text
+https://qinxujunai.github.io/qinxujun-ai-vibecoding/
 ```
 
 构建配置见 `netlify.toml`：

@@ -15,6 +15,7 @@ import Environment from './components/sections/Environment';
 import ContextEngine from './components/sections/ContextEngine';
 import Manifesto from './components/sections/Manifesto';
 import Footer from './components/layout/Footer';
+import { SiteSettingsProvider } from './context/SiteSettings';
 
 export default function App() {
   useEffect(() => {
@@ -34,20 +35,22 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white selection:bg-electric selection:text-white">
-      <Navbar />
-      <main>
-        <Hero />
-        <Concept />
-        <Environment />
-        <Tools />
-        <ContextEngine />
-        <Workflow />
-        <Prompts />
-        <Deployment />
-        <Manifesto />
-      </main>
-      <Footer />
-    </div>
+    <SiteSettingsProvider>
+      <div className="min-h-screen bg-[var(--page-bg)] selection:bg-electric selection:text-white">
+        <Navbar />
+        <main>
+          <Hero />
+          <Concept />
+          <Environment />
+          <Tools />
+          <ContextEngine />
+          <Workflow />
+          <Prompts />
+          <Deployment />
+          <Manifesto />
+        </main>
+        <Footer />
+      </div>
+    </SiteSettingsProvider>
   );
 }

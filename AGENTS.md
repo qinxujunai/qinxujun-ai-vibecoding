@@ -7,6 +7,15 @@
 
 ---
 
+## 0. 当前项目事实 (Current Project Truth)
+
+- 这是一个纯静态 Vite + React + TypeScript + Tailwind CSS v4 展示站，生产站点部署在 Netlify，GitHub Pages 作为镜像。
+- 页面内容、双语文案、工具卡片、提示词正文和页脚文案统一维护在 `src/content/site.tsx`。
+- 语言与主题偏好由 `src/context/SiteSettings.tsx` 管理，并同步 `html lang`、页面标题、description、OG description 与 `color-scheme`。
+- 主题色板集中在 `src/index.css` 的 CSS variables。修改日夜模式时，优先改变量，不要把临时颜色散落进组件。
+- `README.md` 面向人类维护者，`AGENTS.md` 面向接管项目的 Agent，`CLAUDE.md` 只保留指向本文件的轻量入口，`PROMPTS.md` 记录指令库结构与来源。
+- 本仓库不依赖后端服务、数据库、Express、Gemini SDK 或运行时环境变量。
+
 ## 1. 核心哲学与上下文外脑 (Philosophy & Context Engine)
 
 这是 AI 主导软件世界的核心第一性原理：
@@ -19,7 +28,7 @@
 ## 2. 严苛工程基线 (Engineering Baseline)
 
 - **物理容器**: Node.js, Web Browser.
-- **编译层栈**: React 18+ (使用 Vite 闪电构建), TypeScript (拒绝使用未定义或 Any 妥协)。
+- **编译层栈**: React 19, Vite 6, TypeScript。拒绝使用未定义或 `any` 妥协。
 - **样式引擎界限**: Tailwind CSS v4 —— **红线禁止**引入 Bootstrap、MUI 或 AntD。**红线禁止**使用 CSS-in-JS (如 Styled-Components) 导致渲染管线阻塞。
 - **动效基建**: 只允许使用 `motion/react`。所有转场必须是平滑的、克制的 (`ease: [0.16, 1, 0.3, 1]`)，断绝使用弹簧、高频脉冲或低俗特效。
 
@@ -33,8 +42,8 @@
 ### 3.1 资产点位透视地图 (Mockup Radar Index)
 如果你接收到人类修改界面的具体点位需求，核查并对冲以下锚点：
 1. **`src/components/sections/Hero.tsx` (主轴头图区)**
-   - **形态**: 一个含有 Mac 三色窗体控制按钮的深邃版仿真命令行终端环境。其中嵌有犹如呼吸般实时渲染的文字输出流（如 `~/projects/ai.vibecoding (claude-code)` 等绿色字符群）。
-   - **底线**: 如果人类要求更新终端输出或技术热点对白，仅去维护被 Tailwind `font-mono`, `text-emerald-400` 修饰的节点内部。不要摧毁外部布局。
+   - **形态**: 一个含有 Mac 三色窗体控制按钮的深色 Claude Code 终端模拟。外层尺寸、圆角和首屏节奏是页面的视觉锚点。
+   - **底线**: 可以优化内部内容、边界、阴影、标题栏和命令文本，但不要改变外层卡片尺寸、首屏位置和整体布局比例。
 2. **`src/components/sections/Workflow.tsx` (工作流程网格)**
    - **形态**: 一幅利用 Tailwind 原生网格 (Grid)、边框和绝对定位 (Absolute Positioning) 巧妙渲染出的防守型开发逻辑流水线骨架图。
    - **底线**: 处理它如同拆弹，只能增加连线/修改文字，不要改变其结构体系。
@@ -60,3 +69,9 @@
 ## 5. 持续交付宪章 (Build Constraint)
 - 无构建、不交付：你在实施完一组修改原子闭环后，必须立即静默跑通一次 `npm run build`。
 - 如果构建期间 TS 或 Tailwind 跑出 Error，你有必须立即进行 Self-Fixing（自我纠错排查）的义务。绝不可将未跑过测试、带着刺眼的红色的残废品交付给下一位维护者。
+
+## 6. Git 与发布边界 (Git & Release)
+
+- 提交前必须检查 `git status --short`，确认没有 `node_modules/`、`dist/`、`.netlify/`、日志文件或本地密钥进入提交。
+- 正常发布顺序：`npm run lint` -> `npm run build` -> 浏览器验证 -> `git add` -> `git commit` -> `git push` -> Netlify production deploy -> GitHub Pages 镜像更新。
+- 禁止使用批量删除命令。需要删除文件时，只能一次删除一个明确路径的文件。

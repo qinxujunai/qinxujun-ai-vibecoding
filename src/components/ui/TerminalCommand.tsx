@@ -6,6 +6,7 @@ type TerminalCommandProps = {
   command: string;
   officialUrl?: string;
   officialLabel?: string;
+  copyTitle?: string;
   accentClass?: string;
   className?: string;
 };
@@ -38,6 +39,7 @@ export default function TerminalCommand({
   command,
   officialUrl,
   officialLabel = '官方安装',
+  copyTitle = '复制命令',
   accentClass = 'text-electric',
   className = '',
 }: TerminalCommandProps) {
@@ -75,7 +77,8 @@ export default function TerminalCommand({
         type="button"
         onClick={handleCopy}
         className="flex w-full items-center gap-3 rounded-xl bg-white/[0.04] px-3 py-2.5 text-left ring-1 ring-white/10 transition-all duration-300 hover:bg-white/[0.07] hover:ring-white/20 focus:outline-none focus:ring-2 focus:ring-white/35"
-        title="复制命令"
+        title={copyTitle}
+        aria-label={copyTitle}
       >
         <span className="shrink-0 font-mono text-[13px] text-white/55">$</span>
         <span className="command-scroll min-w-0 flex-1 overflow-x-auto whitespace-nowrap py-0.5 font-mono text-[13px] font-semibold text-white">
