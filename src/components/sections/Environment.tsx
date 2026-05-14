@@ -7,7 +7,7 @@ export default function Environment() {
   const { environment } = content;
 
   return (
-    <section id="environment" className="border-t border-[var(--border-subtle)] bg-[var(--page-bg)] py-24 md:py-32">
+    <section id="environment" className="bg-[var(--page-bg)] py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-[11px] font-semibold text-apple-text-muted tracking-[0.3em] uppercase mb-4">{environment.eyebrow}</h2>

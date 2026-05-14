@@ -209,7 +209,7 @@ const zhPrompts: PromptItem[] = [
 4. 优先复用现有组件、样式、工具函数和项目约定。
 5. 遇到脏工作区、冲突文件或用户改动，先保护现状；必要时停止并说明风险。
 6. 每完成一个原子闭环，就运行对应验证。构建、类型、测试或浏览器失败时，先自修复再继续。
-7. 涉及页面体验时，检查桌面和移动端；涉及按钮、复制、弹窗、跳转、表单或外链时，要实际验证。
+7. 涉及页面体验时，必须打开真实浏览器，用截图或可见页面定位问题，并检查桌面和移动端；涉及按钮、复制、弹窗、跳转、表单或外链时，要实际验证。
 8. 如果文案、启动方式、部署方式或协作规则发生变化，同步相关文档。
 9. 提交前复查 diff，确认没有 node_modules、dist、.env、日志或无关文件进入提交。
 10. 默认只做本地修改和验证。git commit、push、部署线上站点都必须得到用户明确授权。
@@ -430,7 +430,7 @@ Complete the task with the smallest reliable change and provide reviewable verif
 4. Reuse existing components, styles, utilities, and project conventions.
 5. Protect dirty worktrees and conflicting user edits; stop if needed.
 6. After each atomic loop, run the matching verification. If build, type, test, or browser checks fail, self-repair before moving on.
-7. For page work, check desktop and mobile. For buttons, copy, modals, links, forms, or external links, verify the interaction.
+7. For page work, open the real browser, use screenshots or visible page evidence to locate the issue, and check desktop and mobile. For buttons, copy, modals, links, forms, or external links, verify the interaction.
 8. If copy, launch flow, deployment flow, or collaboration rules change, update related docs.
 9. Before commit, review the diff and ensure node_modules, dist, .env, logs, and unrelated files are not included.
 10. By default, only modify and verify locally. git commit, push, and production deploy require explicit user approval.
@@ -470,10 +470,10 @@ export const siteContent = {
     },
     nav: {
       concept: '第一性原理',
-      environment: '前置环境',
-      tools: '基建级工具',
-      workflow: '高阶工作流',
-      prompts: '核心指令库',
+      environment: '前置基建',
+      tools: '生态矩阵',
+      workflow: '交付管线',
+      prompts: '指令库',
       homeLabel: '回到首页',
       themeDark: '切换到夜间模式',
       themeLight: '切换到日间模式',
@@ -485,22 +485,6 @@ export const siteContent = {
       subtitle: '让 AI 负责拆解、生成与验证，让你守住目标、边界与品味',
       primaryCta: '阅读核心理念',
       secondaryCta: '搭好底层环境',
-      terminalTitle: '~/projects/ai.vibecoding - claude',
-      terminalProduct: 'Claude Code',
-      terminalMeta: 'official CLI session · Opus 4.7 · xhigh',
-      terminalTipTitle: '启动提示',
-      terminalTip: '先运行 /init 建立项目记忆。',
-      terminalWhatsNewTitle: '交付顺序',
-      terminalWhatsNew: '装载上下文、制定计划、浏览器验收，再上线。',
-      status: 'ready',
-      terminalLines: [
-        ['$', 'claude --model opus'],
-        ['>', 'Interview the user before writing code.'],
-        ['•', 'Read(README.md, AGENTS.md, package.json)'],
-        ['•', 'Plan(scope, risks, tests)'],
-        ['✓', 'Build passed · browser checked · ready to ship'],
-      ],
-      shipLine: 'Ship only after the plan, build, browser check, and human review all agree.',
     },
     concept: {
       eyebrow: '第一性原理 (First Principles)',
@@ -691,8 +675,8 @@ export const siteContent = {
     nav: {
       concept: 'First Principles',
       environment: 'Prerequisites',
-      tools: 'Core Tools',
-      workflow: 'Workflow',
+      tools: 'Tool Matrix',
+      workflow: 'Delivery Pipeline',
       prompts: 'Prompt Library',
       homeLabel: 'Back to top',
       themeDark: 'Switch to dark mode',
@@ -705,22 +689,6 @@ export const siteContent = {
       subtitle: 'Let AI decompose, generate, and verify, while you protect the goal, boundaries, and taste',
       primaryCta: 'Read the principles',
       secondaryCta: 'Set up the foundation',
-      terminalTitle: '~/projects/ai.vibecoding - claude',
-      terminalProduct: 'Claude Code',
-      terminalMeta: 'official CLI session · Opus 4.7 · xhigh',
-      terminalTipTitle: 'Tips for getting started',
-      terminalTip: 'Run /init before writing code.',
-      terminalWhatsNewTitle: "What's new",
-      terminalWhatsNew: 'Context, plan, browser QA, then ship.',
-      status: 'ready',
-      terminalLines: [
-        ['$', 'claude --model opus'],
-        ['>', 'Interview the user before writing code.'],
-        ['•', 'Read(README.md, AGENTS.md, package.json)'],
-        ['•', 'Plan(scope, risks, tests)'],
-        ['✓', 'Build passed · browser checked · ready to ship'],
-      ],
-      shipLine: 'Ship only after the plan, build, browser check, and human review all agree.',
     },
     concept: {
       eyebrow: 'FIRST PRINCIPLES',

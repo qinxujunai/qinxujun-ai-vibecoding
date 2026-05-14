@@ -29,31 +29,13 @@ function TerminalLine({
   );
 }
 
-function WelcomePanel({ hero }: { hero: {
-  terminalProduct: string;
-  terminalMeta: string;
-  terminalTipTitle: string;
-  terminalTip: string;
-  terminalWhatsNewTitle: string;
-  terminalWhatsNew: string;
-} }) {
-  return (
-    <div className="mb-4 grid overflow-hidden rounded-2xl border border-[#E7774D]/45 bg-[#111113]/92 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:grid-cols-[0.92fr_1.08fr]">
-      <div className="flex flex-col items-center justify-center gap-2 border-b border-[#E7774D]/30 px-4 py-4 text-center sm:border-r sm:border-b-0">
-        <div className="text-[13px] font-semibold text-white">{hero.terminalProduct}</div>
-        <ClaudeMark />
-        <div className="text-[11px] text-white/46">{hero.terminalMeta}</div>
-      </div>
-      <div className="min-w-0 px-4 py-4">
-        <div className="text-[12px] font-semibold text-[#FF8A5B]">{hero.terminalTipTitle}</div>
-        <div className="mt-1 truncate text-[12px] text-white/82">{hero.terminalTip}</div>
-        <div className="my-3 h-px bg-[#E7774D]/35" />
-        <div className="text-[12px] font-semibold text-[#FF8A5B]">{hero.terminalWhatsNewTitle}</div>
-        <div className="mt-1 truncate text-[12px] text-white/62">{hero.terminalWhatsNew}</div>
-      </div>
-    </div>
-  );
-}
+const terminalSteps = [
+  ['$', 'claude --model opus'],
+  ['>', 'Interview the user before writing code.'],
+  ['•', 'Read(README.md, AGENTS.md, package.json)'],
+  ['•', 'Plan(scope, risks, tests)'],
+  ['✓', 'Build passed · browser checked · ready to ship'],
+];
 
 export default function Hero() {
   const { content } = useSiteSettings();
@@ -107,28 +89,31 @@ export default function Hero() {
             <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
             <span className="h-3 w-3 rounded-full bg-[#28C840]" />
             <span className="mx-auto truncate pl-4 font-mono text-[11px] tracking-wide text-white/42 md:text-xs">
-              {hero.terminalTitle}
+              ~/projects/ai.vibecoding - claude
             </span>
           </div>
 
-          <div className="relative h-[calc(100%-44px)] overflow-hidden p-4 font-mono text-[12px] leading-relaxed md:p-6 md:text-[13px]">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_0%,rgba(231,119,77,0.10),transparent_32%),radial-gradient(circle_at_88%_18%,rgba(41,151,255,0.09),transparent_34%)]" />
-            <div className="relative">
+          <div className="h-[calc(100%-44px)] overflow-hidden p-4 font-mono text-[12px] leading-relaxed md:p-6 md:text-[13px]">
             <div className="mb-4 flex items-center gap-3">
               <ClaudeMark />
               <div className="min-w-0 flex-1">
-                <div className="text-[13px] font-semibold text-white">{hero.terminalProduct}</div>
-                <div className="truncate text-[11px] text-white/42">{hero.terminalMeta}</div>
+                <div className="text-[13px] font-semibold text-white">Claude Code</div>
+                <div className="truncate text-[11px] text-white/42">official CLI session · Opus 4.7 · xhigh</div>
               </div>
-              <span className="hidden rounded-full border border-emerald-300/20 bg-emerald-300/10 px-2.5 py-1 text-[11px] text-emerald-200 sm:inline-flex">
-                {hero.status}
-              </span>
             </div>
 
-            <WelcomePanel hero={hero} />
+            <div className="mb-4 rounded-xl border border-white/10 bg-white/[0.035] p-3.5 text-white/80 md:p-4">
+              <div className="text-white/52">┌───────────────────────────┐</div>
+              <div>
+                <span className="text-white/52">│</span>
+                <span className="px-2 text-[#F3E8DF]">* Welcome to Claude Code</span>
+                <span className="text-white/52">│</span>
+              </div>
+              <div className="text-white/52">└───────────────────────────┘</div>
+            </div>
 
             <div className="space-y-2.5">
-              {hero.terminalLines.map(([marker, text], idx) => (
+              {terminalSteps.map(([marker, text], idx) => (
                 <TerminalLine key={idx} marker={marker} muted={idx === 4}>
                   {text}
                 </TerminalLine>
@@ -136,8 +121,7 @@ export default function Hero() {
             </div>
 
             <div className="mt-5 rounded-xl border border-emerald-300/15 bg-emerald-300/5 px-3 py-2.5 text-[12px] text-emerald-100">
-              {hero.shipLine}
-            </div>
+              Ship only after the plan, build, browser check, and human review all agree.
             </div>
           </div>
         </div>
