@@ -8,11 +8,11 @@ export default function ContextEngine() {
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-[11px] font-semibold text-electric tracking-[0.3em] uppercase mb-4">外脑与上下文 (Context Engine)</h2>
           <h3 className="text-3xl md:text-5xl font-bold text-apple-text tracking-tight leading-[1.15] mb-6">
-            脱离了物理信息的注入，<br />
-            再强的模型也只是个语法纠错机。
+            <span className="block">脱离了物理信息的注入</span>
+            <span className="block">再强的模型也只是个语法纠错机</span>
           </h3>
           <p className="text-lg text-apple-text-muted">
-            大语言模型本身没有物理状态与项目记忆。你必须通过严谨的开放协议与防护层架构，将其正确接入物理世界，为它的推理引擎构建坚不可摧的“外脑”。
+            大语言模型本身没有物理状态与项目记忆。你必须通过开放协议与防护层架构，将其正确接入真实项目，为它的推理引擎建立可靠的“外脑”。
           </p>
         </div>
 

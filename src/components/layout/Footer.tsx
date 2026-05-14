@@ -65,7 +65,16 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
             </div>
 
             <div className="mt-6 rounded-[1.6rem] bg-white p-3 shadow-[0_18px_55px_rgba(0,0,0,0.10)] ring-1 ring-black/5">
-              <img src={wechatQr} alt="Qin Xujun WeChat QR code" className="w-full rounded-[1.1rem] object-contain" />
+              <img
+                src={wechatQr}
+                alt="Qin Xujun WeChat QR code"
+                width="512"
+                height="512"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                className="w-full rounded-[1.1rem] object-contain"
+              />
             </div>
 
             <div className="mt-4 flex items-center justify-between gap-4 px-1">
@@ -84,6 +93,17 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
 
 export default function Footer() {
   const [contactOpen, setContactOpen] = useState(false);
+
+  useEffect(() => {
+    const image = new Image();
+    image.src = wechatQr;
+
+    if (image.decode) {
+      image.decode().catch(() => {
+        // The modal can still render the image normally if eager decoding is interrupted.
+      });
+    }
+  }, []);
 
   return (
     <footer id="contact" className="bg-apple-text text-apple-gray text-[13px]">

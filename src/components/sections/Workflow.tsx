@@ -23,8 +23,8 @@ export default function Workflow() {
           >
             <h2 className="text-[11px] font-semibold text-apple-text-muted tracking-[0.3em] uppercase mb-4">防御性交付管线</h2>
             <h3 className="text-3xl md:text-5xl font-bold text-apple-text tracking-tight mb-6 leading-[1.15]">
-              先立边界，<br />
-              再把概率压成确定性。
+              <span className="block">先立边界</span>
+              <span className="block">再把概率压成确定性</span>
             </h3>
             <p className="text-apple-text-muted text-lg mb-10">
               AI 写代码很快，但交付靠流程。真正可靠的自然语言编程，是让每一次修改都穿过访谈、上下文、计划、构建和浏览器验收这几道闸门。
@@ -82,13 +82,8 @@ export default function Workflow() {
                   <div className="ml-auto text-sm font-semibold tracking-tight">04_Edit</div>
                 </div>
 
-                <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100 z-10 ml-8 relative group transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+                <div className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-gray-100 z-10 ml-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
                   <div className="w-4 h-4 rounded-full bg-[#FF5F56] border-4 border-white shadow-sm ring-1 ring-[#FF5F56]/30"></div>
-                  <div className="absolute -left-1 opacity-0 group-hover:opacity-100 transform -translate-x-full pr-3 transition-opacity top-1/2 -translate-y-1/2">
-                    <span className="bg-gray-800 text-white text-[10px] px-2 py-1 flex rounded-md">
-                      Auto-recover
-                    </span>
-                  </div>
                   <div className="font-mono text-xs text-apple-text-muted">Build Repair</div>
                   <div className="ml-auto text-sm font-semibold tracking-tight">05_Verify</div>
                 </div>

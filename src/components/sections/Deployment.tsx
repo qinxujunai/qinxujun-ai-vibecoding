@@ -10,8 +10,8 @@ export default function Deployment() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-[11px] font-semibold text-apple-text-muted tracking-[0.3em] uppercase mb-4">云端交付矩阵</h2>
         <h3 className="text-3xl md:text-5xl font-bold text-apple-text tracking-tight mb-16">
-          将本地的 Vibe 魔法，<br />
-          转化为确定性的线上资产。
+          <span className="block">把本地作品</span>
+          <span className="block">交付到真实的线上环境</span>
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">

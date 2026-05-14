@@ -16,8 +16,8 @@ export default function Tools() {
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-[11px] font-semibold text-apple-text-muted tracking-[0.3em] uppercase mb-4">顶级生态矩阵</h2>
           <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold text-apple-text tracking-tight leading-[1.15] mb-6">
-            不要迷信万能。<br />
-            正确的组合决定了开发上限。
+            <span className="block">不要迷信万能</span>
+            <span className="block">正确的组合决定了开发上限</span>
           </h3>
           <p className="text-lg text-apple-text-muted">
             没有最好的工具，只有最匹配当前任务阶段的工具。明确它们的边界，是进阶的第一步。
@@ -40,7 +40,7 @@ export default function Tools() {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xl font-bold text-apple-text tracking-tight">Codex</span>
-                  <span className="text-[12px] font-mono text-apple-text-muted mt-0.5">Codex Coding Agent</span>
+                  <span className="text-[12px] font-mono text-apple-text-muted mt-0.5">OpenAI Coding Agent</span>
                 </div>
               </div>
               <h4 className="text-2xl font-bold mb-4 tracking-tight">致力于构建与交付产品的智能体</h4>
@@ -96,7 +96,7 @@ export default function Tools() {
                   <img src={v0Icon} alt="v0 Logo" className="w-8 h-8 object-contain" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold tracking-tight">v0 (by Vercel)</span>
+                  <span className="text-xl font-bold tracking-tight">v0</span>
                   <span className="text-[12px] font-mono text-gray-400 mt-0.5">AI App Builder</span>
                 </div>
               </div>

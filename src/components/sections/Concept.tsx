@@ -33,8 +33,8 @@ export default function Concept() {
         >
           <h2 className="text-[11px] font-semibold text-electric tracking-[0.3em] uppercase mb-6">第一性原理 (First Principles)</h2>
           <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-apple-text tracking-tight leading-[1.15]">
-            代码不再是手写的产物。<br />
-            <span className="text-gray-400 border-b-2 border-gray-100">它是自然语言被编译器强约束后的副产品。</span>
+            <span className="block">代码不再只是手写的产物</span>
+            <span className="block text-gray-400 border-b-2 border-gray-100">它来自自然语言，也必须穿过工程约束</span>
           </h3>
         </motion.div>
 
