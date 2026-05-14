@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Check, Copy, GitPullRequest, Layers3, MessageSquareText, Rocket } from 'lucide-react';
+import { useSiteSettings } from '../../context/SiteSettings';
 
 const promptPlaybook = [
   {
@@ -255,6 +256,9 @@ function PromptBody({ content }: { content: string }) {
 }
 
 export default function Prompts() {
+  const { content } = useSiteSettings();
+  const promptsContent = content.prompts;
+  const promptPlaybook = promptsContent.items;
   const [active, setActive] = useState(0);
   const [mobileOpen, setMobileOpen] = useState<number | null>(0);
   const [copied, setCopied] = useState<number | null>(null);
@@ -267,16 +271,16 @@ export default function Prompts() {
   };
 
   return (
-    <section id="prompts" className="py-24 md:py-32 bg-white border-t border-gray-100/50">
+    <section id="prompts" className="border-t border-[var(--border-subtle)] bg-[var(--page-bg)] py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-[11px] font-semibold text-electric tracking-[0.3em] uppercase mb-4">核心指令库</h2>
+          <h2 className="text-[11px] font-semibold text-electric tracking-[0.3em] uppercase mb-4">{promptsContent.eyebrow}</h2>
           <h3 className="text-3xl md:text-5xl font-bold text-apple-text tracking-tight mb-6 leading-[1.15]">
-            <span className="block">先建立工程外脑</span>
-            <span className="block">再让 Agent 写代码</span>
+            <span className="block">{promptsContent.titleTop}</span>
+            <span className="block">{promptsContent.titleBottom}</span>
           </h3>
           <p className="text-[16px] text-apple-text-muted leading-relaxed max-w-2xl mx-auto">
-            这套指令让 Agent 先确认目标与边界，再读取真实项目，随后锁定变更路径，最后小步交付并自证结果。
+            {promptsContent.desc}
           </p>
         </div>
 
@@ -290,9 +294,9 @@ export default function Prompts() {
                   key={item.id}
                   type="button"
                   onClick={() => setActive(idx)}
-                  className={`group flex w-full items-center gap-4 rounded-3xl border p-4 text-left transition-all duration-300 ${isActive ? 'border-electric bg-white shadow-[0_16px_45px_rgba(0,102,255,0.10)]' : 'border-gray-100 bg-apple-gray/55 hover:-translate-y-0.5 hover:bg-white hover:shadow-sm'}`}
+                  className={`group flex w-full items-center gap-4 rounded-3xl border p-4 text-left transition-all duration-300 ${isActive ? 'border-electric bg-[var(--surface-card)] shadow-[0_16px_45px_rgba(0,102,255,0.10)]' : 'border-[var(--border-subtle)] bg-apple-gray/55 hover:-translate-y-0.5 hover:bg-[var(--surface-card)] hover:shadow-sm'}`}
                 >
-                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl transition-colors ${isActive ? 'bg-electric text-white' : 'bg-white text-apple-text shadow-sm ring-1 ring-gray-900/5 group-hover:text-electric'}`}>
+                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl transition-colors ${isActive ? 'bg-electric text-white' : 'bg-[var(--surface-muted)] text-apple-text shadow-sm ring-1 ring-gray-900/5 group-hover:text-electric'}`}>
                     <Icon className="h-5 w-5" />
                   </span>
                   <span className="min-w-0">
@@ -310,7 +314,7 @@ export default function Prompts() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-[2rem] border border-gray-100 bg-white p-5 shadow-[0_18px_60px_rgba(0,0,0,0.06)]"
+            className="rounded-[2rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-5 shadow-[var(--shadow-soft)]"
           >
             <div className="mb-5 flex items-center justify-between gap-4 px-2">
               <div>
@@ -320,10 +324,10 @@ export default function Prompts() {
               <button
                 type="button"
                 onClick={() => handleCopy(active)}
-                className="inline-flex h-11 items-center gap-2 rounded-full bg-apple-text px-4 text-[13px] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-black hover:shadow-md active:translate-y-0"
+                className="inline-flex h-11 items-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-4 text-[13px] font-semibold text-[var(--button-primary-text)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--button-primary-hover)] hover:shadow-md active:translate-y-0"
               >
                 {copied === active ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                {copied === active ? '已复制' : '复制指令'}
+                {copied === active ? promptsContent.copied : promptsContent.copy}
               </button>
             </div>
             <PromptBody content={activePrompt.content} />
@@ -335,13 +339,13 @@ export default function Prompts() {
             const Icon = item.icon;
             const isActive = idx === mobileOpen;
             return (
-              <div key={item.id} className="overflow-hidden rounded-[1.75rem] border border-gray-100 bg-white shadow-sm">
+              <div key={item.id} className="overflow-hidden rounded-[1.75rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] shadow-sm">
                 <button
                   type="button"
                   onClick={() => setMobileOpen(isActive ? null : idx)}
                   className="flex w-full items-center gap-4 p-5 text-left"
                 >
-                  <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl ${isActive ? 'bg-electric text-white' : 'bg-apple-gray text-apple-text'}`}>
+                    <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl ${isActive ? 'bg-electric text-white' : 'bg-apple-gray text-apple-text'}`}>
                     <Icon className="h-5 w-5" />
                   </span>
                   <span>
@@ -350,15 +354,15 @@ export default function Prompts() {
                   </span>
                 </button>
                 {isActive ? (
-                  <div className="border-t border-gray-100 p-4">
+                  <div className="border-t border-[var(--border-subtle)] p-4">
                     <p className="mb-4 text-[14px] leading-relaxed text-apple-text-muted">{item.desc}</p>
                     <button
                       type="button"
                       onClick={() => handleCopy(idx)}
-                      className="mb-4 inline-flex h-10 items-center gap-2 rounded-full bg-apple-text px-4 text-[13px] font-semibold text-white"
+                      className="mb-4 inline-flex h-10 items-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-4 text-[13px] font-semibold text-[var(--button-primary-text)]"
                     >
                       {copied === idx ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                      {copied === idx ? '已复制' : '复制指令'}
+                      {copied === idx ? promptsContent.copied : promptsContent.copy}
                     </button>
                     <PromptBody content={item.content} />
                   </div>

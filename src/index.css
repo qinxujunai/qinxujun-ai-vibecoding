@@ -3,11 +3,61 @@
 
 @theme {
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  --color-electric: #0066FF;
-  --color-electric-hover: #005ce6;
-  --color-apple-gray: #F5F5F7;
-  --color-apple-text: #1D1D1F;
-  --color-apple-text-muted: #86868B;
+  --color-electric: var(--electric);
+  --color-electric-hover: var(--electric-hover);
+  --color-apple-gray: var(--apple-gray);
+  --color-apple-text: var(--apple-text);
+  --color-apple-text-muted: var(--apple-text-muted);
+}
+
+:root {
+  color-scheme: light;
+  --electric: #0066FF;
+  --electric-hover: #005ce6;
+  --page-bg: #FFFFFF;
+  --surface-card: #FFFFFF;
+  --surface-elevated: rgba(255, 255, 255, 0.82);
+  --surface-muted: #F5F5F7;
+  --apple-gray: #F5F5F7;
+  --apple-text: #1D1D1F;
+  --apple-text-muted: #86868B;
+  --border-subtle: rgba(0, 0, 0, 0.07);
+  --border-soft: rgba(0, 0, 0, 0.10);
+  --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.06);
+  --nav-bg: rgba(255, 255, 255, 0.72);
+  --nav-border: rgba(0, 0, 0, 0.06);
+  --button-primary-bg: #1D1D1F;
+  --button-primary-text: #FFFFFF;
+  --button-primary-hover: #000000;
+  --terminal-frame-border: rgba(0, 0, 0, 0.08);
+  --terminal-frame-shadow: 0 24px 70px rgba(0, 0, 0, 0.10);
+  --terminal-shell-bg: #070707;
+  --terminal-title-bg: #111113;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --electric: #2997FF;
+  --electric-hover: #147CE5;
+  --page-bg: #050506;
+  --surface-card: #111113;
+  --surface-elevated: rgba(24, 24, 26, 0.78);
+  --surface-muted: #161617;
+  --apple-gray: #161617;
+  --apple-text: #F5F5F7;
+  --apple-text-muted: #A1A1A6;
+  --border-subtle: rgba(255, 255, 255, 0.10);
+  --border-soft: rgba(255, 255, 255, 0.14);
+  --shadow-soft: 0 18px 60px rgba(0, 0, 0, 0.36);
+  --nav-bg: rgba(10, 10, 12, 0.74);
+  --nav-border: rgba(255, 255, 255, 0.10);
+  --button-primary-bg: #F5F5F7;
+  --button-primary-text: #050506;
+  --button-primary-hover: #FFFFFF;
+  --terminal-frame-border: rgba(255, 255, 255, 0.16);
+  --terminal-frame-shadow: 0 28px 90px rgba(0, 0, 0, 0.62), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --terminal-shell-bg: #050505;
+  --terminal-title-bg: #151515;
 }
 
 html {
@@ -20,7 +70,7 @@ footer[id] {
 }
 
 body {
-  @apply font-sans bg-white text-[var(--color-apple-text)] antialiased;
+  @apply font-sans bg-[var(--page-bg)] text-[var(--color-apple-text)] antialiased;
 }
 
 .command-scroll {
