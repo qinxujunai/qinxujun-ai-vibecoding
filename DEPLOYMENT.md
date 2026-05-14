@@ -1,25 +1,20 @@
 # 部署说明
 
-当前生产站点：
+生产站点：
 
 ```text
 https://qinxujun-ai-vibecoding.netlify.app
 ```
 
-当前部署平台：Netlify。
+当前平台：Netlify。
 
-## 为什么使用 Netlify
+## 部署模型
 
-本项目是 Vite 构建的静态展示站，生产产物是 `dist/`。Netlify 对这类项目的路径最短：
+这是一个 Vite 构建的静态站点，发布目录只有 `dist/`。部署路径保持最短即可：
 
-- 构建命令简单：`npm run build`
-- 发布目录明确：`dist`
-- 自动 HTTPS 与 CDN 分发开箱可用
-- 适合连接 GitHub 后持续部署
-
-## 本仓库配置
-
-`netlify.toml`：
+- 构建命令：`npm run build`
+- 发布目录：`dist`
+- 平台配置：`netlify.toml`
 
 ```toml
 [build]
@@ -27,32 +22,20 @@ https://qinxujun-ai-vibecoding.netlify.app
   publish = "dist"
 ```
 
-## 发布流程
-
-1. 确认本地构建通过：
+## 手动部署
 
 ```bash
+npm install
 npm run build
-```
-
-2. 提交并推送 GitHub：
-
-```bash
-git status
-git add <changed-files>
-git commit -m "..."
-git push
-```
-
-3. 部署生产站点：
-
-```bash
 npx netlify deploy --prod --build
 ```
 
+## Git 驱动部署
+
+如果 Netlify 已经连接 GitHub 仓库，那么推送到生产分支后会自动触发构建。手动部署主要用于临时补发或本地确认。
+
 ## 注意事项
 
-- `.netlify/` 是本地 Netlify 关联状态，不提交。
+- `.netlify/` 只保存本地站点绑定状态，不提交。
 - `dist/` 是构建产物，不提交。
-- 若 Netlify Dashboard 出现多余站点，可以删除旧项目；删除旧站点不会恢复已消耗的当月构建/带宽额度，但会停止后续构建和访问消耗。
-- 若未来需要更正式的品牌域名，建议绑定自定义域名，而不是长期依赖默认 `.netlify.app` 子域名。
+- 当前项目不依赖运行时环境变量，Netlify 上也不需要额外配置应用密钥。
