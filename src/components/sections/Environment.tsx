@@ -27,7 +27,8 @@ export default function Environment() {
       title: '终端基础 (Terminal)',
       desc: 'Claude Code、Codex CLI 和部署命令都从终端启动。Windows 推荐 PowerShell；macOS 推荐 Terminal 或 iTerm。',
       command: 'claude',
-      url: 'https://claude.com/product/claude-code',
+      url: 'https://learn.microsoft.com/zh-cn/powershell/scripting/learn/ps101/01-getting-started?view=powershell-7.5',
+      officialLabel: '如何打开',
       accentClass: 'text-[#D97757]',
       dark: true,
     },
@@ -39,8 +40,8 @@ export default function Environment() {
         <div className="text-center mb-16">
           <h2 className="text-[11px] font-semibold text-apple-text-muted tracking-[0.3em] uppercase mb-4">前置基建 (Prerequisites)</h2>
           <h3 className="text-3xl md:text-5xl font-bold text-apple-text tracking-tight mb-6 leading-[1.15]">
-            没有正确配置底层环境，<br />
-            AI 只是个打字机。
+            <span className="block">没有正确配置底层环境</span>
+            <span className="block">AI 只是个打字机</span>
           </h3>
           <p className="text-lg text-apple-text-muted max-w-2xl mx-auto">
             大模型、Codex、Claude Code 都依赖于你主机的计算环境。在要求它们为你构建现代 Web 应用前，必须完成这三大底层基础设施的搭建与授权。
@@ -69,7 +70,7 @@ export default function Environment() {
                 caption={card.dark ? '# 在终端里启动' : '# 一行安装到本地'}
                 command={card.command}
                 officialUrl={card.url}
-                officialLabel="官方安装"
+                officialLabel={card.officialLabel ?? '官方安装'}
                 accentClass={card.accentClass}
                 className="mt-auto w-full"
               />

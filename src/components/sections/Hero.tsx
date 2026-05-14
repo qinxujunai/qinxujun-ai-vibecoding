@@ -45,15 +45,14 @@ export default function Hero() {
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="mx-auto max-w-4xl"
       >
-        <h1 className="mb-6 text-5xl leading-[1.05] font-bold tracking-tight text-apple-text md:text-[64px] lg:text-[76px]">
-          用自然语言，
-          <br />
-          <span className="text-electric">构建确定性的应用世界。</span>
+        <h1 className="mx-auto mb-6 flex w-full max-w-full flex-col items-center text-balance text-[40px] leading-[1.05] font-bold tracking-tight text-apple-text sm:text-5xl md:text-[64px] lg:text-[76px]">
+          <span className="block min-w-0 max-w-full">用自然语言</span>
+          <span className="block min-w-0 max-w-full text-electric">创造可运行的作品</span>
         </h1>
 
-        <p className="mx-auto mb-10 max-w-2xl text-xl leading-relaxed font-medium text-apple-text-muted md:text-2xl">
-          <span className="block">The art of Vibe Coding.</span>
-          <span className="block">从基建矩阵到坚不可摧的工程交付工作流，带你掌握下一代软件的结构学。</span>
+        <p className="mx-auto mb-10 flex w-full max-w-2xl flex-col items-center text-balance text-xl leading-relaxed font-medium text-apple-text-muted md:text-2xl">
+          <span className="block min-w-0 max-w-full">The art of Vibe Coding</span>
+          <span className="block min-w-0 max-w-full">让 AI 负责拆解、生成与验证，让你守住目标、边界与品味</span>
         </p>
 
         <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
