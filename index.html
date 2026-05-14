@@ -3,18 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="秦徐俊关于自然语言编程、AI Agent 工作流、前置环境、上下文工程与确定性交付的产品指南。" />
-    <meta name="theme-color" content="#1D1D1F" />
+    <meta name="description" content="秦徐俊关于自然语言编程、AI Agent 工作流、前置环境、上下文工程与可运行作品的产品指南。" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#F5F5F7" />
     <meta property="og:title" content="ai.vibecoding | Qin Xujun" />
-    <meta property="og:description" content="从底层环境、基建工具、上下文工程到核心指令库，构建确定性的自然语言编程工作流。" />
+    <meta property="og:description" content="用自然语言把想法变成可运行的作品，让 AI 负责拆解、生成与验证，人守住目标、边界与品味。" />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/qinxujun-ai-vibecoding/favicon.svg" />
     <link rel="apple-touch-icon" href="/qinxujun-ai-vibecoding/apple-touch-icon.svg" />
     <title>ai.vibecoding | Qin Xujun</title>
-    <script type="module" crossorigin src="/qinxujun-ai-vibecoding/assets/index-BuBWAaWI.js"></script>
-    <link rel="stylesheet" crossorigin href="/qinxujun-ai-vibecoding/assets/index-CPZCas_p.css">
+    <script type="module" crossorigin src="/qinxujun-ai-vibecoding/assets/index-BB5OPlTZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/qinxujun-ai-vibecoding/assets/index-s0tp5Yb-.css">
   </head>
   <body>
+    <script>
+      (() => {
+        const key = 'ai-vibecoding.theme';
+        const stored = localStorage.getItem(key);
+        const theme = stored === 'light' || stored === 'dark'
+          ? stored
+          : window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
     <div id="root"></div>
   </body>
 </html>
