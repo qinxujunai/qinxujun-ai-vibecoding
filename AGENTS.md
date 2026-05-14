@@ -13,6 +13,7 @@
 - 页面内容、双语文案、工具卡片、提示词正文和页脚文案统一维护在 `src/content/site.tsx`。
 - 语言与主题偏好由 `src/context/SiteSettings.tsx` 管理，并同步 `html lang`、页面标题、description、OG description 与 `color-scheme`。
 - 主题色板集中在 `src/index.css` 的 CSS variables。修改日夜模式时，优先改变量，不要把临时颜色散落进组件。
+- 顶部导航文案必须与目标 section 的信息架构一致：第一性原理、前置基建、生态矩阵、交付管线、指令库。新增或改名 section 时，同步 `src/content/site.tsx` 的中英文导航与对应文档。
 - `README.md` 面向人类维护者，`AGENTS.md` 面向接管项目的 Agent，`CLAUDE.md` 只保留指向本文件的轻量入口，`PROMPTS.md` 记录指令库结构与来源。
 - 本仓库不依赖后端服务、数据库、Express、Gemini SDK 或运行时环境变量。
 
@@ -66,12 +67,24 @@
 
 ---
 
-## 5. 持续交付宪章 (Build Constraint)
+## 5. 页面验证与文档同步 (Browser QA & Docs Sync)
+
+- 任何涉及页面、交互、响应式、动效、主题、语言、文案或视觉结构的需求，都必须打开真实浏览器验证。不要只靠代码推断。
+- 浏览器验证必须至少包含：当前问题所在位置的截图或可见页面证据、桌面宽度检查、必要时移动端宽度检查、控制台错误检查。
+- 如果用户给出截图或浏览器注释，先用真实页面复现和定位，再改代码。不要凭想象重做视觉。
+- 动效遵守 Apple HIG 的克制原则：动效只用于帮助用户理解层级、反馈和过渡，不为了“炫”而加；已有 `motion/react` 入场动画保持轻量、一次性、低干扰。
+- 任何新增功能、文案、导航、部署路径、启动方式、主题规则或协作流程变更后，必须同步相关文档。默认检查 `README.md`、`AGENTS.md`、`PROMPTS.md`、`DEPLOYMENT.md` 是否需要更新。
+- 交付前必须清理明显漂移：未使用的旧常量、重复文案源、过期说明、已经废弃的按钮名或部署信息。
+
+---
+
+## 6. 持续交付宪章 (Build Constraint)
 - 无构建、不交付：你在实施完一组修改原子闭环后，必须立即静默跑通一次 `npm run build`。
 - 如果构建期间 TS 或 Tailwind 跑出 Error，你有必须立即进行 Self-Fixing（自我纠错排查）的义务。绝不可将未跑过测试、带着刺眼的红色的残废品交付给下一位维护者。
 
-## 6. Git 与发布边界 (Git & Release)
+## 7. Git 与发布边界 (Git & Release)
 
 - 提交前必须检查 `git status --short`，确认没有 `node_modules/`、`dist/`、`.netlify/`、日志文件或本地密钥进入提交。
 - 正常发布顺序：`npm run lint` -> `npm run build` -> 浏览器验证 -> `git add` -> `git commit` -> `git push` -> Netlify production deploy -> GitHub Pages 镜像更新。
+- 线上发布后验证 Netlify 与 GitHub Pages 两个地址的 HTTP 状态和关键资源路径。GitHub 仓库 description、homepage、topics 如与项目定位不一致，也要同步更新。
 - 禁止使用批量删除命令。需要删除文件时，只能一次删除一个明确路径的文件。

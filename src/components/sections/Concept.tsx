@@ -17,7 +17,7 @@ export default function Concept() {
           <h2 className="text-[11px] font-semibold text-electric tracking-[0.3em] uppercase mb-6">{concept.eyebrow}</h2>
           <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-apple-text tracking-tight leading-[1.15]">
             <span className="block">{concept.titleTop}</span>
-            <span className="block border-b-2 border-[var(--border-subtle)] text-apple-text-muted">{concept.titleAccent}</span>
+            <span className="block text-apple-text-muted">{concept.titleAccent}</span>
           </h3>
         </motion.div>
 
