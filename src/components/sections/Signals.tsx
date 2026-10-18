@@ -7,7 +7,7 @@ export default function Signals() {
   const { signals } = content;
 
   return (
-    <section aria-label={signals.label} className="px-4 pb-24 sm:px-6 md:pb-32 lg:px-8">
+    <section aria-label={signals.label} className="px-4 pb-20 sm:px-6 md:pb-28 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <p className="mb-6 text-center font-mono text-[11px] font-semibold uppercase tracking-[0.28em] text-apple-text-muted">{signals.label}</p>

@@ -51,7 +51,7 @@ export default function Environment() {
                   <h3 className="mt-1 text-xl font-bold tracking-tight text-apple-text">{card.title}</h3>
                   <p className="mb-6 mt-3 text-[14px] leading-relaxed text-apple-text-muted">{card.desc}</p>
                   <TerminalCommand
-                    caption={environment.captions.install}
+                    caption={os === 'win' ? 'PowerShell' : environment.captions.install}
                     command={cmd[os]}
                     officialUrl={cmd.url}
                     officialLabel={card.officialLabel}

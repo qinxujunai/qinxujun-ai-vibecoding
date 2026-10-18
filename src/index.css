@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
-/* System fonts only: no render-blocking web font request (Google Fonts is unreliable in mainland China). */
+/* Inter is bundled locally (@fontsource-variable/inter): same look as before, no external font request.
+   Chinese text falls back to the platform's best CJK face. */
 @theme {
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-sans: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   --color-electric: var(--electric);
   --color-electric-hover: var(--electric-hover);

@@ -1,0 +1,26 @@
+# ai.vibecoding
+
+> Qin Xujun's bilingual (zh-CN / en-US) map of AI-native software work: from vibe coding to agentic engineering. Core claim: code is getting cheap; what stays scarce is defining the problem, curating context, and verifying the result. Content updated 2026-10.
+
+The site is a single static page. Each chapter is an anchor on the same URL.
+
+## Chapters
+
+- [01 The Shift](#shift): how the human–AI split changed 2021–2026; before/now comparison of the developer's job.
+- [02 First Principles](#concept): Quality = Problem × Context × Verification; three laws with one concrete action each.
+- [03 Spectrum](#spectrum): choose a mode per task by cost of error × verification speed (human-led, agentic engineering, exploration, pure vibe).
+- [04 Setup](#environment): Node.js, Git, Claude Code install commands per OS, and the first hour after install.
+- [05 Tools](#tools): Claude Code, Codex, v0, plus four shapes of collaboration (terminal agent, AI IDE, app builder, cloud agent).
+- [06 Context Engine](#context-engine): context budget as reported by /context; AGENTS.md / CLAUDE.md, Skills, MCP, Subagents, Hooks, compaction; the lethal trifecta.
+- [07 Delivery Pipeline](#workflow): six gates (interview, context, plan gate, atomic patch, verify loop, ship review) and the evidence each leaves.
+- [08 Failure Modes](#failures): eight common failures with symptom and fix.
+- [09 Better Questions](#questions): common questions reframed into higher-leverage ones.
+- [10 Prompt Library](#prompts): five copy-ready prompts (project interview, load context, change contract, atomic delivery, independent review).
+- [11 Deploy](#deployment): five checks before release; Netlify, Cloudflare, Vercel.
+
+## Source of truth
+
+- Repository: https://github.com/qinxujunai/qinxujun-ai-vibecoding
+- All page copy and prompt text: src/content/site.tsx
+- Prompt library as Markdown: PROMPTS.md
+- Agent rules for this repo: AGENTS.md

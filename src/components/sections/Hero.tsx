@@ -32,7 +32,7 @@ export default function Hero() {
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="#shift"
+            href="#start"
             className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-8 py-3.5 text-[17px] font-semibold text-[var(--button-primary-text)] shadow-md shadow-black/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--button-primary-hover)] hover:shadow-lg hover:shadow-black/15 active:translate-y-0 sm:w-auto"
           >
             {hero.primaryCta}

@@ -9,6 +9,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
 import Signals from './components/sections/Signals';
+import Paths from './components/sections/Paths';
 import Shift from './components/sections/Shift';
 import Concept from './components/sections/Concept';
 import Spectrum from './components/sections/Spectrum';
@@ -50,6 +51,7 @@ export default function App() {
             {/* Act I — understanding */}
             <Hero />
             <Signals />
+            <Paths />
             <Shift />
             <Concept />
             <Spectrum />

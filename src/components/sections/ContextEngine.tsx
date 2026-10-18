@@ -2,8 +2,9 @@ import { AlertTriangle } from 'lucide-react';
 import { useSiteSettings } from '../../context/SiteSettings';
 import { Reveal, SectionHeader } from '../ui/Section';
 
-// Budget segments map to a fixed ramp; the last one is free space.
-const budgetColors = ['bg-apple-text/70', 'bg-electric', 'bg-electric/60', 'bg-warm', 'bg-warm/55', 'bg-transparent'];
+// Segment colors follow /context order: fixed overhead (gray), MCP (warm), what you curate (blue),
+// messages (warm), reserved buffer (light gray), free space (empty).
+const budgetColors = ['bg-apple-text/70', 'bg-apple-text/45', 'bg-warm', 'bg-electric', 'bg-electric/60', 'bg-warm/50', 'bg-apple-text/15', 'bg-transparent'];
 
 export default function ContextEngine() {
   const { content } = useSiteSettings();
@@ -15,30 +16,44 @@ export default function ContextEngine() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow={contextEngine.eyebrow} titleTop={contextEngine.titleTop} titleBottom={contextEngine.titleBottom} desc={contextEngine.desc} />
 
-        {/* Context budget bar */}
+        {/* Context budget, using the categories Claude Code's /context command reports */}
         <Reveal className="mx-auto mt-16 max-w-4xl">
           <div className="rounded-[2rem] border border-[var(--border-subtle)] bg-apple-gray/60 p-6 md:p-8">
-            <p className="text-[13px] font-semibold text-apple-text">{contextEngine.budgetTitle}</p>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <p className="text-[15px] font-semibold text-apple-text">{contextEngine.budgetTitle}</p>
+              <code className="rounded-md bg-[var(--code-bg)] px-2 py-0.5 font-mono text-[12px] font-semibold text-white">/context</code>
+            </div>
+            <p className="mt-1 text-[13px] text-apple-text-muted">{contextEngine.budgetHint}</p>
             <div className="mt-5 flex h-4 overflow-hidden rounded-full ring-1 ring-[var(--border-soft)]">
               {contextEngine.budget.map((seg, idx) => (
                 <div
-                  key={seg.label}
+                  key={seg.cli}
                   className={`${budgetColors[idx]} h-full ${idx < contextEngine.budget.length - 1 ? 'border-r border-[var(--page-bg)]' : ''}`}
                   style={{ width: `${seg.pct}%` }}
-                  title={`${seg.label} ${seg.pct}%`}
+                  title={`${seg.cli} ${seg.pct}%`}
                 />
               ))}
             </div>
-            <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3">
+            <ul className="mt-5 grid grid-cols-1 gap-x-8 gap-y-2.5 sm:grid-cols-2">
               {contextEngine.budget.map((seg, idx) => (
-                <li key={seg.label} className="flex items-center gap-2 text-[13px] text-apple-text-muted">
+                <li key={seg.cli} className="flex items-center gap-2.5 text-[13px]">
                   <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${budgetColors[idx]} ${idx === contextEngine.budget.length - 1 ? 'ring-1 ring-[var(--border-soft)]' : ''}`} />
-                  <span className="min-w-0 truncate">{seg.label}</span>
+                  <span className="min-w-0 truncate">
+                    <span className="font-mono text-[12px] text-apple-text">{seg.cli}</span>
+                    <span className="ml-2 text-apple-text-muted">{seg.label}</span>
+                  </span>
                   <span className="ml-auto font-mono text-[12px] text-apple-text">{seg.pct}%</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-5 border-t border-[var(--border-subtle)] pt-4 text-[13px] text-apple-text-muted">{contextEngine.budgetNote}</p>
+            <ul className="mt-6 space-y-2 border-t border-[var(--border-subtle)] pt-5">
+              {contextEngine.budgetInsights.map((insight) => (
+                <li key={insight} className="flex gap-2.5 text-[14px] leading-relaxed text-apple-text">
+                  <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-electric" />
+                  {insight}
+                </li>
+              ))}
+            </ul>
           </div>
         </Reveal>
 

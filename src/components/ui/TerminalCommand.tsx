@@ -31,27 +31,21 @@ export default function TerminalCommand({
   };
 
   return (
-    <div className={`group/terminal rounded-3xl bg-[#1C1C1E] p-5 text-left shadow-xl ring-1 ring-white/10 transition-all duration-300 hover:ring-white/20 ${className}`}>
-      <div className="mb-4 flex items-center justify-between gap-3">
-        <div className="flex gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
-        </div>
+    <div className={`group/terminal rounded-[1.25rem] bg-[#1C1C1E] p-4 text-left shadow-lg ring-1 ring-white/10 transition-all duration-300 hover:ring-white/20 ${className}`}>
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <span className="font-mono text-[12px] text-white/45">{caption}</span>
         {officialUrl && officialLabel ? (
           <a
             href={officialUrl}
             target="_blank"
             rel="noreferrer"
-            className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-semibold transition-colors hover:bg-white/10 ${accentClass}`}
+            className={`inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-[11px] font-semibold transition-colors hover:bg-white/10 ${accentClass}`}
           >
             {officialLabel}
             <ExternalLink className="h-3 w-3" />
           </a>
         ) : null}
       </div>
-
-      <div className="mb-2 font-mono text-[12px] text-white/40">{caption}</div>
       <button
         type="button"
         onClick={handleCopy}
