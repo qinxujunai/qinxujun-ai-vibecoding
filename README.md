@@ -16,7 +16,7 @@
 - **装备**：04 前置基建（按系统切换的安装命令 + 第一个小时）、05 生态矩阵（三款代表工具 + 四种协作形态）、06 上下文外脑（上下文预算、AGENTS.md / Skills / MCP / Subagents / Hooks / Compaction、致命三要素）。
 - **实战**：07 交付管线、08 失败模式、09 升维问题、10 指令库（五段可复制指令）、11 云端交付（发布清单 + 托管平台）。
 
-首屏下方的“四个改变判断的事实”和页尾“信源”章节保证每个判断都有一手出处。站点包含中英文切换、日夜模式、移动端章节目录、阅读进度条、可复制命令与指令、二维码联系弹窗。所有页面文案统一维护在 `src/content/site.tsx`，避免界面、文档和提示词各写一份导致漂移。
+首屏下方依次是“四个改变判断的事实”和“选择你的起点”路线器（零基础 / 产品·创业者 / 工程师三条路线，并推荐 Datawhale easy-vibe 课程做系统学习）；页尾“信源”章节保证每个判断都有一手出处。`public/llms.txt` 为 AI Agent 提供站点导航。站点包含中英文切换、日夜模式、移动端章节目录、阅读进度条、可复制命令与指令、二维码联系弹窗。所有页面文案统一维护在 `src/content/site.tsx`，避免界面、文档和提示词各写一份导致漂移。
 
 章节顺序以 `src/content/site.tsx` 的 `sectionOrder` 为准，桌面导航显示 `primaryNav`。中英文导航、章节 eyebrow 编号和文档说明必须一起维护。
 
@@ -28,7 +28,7 @@
 - Tailwind CSS v4
 - motion/react
 - lucide-react
-- 系统字体栈（不加载外部字体）
+- Inter 可变字体本地打包（@fontsource-variable/inter），中文回退到各平台系统字体
 - Netlify 静态部署 + GitHub Pages 镜像（GitHub Actions 自动发布）
 
 ## 本地启动
@@ -72,6 +72,7 @@ npm run build
 ```text
 Hero (+ HeroTerminal)
 Signals          四个改变判断的事实
+Paths            选择你的起点（三条阅读路线）
 Shift            01 范式跃迁
 Concept          02 第一性原理
 Spectrum         03 模式光谱

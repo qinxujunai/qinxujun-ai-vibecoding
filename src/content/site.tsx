@@ -79,7 +79,8 @@ const zhPrompts: PromptItem[] = [
 3. 如果我的想法里有冲突、过度设计、缺少前提、成本不成比例或假设不成立，直接指出。
 4. 如果信息已经足够，不要继续采访；直接整理项目宪章草案。
 5. 明确区分：我已经说过的事实、你基于经验做出的判断、仍未确认的问题。
-6. 不写代码，不创建文件，不修改文件；这个阶段只产出工程外脑。
+6. 追问真实发生过的场景和用户现在的替代方案（The Mom Test），不接受“用户应该会喜欢”这类假设。
+7. 不写代码，不创建文件，不修改文件；这个阶段只产出工程外脑。
 </rules>
 
 <process>
@@ -348,7 +349,8 @@ I may describe a project, page, feature, workflow, or a problem that is still un
 3. If the idea contains contradictions, over-design, missing assumptions, poor cost-value tradeoffs, or invalid premises, call that out directly.
 4. If the information is sufficient, stop interviewing and draft the charter.
 5. Separate what I said, what you infer from experience, and what remains unconfirmed.
-6. Do not write code, create files, or modify files; this stage only produces the project brain.
+6. Ask about real past situations and what users do today instead (The Mom Test); do not accept assumptions like “users will love it”.
+7. Do not write code, create files, or modify files; this stage only produces the project brain.
 </rules>
 
 <process>
@@ -600,6 +602,7 @@ export const links = {
   claudeSetup: 'https://code.claude.com/docs/en/setup',
   codex: 'https://developers.openai.com/codex',
   v0: 'https://v0.app',
+  easyVibe: 'https://datawhalechina.github.io/easy-vibe/',
   netlify: 'https://docs.netlify.com',
   cloudflare: 'https://developers.cloudflare.com/workers/static-assets/',
   vercel: 'https://vercel.com/docs',
@@ -710,6 +713,34 @@ export const siteContent = {
         },
       ],
     },
+    paths: {
+      eyebrow: '选择你的起点',
+      title: '同一张地图，三条路线',
+      desc: '挑一条，按顺序读完，然后只做那一件事。',
+      actionLabel: '读完就做',
+      items: [
+        {
+          who: '零基础',
+          goal: '想做出第一个能用的作品',
+          route: ['shift', 'environment', 'spectrum', 'prompts'],
+          action: '今晚装好 Claude Code，用指令 01 把你的想法访谈成一页 AGENTS.md。',
+        },
+        {
+          who: '产品经理 · 创业者',
+          goal: '想低成本验证想法、做出 MVP',
+          route: ['concept', 'spectrum', 'questions', 'prompts'],
+          action: '开工前，问三个真实用户：“上一次遇到这个问题时，你是怎么解决的？”',
+        },
+        {
+          who: '工程师 · 技术负责人',
+          goal: '想让团队把 Agent 用进生产',
+          route: ['context-engine', 'workflow', 'failures', 'prompts'],
+          action: '把构建命令和红线写进 AGENTS.md，再用 Hooks 把 lint 与测试变成硬闸门。',
+        },
+      ],
+      deeper: '想系统学？Datawhale 的开源课程 easy-vibe 从找到好问题讲到全栈上线与 Claude Code 进阶，适合配合本页使用。',
+      deeperCta: 'easy-vibe 课程',
+    },
     shift: {
       eyebrow: '01 · 范式跃迁',
       titleTop: '写代码不再是瓶颈',
@@ -783,7 +814,7 @@ export const siteContent = {
       titleBottom: '让 AI 从聊天窗口走进你的电脑',
       desc: 'Agent 需要真实的运行时、版本控制和终端，才能读文件、跑构建、回滚错误。先选择你的系统。',
       osLabels: { mac: 'macOS / Linux', win: 'Windows' },
-      captions: { install: '# 在终端中运行', officialInstall: '官方安装', copy: '复制命令' },
+      captions: { install: '终端 · zsh / bash', officialInstall: '官方安装', copy: '复制命令' },
       macNote: 'macOS 未安装 Homebrew 时，可直接从 Node.js 官网下载安装包。',
       cards: [
         {
@@ -830,7 +861,7 @@ export const siteContent = {
           label: 'Anthropic · Agentic CLI',
           title: '终端里的自主工程师',
           desc: '直接在本地仓库读代码、改文件、跑命令、做验证。原生支持 CLAUDE.md、Skills、MCP、Subagents 与 Hooks，也能在桌面端、IDE 和网页端运行。适合多文件重构与端到端交付。',
-          caption: '# 在项目目录启动',
+          caption: '在项目目录启动',
           official: '产品主页',
         },
         codex: {
@@ -838,7 +869,7 @@ export const siteContent = {
           label: 'OpenAI · Coding Agent',
           title: '本地与云端并行的交付代理',
           desc: '同一个 Agent 覆盖 CLI、IDE 插件、桌面应用和云端任务：本地精细协作，云端并行跑任务并直接产出 PR。原生读取 AGENTS.md。',
-          caption: '# 安装 Codex CLI',
+          caption: '安装 Codex CLI',
           official: '开发者文档',
         },
         v0: {
@@ -864,22 +895,29 @@ export const siteContent = {
       titleTop: '模型是 CPU，上下文是内存',
       titleBottom: '你放进去的，决定它算出来的',
       desc: '模型没有项目记忆。每次会话，它只知道你放进窗口的东西。上下文工程，就是决定什么常驻、什么按需加载、什么及时清空。',
-      budgetTitle: '一次会话的上下文预算（示意）',
+      budgetTitle: '一次会话的上下文预算',
+      budgetHint: '示例会话。在 Claude Code 中输入 /context，看你自己的真实分布。',
       budget: [
-        { label: '系统与工具定义', pct: 12 },
-        { label: '项目记忆', pct: 6 },
-        { label: '按需 Skills', pct: 5 },
-        { label: '读取的代码与文档', pct: 32 },
-        { label: '对话与工具输出', pct: 25 },
-        { label: '剩余空间', pct: 20 },
+        { cli: 'System prompt', label: '系统提示', pct: 2 },
+        { cli: 'System tools', label: '内置工具定义', pct: 7 },
+        { cli: 'MCP tools', label: 'MCP 工具定义', pct: 5 },
+        { cli: 'Memory files', label: 'CLAUDE.md / AGENTS.md', pct: 1 },
+        { cli: 'Skills', label: 'Skills 描述', pct: 1 },
+        { cli: 'Messages', label: '对话、读取的文件、工具输出', pct: 34 },
+        { cli: 'Autocompact buffer', label: '自动压缩预留', pct: 22 },
+        { cli: 'Free space', label: '剩余空间', pct: 28 },
       ],
-      budgetNote: '窗口越满，召回越差。阶段完成就压缩，或开一个新会话。',
+      budgetInsights: [
+        '项目记忆和 Skills 只占约 2%，却决定了 Agent 怎么做事——这是性价比最高的 token。',
+        'MCP 工具定义不调用也在占预算：只接当前任务需要的服务器。',
+        '消息历史是最大头：阶段结束用 /compact 压缩，换任务就 /clear。',
+      ],
       cards: [
         { icon: FileText, title: 'AGENTS.md / CLAUDE.md', badge: '常驻记忆', desc: '每次会话自动加载的项目宪章。只写 Agent 猜不到的：构建命令、代码约定、红线。AGENTS.md 已随 Linux 基金会 AAIF 成为跨工具标准。' },
         { icon: BookOpen, title: 'Skills', badge: '按需加载', desc: '把一项专业能力打包成文件夹：SKILL.md + 脚本 + 参考资料。平时只占一行描述，用到时才展开——渐进式披露，知识库可以无限扩展而不挤占窗口。' },
         { icon: Plug, title: 'MCP', badge: '外部连接', desc: 'Model Context Protocol：用统一接口连接数据库、设计稿、工单和浏览器。由 Anthropic 发起，2025 年 12 月捐赠给 Linux 基金会。' },
         { icon: Network, title: 'Subagents', badge: '隔离上下文', desc: '调研、审查、测试交给独立窗口里的专家，只把精炼结论带回主会话。主线保持干净，判断不被噪音稀释。' },
-        { icon: ShieldCheck, title: 'Hooks', badge: '确定性闸门', desc: '在工具调用前后自动执行格式化、构建、拦截危险命令。提示词是建议，Hook 是规则：必须发生的事，不要交给模型的记忆。' },
+        { icon: ShieldCheck, title: 'Hooks', badge: '确定性闸门', desc: '在工具调用前后自动格式化、构建、拦截危险命令；Stop Hook 在 Agent 想收工时先检查验收条件。提示词是建议，Hook 是规则。' },
         { icon: RefreshCw, title: 'Compaction / 新会话', badge: '对抗腐烂', desc: '长任务把进度写进笔记文件，阶段结束就压缩或重开会话。一个任务一个会话，比一个会话做到底可靠得多。' },
       ],
       trifecta: {
@@ -940,6 +978,7 @@ export const siteContent = {
         { low: '怎么写出完美的提示词？', high: '怎样让一个新 Agent 第一次进仓库，就不需要我解释？', why: '提示词是一次性的，项目记忆是复利的。' },
         { low: '怎么让 AI 一次写对？', high: '怎样让它错得早、错得便宜、错得可见？', why: '可靠来自快速纠错，不来自一次命中。' },
         { low: '不会写代码，能做产品吗？', high: '我能不能清楚定义“什么叫做对”？', why: '能写出验收标准的人，就能指挥 Agent。' },
+        { low: '这个产品做出来，会有人用吗？', high: '用户上一次遇到这个问题时，实际做了什么、花了多少？', why: 'The Mom Test：问过去的行为，不问未来的意愿。' },
         { low: 'AI 会取代程序员吗？', high: '当执行趋于免费，我的判断和品味以什么速度复利？', why: '被替代的是执行，不是判断。' },
         { low: '下一个模型会更强吗？', high: '模型变强时，我的工作流会不会自动变强？', why: '规则、测试、Skills 是资产；提示技巧是消耗品。' },
         { low: '怎么让它写得更快？', high: '我的验证速度，跟得上它的生成速度吗？', why: '生成快于验证时，你在积累看不见的债。' },
@@ -1099,6 +1138,34 @@ export const siteContent = {
         },
       ],
     },
+    paths: {
+      eyebrow: 'PICK YOUR STARTING POINT',
+      title: 'One map, three routes',
+      desc: 'Pick one, read it in order, then do exactly one thing.',
+      actionLabel: 'Then do this',
+      items: [
+        {
+          who: 'Beginner',
+          goal: 'Wants to ship a first working product',
+          route: ['shift', 'environment', 'spectrum', 'prompts'],
+          action: 'Install Claude Code tonight and use prompt 01 to interview your idea into a one-page AGENTS.md.',
+        },
+        {
+          who: 'PM · Founder',
+          goal: 'Wants to validate ideas and build an MVP cheaply',
+          route: ['concept', 'spectrum', 'questions', 'prompts'],
+          action: 'Before building, ask three real users: “The last time you hit this problem, what did you do?”',
+        },
+        {
+          who: 'Engineer · Tech lead',
+          goal: 'Wants agents working in production',
+          route: ['context-engine', 'workflow', 'failures', 'prompts'],
+          action: 'Put build commands and red lines in AGENTS.md, then make lint and tests hard gates with Hooks.',
+        },
+      ],
+      deeper: 'Want a full course? Datawhale’s open-source easy-vibe goes from finding a good problem to full-stack launch and advanced Claude Code. It pairs well with this page.',
+      deeperCta: 'easy-vibe course',
+    },
     shift: {
       eyebrow: '01 · THE SHIFT',
       titleTop: 'Writing code is no longer the bottleneck',
@@ -1172,7 +1239,7 @@ export const siteContent = {
       titleBottom: 'move AI from a chat window into your machine',
       desc: 'Agents need a real runtime, version control, and a terminal to read files, run builds, and roll back mistakes. Pick your system first.',
       osLabels: { mac: 'macOS / Linux', win: 'Windows' },
-      captions: { install: '# Run in your terminal', officialInstall: 'Official install', copy: 'Copy command' },
+      captions: { install: 'Terminal · zsh / bash', officialInstall: 'Official install', copy: 'Copy command' },
       macNote: 'No Homebrew on macOS? Download the installer from nodejs.org instead.',
       cards: [
         {
@@ -1219,7 +1286,7 @@ export const siteContent = {
           label: 'Anthropic · Agentic CLI',
           title: 'An autonomous engineer in your terminal',
           desc: 'Reads code, edits files, runs commands, and verifies inside your local repo. Native support for CLAUDE.md, Skills, MCP, Subagents, and Hooks, plus desktop, IDE, and web surfaces. Built for multi-file refactors and end-to-end delivery.',
-          caption: '# Start inside a project',
+          caption: 'Start inside a project',
           official: 'Product page',
         },
         codex: {
@@ -1227,7 +1294,7 @@ export const siteContent = {
           label: 'OpenAI · Coding Agent',
           title: 'A delivery agent, local and in the cloud',
           desc: 'One agent across CLI, IDE extension, desktop app, and cloud tasks: precise local collaboration, parallel cloud runs that open PRs. Reads AGENTS.md natively.',
-          caption: '# Install the Codex CLI',
+          caption: 'Install the Codex CLI',
           official: 'Developer docs',
         },
         v0: {
@@ -1253,22 +1320,29 @@ export const siteContent = {
       titleTop: 'The model is the CPU; context is the RAM',
       titleBottom: 'What you load decides what it computes',
       desc: 'A model has no project memory. In each session it knows only what you put in the window. Context engineering decides what stays resident, what loads on demand, and what gets cleared.',
-      budgetTitle: 'Context budget for one session (illustrative)',
+      budgetTitle: 'Context budget for one session',
+      budgetHint: 'Example session. Type /context in Claude Code to see your own real breakdown.',
       budget: [
-        { label: 'System and tool definitions', pct: 12 },
-        { label: 'Project memory', pct: 6 },
-        { label: 'On-demand Skills', pct: 5 },
-        { label: 'Code and docs read', pct: 32 },
-        { label: 'Conversation and tool output', pct: 25 },
-        { label: 'Free space', pct: 20 },
+        { cli: 'System prompt', label: 'System prompt', pct: 2 },
+        { cli: 'System tools', label: 'Built-in tool definitions', pct: 7 },
+        { cli: 'MCP tools', label: 'MCP tool definitions', pct: 5 },
+        { cli: 'Memory files', label: 'CLAUDE.md / AGENTS.md', pct: 1 },
+        { cli: 'Skills', label: 'Skill descriptions', pct: 1 },
+        { cli: 'Messages', label: 'Conversation, files read, tool output', pct: 34 },
+        { cli: 'Autocompact buffer', label: 'Reserved for auto-compaction', pct: 22 },
+        { cli: 'Free space', label: 'Free space', pct: 28 },
       ],
-      budgetNote: 'The fuller the window, the worse the recall. Compact or start a fresh session when a phase is done.',
+      budgetInsights: [
+        'Project memory and Skills take about 2%, yet decide how the agent works. These are the highest-leverage tokens you own.',
+        'MCP tool definitions cost budget even when unused. Connect only the servers this task needs.',
+        'Message history is the biggest slice: /compact at phase boundaries, /clear when switching tasks.',
+      ],
       cards: [
         { icon: FileText, title: 'AGENTS.md / CLAUDE.md', badge: 'Resident memory', desc: 'The project charter loaded into every session. Write only what the agent cannot guess: build commands, conventions, red lines. AGENTS.md is now a cross-tool standard under the Linux Foundation’s AAIF.' },
         { icon: BookOpen, title: 'Skills', badge: 'Load on demand', desc: 'Package one capability as a folder: SKILL.md plus scripts and references. It costs one line of description until needed, then expands. Progressive disclosure lets knowledge grow without crowding the window.' },
         { icon: Plug, title: 'MCP', badge: 'External connections', desc: 'Model Context Protocol: one interface to databases, design files, tickets, and browsers. Started by Anthropic and donated to the Linux Foundation in December 2025.' },
         { icon: Network, title: 'Subagents', badge: 'Isolated context', desc: 'Research, review, and testing run in separate windows and return only distilled conclusions. The main thread stays clean and judgment is not diluted by noise.' },
-        { icon: ShieldCheck, title: 'Hooks', badge: 'Deterministic gates', desc: 'Run formatting, builds, and dangerous-command blocks before or after tool calls. Prompts are suggestions; hooks are rules. Whatever must happen should not depend on model memory.' },
+        { icon: ShieldCheck, title: 'Hooks', badge: 'Deterministic gates', desc: 'Format, build, and block dangerous commands around tool calls; a Stop hook checks acceptance criteria before the agent is allowed to quit. Prompts are suggestions; hooks are rules.' },
         { icon: RefreshCw, title: 'Compaction / fresh sessions', badge: 'Fight the rot', desc: 'Long tasks keep progress in a notes file and compact or restart at each phase boundary. One task per session beats one session for everything.' },
       ],
       trifecta: {
@@ -1329,6 +1403,7 @@ export const siteContent = {
         { low: 'How do I write the perfect prompt?', high: 'How does a new agent understand this repo without me explaining it?', why: 'A prompt is used once; project memory compounds.' },
         { low: 'How do I get AI to do it right the first time?', high: 'How do I make its mistakes early, cheap, and visible?', why: 'Reliability comes from fast correction, not first-shot accuracy.' },
         { low: 'Can I build a product without coding?', high: 'Can I define clearly what “correct” means?', why: 'Whoever can write acceptance criteria can direct an agent.' },
+        { low: 'Will anyone use this if I build it?', high: 'The last time users hit this problem, what did they actually do, and what did it cost?', why: 'The Mom Test: ask about past behavior, not future intent.' },
         { low: 'Will AI replace programmers?', high: 'As execution becomes free, how fast do my judgment and taste compound?', why: 'Execution gets replaced; judgment does not.' },
         { low: 'Will the next model be better?', high: 'When models improve, does my workflow improve automatically?', why: 'Rules, tests, and Skills are assets; prompt tricks are consumables.' },
         { low: 'How do I make it write faster?', high: 'Can my verification keep up with its generation?', why: 'When generation outruns verification, you accumulate invisible debt.' },

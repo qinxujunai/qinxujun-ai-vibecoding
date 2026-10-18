@@ -15,7 +15,8 @@
 - 主题色板集中在 `src/index.css` 的 CSS variables。修改日夜模式时，优先改变量，不要把临时颜色散落进组件。
 - 页面按 11 章由浅入深：01 范式跃迁、02 第一性原理、03 模式光谱、04 前置基建、05 生态矩阵、06 上下文外脑、07 交付管线、08 失败模式、09 升维问题、10 指令库、11 云端交付，之后是写在最后与信源。章节顺序的单一事实源是 `src/content/site.tsx` 的 `sectionOrder`；桌面导航显示 `primaryNav` 中的 7 项，移动端目录列出全部章节。新增或改名章节时，同步 `sectionOrder`、中英文 `nav.labels`、章节 eyebrow 编号与对应文档。
 - 页面中的事实性判断（研究数据、标准、发布时间）必须能在“信源”章节找到一手出处；更新内容时同步 `sources` 与页脚的“内容更新于”日期。
-- 字体只用系统字体栈，不引入 Google Fonts 等外部字体（中国大陆访问会阻塞渲染）。
+- 西文字体为本地打包的 Inter（`@fontsource-variable/inter`，在 `src/main.tsx` 引入），中文回退到平台系统字体。不要再引入 Google Fonts 等外部字体请求（中国大陆访问会阻塞渲染）。
+- 首屏之后的“选择你的起点”（`Paths.tsx`，锚点 `#start`）是三条阅读路线，路线中的章节 id 必须存在于 `sectionOrder`。`public/llms.txt` 是给 AI Agent 的站点导航，章节变化时同步更新。
 - `README.md` 面向人类维护者，`AGENTS.md` 面向接管项目的 Agent，`CLAUDE.md` 只保留指向本文件的轻量入口，`PROMPTS.md` 记录指令库结构与来源。
 - 本仓库不依赖后端服务、数据库、Express、Gemini SDK 或运行时环境变量。
 
