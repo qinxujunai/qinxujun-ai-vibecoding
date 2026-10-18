@@ -1,43 +1,30 @@
-import { motion } from 'motion/react';
 import { useSiteSettings } from '../../context/SiteSettings';
+import { Reveal, SectionHeader } from '../ui/Section';
 
 export default function Concept() {
   const { content } = useSiteSettings();
   const { concept } = content;
 
   return (
-    <section id="concept" className="py-24 md:py-32 bg-[var(--page-bg)]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-24 max-w-4xl mx-auto"
-        >
-          <h2 className="text-[11px] font-semibold text-electric tracking-[0.3em] uppercase mb-6">{concept.eyebrow}</h2>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-apple-text tracking-tight leading-[1.15]">
-            <span className="block">{concept.titleTop}</span>
-            <span className="block text-apple-text-muted">{concept.titleAccent}</span>
-          </h3>
-        </motion.div>
+    <section id="concept" className="bg-apple-gray py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader eyebrow={concept.eyebrow} titleTop={concept.titleTop} titleBottom={concept.titleAccent} />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+        <div className="mt-20 grid grid-cols-1 gap-5 md:grid-cols-3">
           {concept.principles.map((item, idx) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 + idx * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="group"
-            >
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-6 transition-all duration-300 ${item.active ? 'bg-[var(--button-primary-bg)] text-[var(--button-primary-text)] group-hover:shadow-md group-hover:shadow-black/10' : 'border border-[var(--border-subtle)] text-apple-text group-hover:border-apple-text group-hover:shadow-sm'}`}>
-                <span className="font-mono text-sm font-semibold">{item.id}</span>
-              </div>
-              <h4 className="text-[19px] font-bold mb-3 tracking-tight">{item.title}</h4>
-              <p className="text-apple-text-muted text-[15px] leading-relaxed">{item.desc}</p>
-            </motion.div>
+            <Reveal key={item.id} delay={idx * 0.08} className="h-full">
+              <article className="flex h-full flex-col rounded-[2rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-7 shadow-[var(--shadow-soft)] transition-shadow duration-300 hover:shadow-[var(--shadow-hover)] md:p-8">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-[var(--button-primary-bg)] font-mono text-sm font-semibold text-[var(--button-primary-text)]">{item.id}</span>
+                <h3 className="mt-6 text-[21px] font-bold leading-snug tracking-tight text-apple-text">{item.title}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-apple-text-muted">{item.desc}</p>
+                <div className="mt-auto pt-6">
+                  <div className="rounded-2xl bg-electric/[0.07] px-4 py-3 ring-1 ring-electric/15">
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-electric">{concept.practiceLabel}</p>
+                    <p className="mt-1 text-[14px] font-semibold text-apple-text">{item.practice}</p>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
       </div>

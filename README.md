@@ -10,11 +10,15 @@
 
 `ai.vibecoding` 是一个静态展示站，用来讲清楚自然语言编程、AI Agent 工作流、上下文工程与确定性交付之间的关系。
 
-它不是工具罗列页，也不是 Prompt 资料堆。它的目标是用一条完整的叙事路径，把“先理解、再约束、后实现、最后验证”的工程观讲清楚。
+它不是工具罗列页，也不是 Prompt 资料堆。核心命题：代码正在变得廉价，稀缺的是定义问题、组织上下文、验证结果的能力。页面用 11 章把读者从“Vibe Coding”带到“Agentic Engineering”，分三幕由浅入深：
 
-当前站点包含中英文切换、日夜模式、可复制指令、二维码联系弹窗，以及一套面向 Agent 协作的核心指令库。所有页面文案统一维护在 `src/content/site.tsx`，避免界面、文档和提示词各写一份导致漂移。
+- **认知**：01 范式跃迁（时间线 + 过去/现在对照）、02 第一性原理（交付质量 = 问题 × 上下文 × 验证）、03 模式光谱（出错代价 × 验证速度四象限）。
+- **装备**：04 前置基建（按系统切换的安装命令 + 第一个小时）、05 生态矩阵（三款代表工具 + 四种协作形态）、06 上下文外脑（上下文预算、AGENTS.md / Skills / MCP / Subagents / Hooks / Compaction、致命三要素）。
+- **实战**：07 交付管线、08 失败模式、09 升维问题、10 指令库（五段可复制指令）、11 云端交付（发布清单 + 托管平台）。
 
-导航信息架构以页面真实 section 为准：第一性原理、前置基建、生态矩阵、交付管线、指令库。中英文导航、section eyebrow 和文档说明必须一起维护。
+首屏下方的“四个改变判断的事实”和页尾“信源”章节保证每个判断都有一手出处。站点包含中英文切换、日夜模式、移动端章节目录、阅读进度条、可复制命令与指令、二维码联系弹窗。所有页面文案统一维护在 `src/content/site.tsx`，避免界面、文档和提示词各写一份导致漂移。
+
+章节顺序以 `src/content/site.tsx` 的 `sectionOrder` 为准，桌面导航显示 `primaryNav`。中英文导航、章节 eyebrow 编号和文档说明必须一起维护。
 
 ## 技术栈
 
@@ -24,7 +28,8 @@
 - Tailwind CSS v4
 - motion/react
 - lucide-react
-- Netlify 静态部署
+- 系统字体栈（不加载外部字体）
+- Netlify 静态部署 + GitHub Pages 镜像（GitHub Actions 自动发布）
 
 ## 本地启动
 
@@ -65,25 +70,32 @@ npm run build
 ## 页面结构
 
 ```text
-Hero
-Concept
-Environment
-Tools
-ContextEngine
-Workflow
-Prompts
-Deployment
-Manifesto
+Hero (+ HeroTerminal)
+Signals          四个改变判断的事实
+Shift            01 范式跃迁
+Concept          02 第一性原理
+Spectrum         03 模式光谱
+Environment      04 前置基建
+Tools            05 生态矩阵
+ContextEngine    06 上下文外脑
+Workflow         07 交付管线
+Failures         08 失败模式
+Questions        09 升维问题
+Prompts          10 指令库
+Deployment       11 云端交付
+Manifesto        写在最后
+Sources          信源
 Footer
 ```
 
 核心文件：
 
-- `src/content/site.tsx`：全站中英文内容、提示词正文、工具卡片和页脚文案。
+- `src/content/site.tsx`：全站中英文内容、章节顺序、安装命令、外链与信源、提示词正文和页脚文案。
 - `src/context/SiteSettings.tsx`：语言、主题、`html lang`、SEO meta 和本地偏好。
 - `src/index.css`：Tailwind v4 入口和主题变量。
-- `src/components/sections/Hero.tsx`：首页文案与 Claude Code 终端模拟。
-- `src/components/layout/Navbar.tsx`：品牌回顶部、语言切换、日夜模式切换。
+- `src/components/sections/Hero.tsx` / `HeroTerminal.tsx`：首页文案与 Claude Code v2 终端模拟。
+- `src/components/ui/Section.tsx`：统一的章节标题与一次性入场动效。
+- `src/components/layout/Navbar.tsx`：品牌回顶部、章节高亮、移动端章节目录、阅读进度条、语言与日夜模式切换。
 - `src/components/layout/Footer.tsx`：联系入口、二维码弹窗和页脚收尾。
 
 ## 协作约束
@@ -129,3 +141,5 @@ https://qinxujunai.github.io/qinxujun-ai-vibecoding/
 ```bash
 npx netlify deploy --prod --build
 ```
+
+GitHub Pages 由 `.github/workflows/deploy.yml` 自动发布：每次推送 `main`，Actions 会运行 `npm run lint`、带 `BASE_PATH` 构建，并把 `dist/` 发布到 `gh-pages` 分支。

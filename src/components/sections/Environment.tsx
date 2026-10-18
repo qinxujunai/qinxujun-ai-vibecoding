@@ -1,58 +1,85 @@
-import { motion } from 'motion/react';
+import { useState } from 'react';
 import TerminalCommand from '../ui/TerminalCommand';
+import { Reveal, SectionHeader } from '../ui/Section';
+import { envCommands, type OsKey } from '../../content/site';
 import { useSiteSettings } from '../../context/SiteSettings';
+
+function detectOs(): OsKey {
+  if (typeof navigator === 'undefined') return 'mac';
+  return /Win/i.test(navigator.userAgent) ? 'win' : 'mac';
+}
 
 export default function Environment() {
   const { content } = useSiteSettings();
   const { environment } = content;
+  const [os, setOs] = useState<OsKey>(detectOs);
+  const osKeys: OsKey[] = ['mac', 'win'];
 
   return (
-    <section id="environment" className="bg-[var(--page-bg)] py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-[11px] font-semibold text-apple-text-muted tracking-[0.3em] uppercase mb-4">{environment.eyebrow}</h2>
-          <h3 className="text-3xl md:text-5xl font-bold text-apple-text tracking-tight mb-6 leading-[1.15]">
-            <span className="block">{environment.titleTop}</span>
-            <span className="block">{environment.titleBottom}</span>
-          </h3>
-          <p className="text-lg text-apple-text-muted max-w-2xl mx-auto">
-            {environment.desc}
-          </p>
-        </div>
+    <section id="environment" className="border-t border-[var(--border-subtle)] bg-[var(--page-bg)] py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader eyebrow={environment.eyebrow} titleTop={environment.titleTop} titleBottom={environment.titleBottom} desc={environment.desc} />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Reveal className="mt-10 flex justify-center">
+          <div role="tablist" aria-label="OS" className="inline-flex rounded-full bg-apple-gray p-1 ring-1 ring-[var(--border-subtle)]">
+            {osKeys.map((key) => (
+              <button
+                key={key}
+                type="button"
+                role="tab"
+                aria-selected={os === key}
+                onClick={() => setOs(key)}
+                className={`rounded-full px-5 py-2 text-[13px] font-semibold transition-all duration-300 ${os === key ? 'bg-[var(--surface-card)] text-apple-text shadow-sm' : 'text-apple-text-muted hover:text-apple-text'}`}
+              >
+                {environment.osLabels[key]}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
+        <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-3">
           {environment.cards.map((card, idx) => {
             const Icon = card.icon;
+            const cmd = envCommands[card.key];
             return (
-              <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -6 }}
-              className={`p-8 rounded-[2rem] flex flex-col items-center text-center group transition-shadow duration-300 ${card.dark ? 'bg-[#1D1D1F] hover:shadow-[0_18px_50px_rgba(0,0,0,0.18)]' : 'bg-apple-gray hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)]'}`}
-            >
-              <div className={`w-16 h-16 rounded-full flex items-center justify-center shadow-sm mb-6 group-hover:scale-110 transition-transform duration-300 ${card.dark ? 'bg-white/10' : 'bg-white'}`}>
-                <Icon className={`h-8 w-8 ${card.dark ? 'text-white' : card.accentClass}`} />
-              </div>
-              <h4 className={`text-xl font-bold mb-3 ${card.dark ? 'text-white' : 'text-apple-text'}`}>{card.title}</h4>
-              <p className={`text-[14px] mb-6 leading-relaxed ${card.dark ? 'text-gray-300' : 'text-apple-text-muted'}`}>
-                {card.desc}
-              </p>
-              <TerminalCommand
-                caption={card.dark ? environment.captions.launch : environment.captions.install}
-                command={card.command}
-                officialUrl={card.url}
-                officialLabel={card.officialLabel ?? environment.captions.officialInstall}
-                copyTitle={environment.captions.copy}
-                accentClass={card.accentClass}
-                className="mt-auto w-full"
-              />
-              </motion.div>
+              <Reveal key={card.key} delay={idx * 0.08} className="h-full">
+                <article className="flex h-full flex-col rounded-[2rem] bg-apple-gray p-7 md:p-8">
+                  <div className="mb-6 grid h-14 w-14 place-items-center rounded-2xl bg-[var(--surface-card)] shadow-sm ring-1 ring-[var(--border-subtle)]">
+                    <Icon className={`h-7 w-7 ${card.accentClass}`} />
+                  </div>
+                  <p className="font-mono text-[12px] font-semibold text-apple-text-muted">0{idx + 1}</p>
+                  <h3 className="mt-1 text-xl font-bold tracking-tight text-apple-text">{card.title}</h3>
+                  <p className="mb-6 mt-3 text-[14px] leading-relaxed text-apple-text-muted">{card.desc}</p>
+                  <TerminalCommand
+                    caption={environment.captions.install}
+                    command={cmd[os]}
+                    officialUrl={cmd.url}
+                    officialLabel={card.officialLabel}
+                    copyTitle={environment.captions.copy}
+                    accentClass={card.accentClass}
+                    className="mt-auto w-full"
+                  />
+                </article>
+              </Reveal>
             );
           })}
         </div>
+        {os === 'mac' ? <p className="mt-4 text-center text-[12px] text-apple-text-muted">{environment.macNote}</p> : null}
+
+        <Reveal className="mt-20">
+          <h3 className="mb-8 text-center text-[13px] font-semibold text-apple-text-muted">{environment.firstHourTitle}</h3>
+          <ol className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {environment.firstHour.map((step, idx) => (
+              <li key={step.code} className="rounded-[1.5rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-5">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-electric text-[12px] font-bold text-white">{idx + 1}</span>
+                  <code className="truncate rounded-lg bg-[var(--code-bg)] px-2.5 py-1 font-mono text-[12px] font-semibold text-white">{step.code}</code>
+                </div>
+                <p className="mt-4 text-[14px] leading-relaxed text-apple-text-muted">{step.desc}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
       </div>
     </section>
   );

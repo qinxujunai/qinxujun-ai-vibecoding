@@ -16,15 +16,32 @@ const THEME_KEY = 'ai-vibecoding.theme';
 
 const SiteSettingsContext = createContext<SiteSettingsContextValue | null>(null);
 
+// Storage can throw in private mode or with blocked site data; preferences are a convenience only.
+function readStorage(key: string): string | null {
+  try {
+    return window.localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function writeStorage(key: string, value: string) {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch {
+    // Ignore: the preference simply will not persist.
+  }
+}
+
 function readStoredLocale(): Locale {
   if (typeof window === 'undefined') return 'zh-CN';
-  const stored = window.localStorage.getItem(LOCALE_KEY);
+  const stored = readStorage(LOCALE_KEY);
   return stored === 'en-US' || stored === 'zh-CN' ? stored : 'zh-CN';
 }
 
 function readStoredTheme(): ThemeMode {
   if (typeof window === 'undefined') return 'light';
-  const stored = window.localStorage.getItem(THEME_KEY);
+  const stored = readStorage(THEME_KEY);
   if (stored === 'light' || stored === 'dark') return stored;
   return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
@@ -44,12 +61,12 @@ export function SiteSettingsProvider({ children }: { children: ReactNode }) {
 
   const setLocale = useCallback((nextLocale: Locale) => {
     setLocaleState(nextLocale);
-    window.localStorage.setItem(LOCALE_KEY, nextLocale);
+    writeStorage(LOCALE_KEY, nextLocale);
   }, []);
 
   const setTheme = useCallback((nextTheme: ThemeMode) => {
     setThemeState(nextTheme);
-    window.localStorage.setItem(THEME_KEY, nextTheme);
+    writeStorage(THEME_KEY, nextTheme);
   }, []);
 
   useEffect(() => {
