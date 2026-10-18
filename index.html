@@ -3,23 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="秦徐俊关于自然语言编程、AI Agent 工作流、前置环境、上下文工程与可运行作品的产品指南。" />
+    <meta name="description" content="秦徐俊的 AI 编程认知地图：范式跃迁、第一性原理、模式光谱、上下文工程、交付管线、失败模式与可复制的 Agent 指令库。" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#F5F5F7" />
-    <meta property="og:title" content="ai.vibecoding | Qin Xujun" />
-    <meta property="og:description" content="用自然语言把想法变成可运行的作品，让 AI 负责拆解、生成与验证，人守住目标、边界与品味。" />
+    <meta property="og:title" content="ai.vibecoding | 从 Vibe Coding 到 Agentic Engineering" />
+    <meta property="og:description" content="代码正在变得廉价。真正稀缺的，是定义问题、组织上下文、验证结果的能力。" />
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="author" content="秦徐俊 Qin Xujun" />
     <link rel="icon" type="image/svg+xml" href="/qinxujun-ai-vibecoding/favicon.svg" />
     <link rel="apple-touch-icon" href="/qinxujun-ai-vibecoding/apple-touch-icon.svg" />
-    <title>ai.vibecoding | Qin Xujun</title>
-    <script type="module" crossorigin src="/qinxujun-ai-vibecoding/assets/index-CzLq5ZqV.js"></script>
-    <link rel="stylesheet" crossorigin href="/qinxujun-ai-vibecoding/assets/index-Co_JrUO5.css">
+    <title>ai.vibecoding | 从 Vibe Coding 到 Agentic Engineering</title>
+    <script type="module" crossorigin src="/qinxujun-ai-vibecoding/assets/index-BeRW2p5K.js"></script>
+    <link rel="stylesheet" crossorigin href="/qinxujun-ai-vibecoding/assets/index-CwvNCwgE.css">
   </head>
   <body>
     <script>
       (() => {
         const key = 'ai-vibecoding.theme';
-        const stored = localStorage.getItem(key);
+        let stored = null;
+        try { stored = localStorage.getItem(key); } catch (e) {}
         const theme = stored === 'light' || stored === 'dark'
           ? stored
           : window.matchMedia('(prefers-color-scheme: dark)').matches
