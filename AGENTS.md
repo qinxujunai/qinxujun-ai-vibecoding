@@ -13,8 +13,9 @@
 - 页面内容、双语文案、工具卡片、提示词正文和页脚文案统一维护在 `src/content/site.tsx`。
 - 语言与主题偏好由 `src/context/SiteSettings.tsx` 管理，并同步 `html lang`、页面标题、description、OG description 与 `color-scheme`。
 - 主题色板集中在 `src/index.css` 的 CSS variables。修改日夜模式时，优先改变量，不要把临时颜色散落进组件。
-- 页面按 11 章由浅入深：01 范式跃迁、02 第一性原理、03 模式光谱、04 前置基建、05 生态矩阵、06 上下文外脑、07 交付管线、08 失败模式、09 升维问题、10 指令库、11 云端交付，之后是写在最后与信源。章节顺序的单一事实源是 `src/content/site.tsx` 的 `sectionOrder`；桌面导航显示 `primaryNav` 中的 7 项，移动端目录列出全部章节。新增或改名章节时，同步 `sectionOrder`、中英文 `nav.labels`、章节 eyebrow 编号与对应文档。
-- 页面中的事实性判断（研究数据、标准、发布时间）必须能在“信源”章节找到一手出处；更新内容时同步 `sources` 与页脚的“内容更新于”日期。
+- 页面按 10 章由浅入深：01 范式跃迁、02 第一性原理、03 模式光谱、04 前置基建、05 生态矩阵、06 上下文外脑、07 交付管线、08 失败模式、09 升维问题、10 指令库，之后是写在最后与精选必读。章节顺序的单一事实源是 `src/content/site.tsx` 的 `sectionOrder`；桌面导航显示 `primaryNav` 中的 7 项，移动端目录列出全部章节。新增或改名章节时，同步 `sectionOrder`、中英文 `nav.labels`、章节 eyebrow 编号与对应文档。
+- 页面中的事实性判断（研究数据、标准、工作流对照）必须能在“精选必读”（`reading`）中找到一手出处，每条写明为什么值得读、印证本页哪一章。不要在页面上写“内容更新于某日期”这类时间戳。
+- 交付管线与指令库以五个独立来源的交叉验证为准（Anthropic 官方、GitHub Spec Kit、obra/superpowers、Harper Reed、Addy Osmani），对照表在 `workflow.matrix`，来源列表在 `workflowSources`。改动管线步骤时，同步矩阵、七段指令（00 宪章 + 01–06）与 `PROMPTS.md`。
 - 西文字体为本地打包的 Inter（`@fontsource-variable/inter`，在 `src/main.tsx` 引入），中文回退到平台系统字体。不要再引入 Google Fonts 等外部字体请求（中国大陆访问会阻塞渲染）。
 - 首屏之后的“选择你的起点”（`Paths.tsx`，锚点 `#start`）是三条阅读路线，路线中的章节 id 必须存在于 `sectionOrder`。`public/llms.txt` 是给 AI Agent 的站点导航，章节变化时同步更新。
 - `README.md` 面向人类维护者，`AGENTS.md` 面向接管项目的 Agent，`CLAUDE.md` 只保留指向本文件的轻量入口，`PROMPTS.md` 记录指令库结构与来源。
@@ -49,7 +50,7 @@
    - **形态**: 一个含有 Mac 三色窗体控制按钮的深色 Claude Code v2 终端模拟（`HeroTerminal.tsx`）：Clawd 像素标志头部、用户输入、`⏺` 工具调用与 `⎿` 结果、Todo 清单、进度行、输入框与模式栏，内容底部对齐，像真实终端一样在矮屏上从顶部滚出。外层尺寸、圆角和首屏节奏是页面的视觉锚点。
    - **底线**: 可以优化内部内容、边界、阴影、标题栏和命令文本，但不要改变外层卡片尺寸、首屏位置和整体布局比例。模型名与版本号要跟随 Claude Code 当前真实界面更新，不要停留在旧版本。
 2. **`src/components/sections/Workflow.tsx` (工作流程网格)**
-   - **形态**: 一幅利用 Tailwind 原生网格 (Grid)、边框和绝对定位 (Absolute Positioning) 渲染的流水线骨架图。左侧是六道闸门的做法，右侧是每道闸门留下的证据物（AGENTS.md → QA 报告），含两个人工确认点与 Patch ⇄ Verify 的失败重修回环。
+   - **形态**: 一幅利用 Tailwind 原生网格 (Grid)、边框和绝对定位 (Absolute Positioning) 渲染的流水线骨架图。左侧是六道闸门（Spec / Plan / Build / Verify / Review / Ship）的做法，右侧是每道闸门留下的证据物（SPEC.md → PR），在 Plan 与 Ship 两处标人工确认，Build ⇄ Verify 之间是失败重修回环；图下方是五个来源的交叉验证矩阵。
    - **底线**: 处理它如同拆弹，只能增加连线/修改文字，不要改变其结构体系。
 3. **`src/components/sections/Tools.tsx` (开发矩阵)**
    - **形态**: 包裹在精美卡片内，优先采用 `<svg>` 原生标签人工精绘，或使用统一管理的本地化静态资产（统归于 `src/assets/icons` 闭环管理）。

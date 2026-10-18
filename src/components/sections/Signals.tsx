@@ -16,8 +16,7 @@ export default function Signals() {
               <a
                 key={item.label}
                 href={item.url}
-                target="_blank"
-                rel="noreferrer"
+                {...(item.url.startsWith('http') ? { target: '_blank', rel: 'noreferrer' } : {})}
                 className="group flex flex-col bg-[var(--surface-card)] p-6 transition-colors duration-300 hover:bg-apple-gray md:p-7"
               >
                 <div className="flex items-baseline gap-1.5">
