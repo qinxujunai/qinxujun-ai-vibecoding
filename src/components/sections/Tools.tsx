@@ -1,121 +1,108 @@
-import { motion } from 'motion/react';
 import { ExternalLink } from 'lucide-react';
 import codexIcon from '../../assets/icons/codex.svg';
 import claudeIcon from '../../assets/icons/claude.svg';
 import v0Icon from '../../assets/icons/v0.svg';
 import TerminalCommand from '../ui/TerminalCommand';
+import { Reveal, SectionHeader } from '../ui/Section';
+import { links, toolCommands } from '../../content/site';
 import { useSiteSettings } from '../../context/SiteSettings';
 
-const claudeInstallCommand = 'winget install Anthropic.ClaudeCode';
-const claudeCodeOfficialUrl =
-  'https://claude.com/product/claude-code?utm_source=google&utm_medium=paid_search_coder&utm_campaign=acq_code_us_q3&utm_term=claude%20code&gclsrc=aw.ds&gad_source=1&gad_campaignid=23253558478&gbraid=0AAAAA99jmquYOUDyoNZF4KOi6hbTqAYz2&gclid=CjwKCAjwn4vQBhBsEiwAq3hhN3s4NMPDp7C6tivDusoCXUVs_Z072QAIEPeAHR2-uLTyYQbqu5xhBhoCu18QAvD_BwE';
+function ToolHead({ icon, name, label, labelClass, iconClass = 'h-7 w-7' }: { icon: string; name: string; label: string; labelClass: string; iconClass?: string }) {
+  return (
+    <div className="mb-8 flex items-center gap-3">
+      <div className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm">
+        <img src={icon} alt="" className={`${iconClass} object-contain`} />
+      </div>
+      <div className="flex flex-col">
+        <span className="text-xl font-bold tracking-tight">{name}</span>
+        <span className={`mt-0.5 font-mono text-[12px] ${labelClass}`}>{label}</span>
+      </div>
+    </div>
+  );
+}
 
 export default function Tools() {
   const { content } = useSiteSettings();
   const { tools } = content;
+  const { claude, codex, v0 } = tools.cards;
+  const copyTitle = content.environment.captions.copy;
 
   return (
-    <section id="tools" className="py-24 md:py-32 bg-apple-gray">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="text-[11px] font-semibold text-apple-text-muted tracking-[0.3em] uppercase mb-4">{tools.eyebrow}</h2>
-          <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold text-apple-text tracking-tight leading-[1.15] mb-6">
-            <span className="block">{tools.titleTop}</span>
-            <span className="block">{tools.titleBottom}</span>
-          </h3>
-          <p className="text-lg text-apple-text-muted">
-            {tools.desc}
-          </p>
+    <section id="tools" className="bg-apple-gray py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader eyebrow={tools.eyebrow} titleTop={tools.titleTop} titleBottom={tools.titleBottom} desc={tools.desc} />
+
+        <div className="mt-20 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <Reveal className="h-full">
+            <article className="flex h-full flex-col rounded-[2rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-8 text-apple-text shadow-[var(--shadow-soft)] transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(217,119,87,0.14)] md:p-10">
+              <ToolHead icon={claudeIcon} name={claude.name} label={claude.label} labelClass="text-warm" />
+              <h3 className="mb-4 text-2xl font-bold tracking-tight">{claude.title}</h3>
+              <p className="mb-8 text-[15px] leading-relaxed text-apple-text-muted">{claude.desc}</p>
+              <TerminalCommand
+                caption={claude.caption}
+                command={toolCommands.claude}
+                officialUrl={links.claudeCode}
+                officialLabel={claude.official}
+                copyTitle={copyTitle}
+                accentClass="text-[#D97757]"
+                className="mt-auto"
+              />
+            </article>
+          </Reveal>
+
+          <Reveal className="h-full" delay={0.08}>
+            <article className="flex h-full flex-col rounded-[2rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-8 text-apple-text shadow-[var(--shadow-soft)] transition-shadow duration-300 hover:shadow-[var(--shadow-hover)] md:p-10">
+              <ToolHead icon={codexIcon} name={codex.name} label={codex.label} labelClass="text-apple-text-muted" iconClass="h-full w-full" />
+              <h3 className="mb-4 text-2xl font-bold tracking-tight">{codex.title}</h3>
+              <p className="mb-8 text-[15px] leading-relaxed text-apple-text-muted">{codex.desc}</p>
+              <TerminalCommand
+                caption={codex.caption}
+                command={toolCommands.codex}
+                officialUrl={links.codex}
+                officialLabel={codex.official}
+                copyTitle={copyTitle}
+                accentClass="text-[#10A37F]"
+                className="mt-auto"
+              />
+            </article>
+          </Reveal>
+
+          <Reveal className="h-full md:col-span-2 lg:col-span-1" delay={0.16}>
+            <article className="flex h-full flex-col rounded-[2rem] border border-white/10 bg-black p-8 text-white shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-shadow duration-300 hover:shadow-[0_20px_60px_rgba(0,0,0,0.25)] md:p-10">
+              <ToolHead icon={v0Icon} name={v0.name} label={v0.label} labelClass="text-white/50" iconClass="h-8 w-8" />
+              <h3 className="mb-4 text-2xl font-bold tracking-tight">{v0.title}</h3>
+              <p className="mb-8 text-[15px] leading-relaxed text-white/60">{v0.desc}</p>
+              <a
+                href={links.v0}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-auto inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-[14px] font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/90 active:translate-y-0"
+              >
+                {v0.cta} <ExternalLink className="h-3 w-3" />
+              </a>
+            </article>
+          </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-8">
-          
-          {/* Codex */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            whileHover={{ y: -6 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col justify-between rounded-[2rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-8 shadow-[var(--shadow-soft)] transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(0,0,0,0.08)] md:p-10 group"
-          >
-            <div>
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 shadow-sm rounded-2xl overflow-hidden border border-gray-100 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
-                  <img src={codexIcon} alt="Codex Logo" className="w-full h-full object-contain" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xl font-bold text-apple-text tracking-tight">{tools.cards.codex.name}</span>
-                  <span className="text-[12px] font-mono text-apple-text-muted mt-0.5">{tools.cards.codex.label}</span>
-                </div>
-              </div>
-              <h4 className="text-2xl font-bold mb-4 tracking-tight text-apple-text">{tools.cards.codex.title}</h4>
-              <p className="text-apple-text-muted text-[15px] leading-relaxed mb-10">
-                {tools.cards.codex.desc}
-              </p>
+        <Reveal className="mt-20">
+          <h3 className="mb-8 text-center text-[13px] font-semibold text-apple-text-muted">{tools.matrixTitle}</h3>
+          <div className="overflow-hidden rounded-[2rem] border border-[var(--border-subtle)] bg-[var(--surface-card)]">
+            <div className="hidden grid-cols-[1fr_1.6fr_1.6fr_1.1fr] gap-4 border-b border-[var(--border-subtle)] bg-apple-gray/70 px-8 py-3.5 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-apple-text-muted md:grid">
+              {tools.matrixHead.map((head) => (
+                <span key={head}>{head}</span>
+              ))}
             </div>
-            <a href="https://chatgpt.com/zh-Hans-CN/codex/" target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-5 py-3 text-[14px] font-semibold text-[var(--button-primary-text)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--button-primary-hover)] hover:shadow-lg hover:shadow-black/10 active:scale-95 mt-auto">
-              {tools.cards.codex.cta} <ExternalLink className="w-3 h-3" />
-            </a>
-          </motion.div>
-
-          {/* Claude Code */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-            whileHover={{ y: -6 }}
-            className="flex flex-col justify-between rounded-[2rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-8 shadow-sm transition-shadow duration-300 hover:shadow-[0_18px_50px_rgba(217,119,87,0.12)] md:p-10 group"
-          >
-            <div>
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 flex items-center justify-center rounded-2xl shadow-sm bg-white border border-gray-100 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
-                  <img src={claudeIcon} alt="Claude Logo" className="w-7 h-7 object-contain" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xl font-bold text-apple-text tracking-tight">{tools.cards.claude.name}</span>
-                  <span className="text-[12px] font-mono text-[#D97757] mt-0.5">{tools.cards.claude.label}</span>
-                </div>
+            {tools.matrix.map(([shape, examples, bestFor, role]) => (
+              <div key={shape} className="grid grid-cols-1 gap-1.5 border-b border-[var(--border-subtle)] px-6 py-5 last:border-b-0 md:grid-cols-[1fr_1.6fr_1.6fr_1.1fr] md:gap-4 md:px-8">
+                <span className="text-[16px] font-bold text-apple-text">{shape}</span>
+                <span className="font-mono text-[13px] text-apple-text">{examples}</span>
+                <span className="text-[14px] text-apple-text-muted">{bestFor}</span>
+                <span className="text-[14px] font-semibold text-electric">{role}</span>
               </div>
-              <h4 className="text-2xl font-bold mb-4 tracking-tight text-apple-text">{tools.cards.claude.title}</h4>
-              <p className="text-apple-text-muted text-[15px] leading-relaxed mb-8">
-                {tools.cards.claude.desc}
-              </p>
-            </div>
-            <TerminalCommand
-              caption={tools.cards.claude.caption}
-              command={claudeInstallCommand}
-              officialUrl={claudeCodeOfficialUrl}
-              officialLabel={tools.cards.claude.official}
-              copyTitle={content.environment.captions.copy}
-              accentClass="text-[#D97757]"
-              className="mt-auto group-hover:scale-[1.01]"
-            />
-          </motion.div>
-
-          {/* v0 by Vercel */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-            whileHover={{ y: -6 }}
-            className="bg-black rounded-[2rem] p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-gray-800 flex flex-col justify-between group text-white transition-shadow duration-300 hover:shadow-[0_20px_60px_rgba(0,0,0,0.22)]"
-          >
-            <div>
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 flex items-center justify-center rounded-2xl shadow-sm bg-white border border-gray-100 flex-shrink-0 overflow-hidden transition-transform duration-300 group-hover:scale-105">
-                  <img src={v0Icon} alt="v0 Logo" className="w-8 h-8 object-contain" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xl font-bold tracking-tight">{tools.cards.v0.name}</span>
-                  <span className="text-[12px] font-mono text-gray-400 mt-0.5">{tools.cards.v0.label}</span>
-                </div>
-              </div>
-              <h4 className="text-2xl font-bold mb-4 tracking-tight">{tools.cards.v0.title}</h4>
-              <p className="text-gray-400 text-[15px] leading-relaxed mb-8">
-                {tools.cards.v0.desc}
-              </p>
-            </div>
-            <a href="https://v0.dev/" target="_blank" rel="noreferrer" className="inline-flex w-fit items-center gap-2 text-[14px] font-semibold text-black bg-white hover:bg-gray-200 px-5 py-3 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-white/10 active:scale-95 mt-auto">
-              {tools.cards.v0.cta} <ExternalLink className="w-3 h-3" />
-            </a>
-          </motion.div>
-
-        </div>
+            ))}
+          </div>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-[15px] font-semibold text-apple-text">{tools.matrixNote}</p>
+        </Reveal>
       </div>
     </section>
   );

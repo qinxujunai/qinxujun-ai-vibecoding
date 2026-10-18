@@ -2,30 +2,28 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Check, Copy } from 'lucide-react';
 import { useSiteSettings } from '../../context/SiteSettings';
-
-function copyToClipboard(text: string) {
-  if (navigator.clipboard?.writeText) {
-    return navigator.clipboard.writeText(text).then(() => true).catch(() => false);
-  }
-
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.setAttribute('readonly', '');
-  textarea.style.position = 'fixed';
-  textarea.style.top = '-9999px';
-  document.body.appendChild(textarea);
-  textarea.focus();
-  textarea.select();
-  const ok = document.execCommand('copy');
-  document.body.removeChild(textarea);
-  return Promise.resolve(ok);
-}
+import { copyToClipboard } from '../../lib/clipboard';
+import { EASE, SectionHeader } from '../ui/Section';
 
 function PromptBody({ content }: { content: string }) {
   return (
-    <pre className="max-h-[460px] overflow-auto whitespace-pre-wrap rounded-[1.5rem] bg-[#0B0B0D] p-6 text-left font-mono text-[13px] leading-relaxed text-white/78 shadow-inner selection:bg-electric selection:text-white md:p-8">
+    <pre className="max-h-[460px] overflow-auto whitespace-pre-wrap rounded-[1.5rem] bg-[var(--code-bg)] p-6 text-left font-mono text-[13px] leading-relaxed text-white/80 shadow-inner selection:bg-electric selection:text-white md:p-8">
       {content}
     </pre>
+  );
+}
+
+function CopyButton({ copied, onClick, copyLabel, copiedLabel, className = '' }: { copied: boolean; onClick: () => void; copyLabel: string; copiedLabel: string; className?: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-live="polite"
+      className={`inline-flex shrink-0 items-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-4 text-[13px] font-semibold text-[var(--button-primary-text)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--button-primary-hover)] hover:shadow-md active:translate-y-0 ${className}`}
+    >
+      {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+      {copied ? copiedLabel : copyLabel}
+    </button>
   );
 }
 
@@ -39,7 +37,8 @@ export default function Prompts() {
   const activePrompt = promptPlaybook[active];
 
   const handleCopy = async (idx: number) => {
-    await copyToClipboard(promptPlaybook[idx].content);
+    const ok = await copyToClipboard(promptPlaybook[idx].content);
+    if (!ok) return;
     setCopied(idx);
     window.setTimeout(() => setCopied(null), 1600);
   };
@@ -47,16 +46,8 @@ export default function Prompts() {
   return (
     <section id="prompts" className="border-t border-[var(--border-subtle)] bg-[var(--page-bg)] py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-[11px] font-semibold text-electric tracking-[0.3em] uppercase mb-4">{promptsContent.eyebrow}</h2>
-          <h3 className="text-3xl md:text-5xl font-bold text-apple-text tracking-tight mb-6 leading-[1.15]">
-            <span className="block">{promptsContent.titleTop}</span>
-            <span className="block">{promptsContent.titleBottom}</span>
-          </h3>
-          <p className="text-[16px] text-apple-text-muted leading-relaxed max-w-2xl mx-auto">
-            {promptsContent.desc}
-          </p>
-        </div>
+        <SectionHeader eyebrow={promptsContent.eyebrow} titleTop={promptsContent.titleTop} titleBottom={promptsContent.titleBottom} desc={promptsContent.desc} />
+        <p className="mx-auto mb-16 mt-4 max-w-2xl rounded-2xl bg-apple-gray px-4 py-3 text-center text-[13px] font-medium text-apple-text">{promptsContent.usage}</p>
 
         <div className="hidden lg:grid lg:grid-cols-[320px_1fr] gap-8 items-start">
           <div className="space-y-3">
@@ -68,9 +59,10 @@ export default function Prompts() {
                   key={item.id}
                   type="button"
                   onClick={() => setActive(idx)}
+                  aria-pressed={isActive}
                   className={`group flex w-full items-center gap-4 rounded-3xl border p-4 text-left transition-all duration-300 ${isActive ? 'border-electric bg-[var(--surface-card)] shadow-[0_16px_45px_rgba(0,102,255,0.10)]' : 'border-[var(--border-subtle)] bg-apple-gray/55 hover:-translate-y-0.5 hover:bg-[var(--surface-card)] hover:shadow-sm'}`}
                 >
-                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl transition-colors ${isActive ? 'bg-electric text-white' : 'bg-[var(--surface-muted)] text-apple-text shadow-sm ring-1 ring-gray-900/5 group-hover:text-electric'}`}>
+                  <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl transition-colors ${isActive ? 'bg-electric text-white' : 'bg-[var(--surface-muted)] text-apple-text shadow-sm ring-1 ring-[var(--border-subtle)] group-hover:text-electric'}`}>
                     <Icon className="h-5 w-5" />
                   </span>
                   <span className="min-w-0">
@@ -84,25 +76,18 @@ export default function Prompts() {
           </div>
 
           <motion.div
-            key={activePrompt.id}
+            key={activePrompt.id + content.meta.title}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.35, ease: EASE }}
             className="rounded-[2rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-5 shadow-[var(--shadow-soft)]"
           >
             <div className="mb-5 flex items-center justify-between gap-4 px-2">
               <div>
                 <div className="font-mono text-[12px] font-semibold text-electric">{activePrompt.id} · {activePrompt.badge}</div>
-                <h4 className="mt-1 text-2xl font-bold tracking-tight text-apple-text">{activePrompt.title}</h4>
+                <h3 className="mt-1 text-2xl font-bold tracking-tight text-apple-text">{activePrompt.title}</h3>
               </div>
-              <button
-                type="button"
-                onClick={() => handleCopy(active)}
-                className="inline-flex h-11 items-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-4 text-[13px] font-semibold text-[var(--button-primary-text)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--button-primary-hover)] hover:shadow-md active:translate-y-0"
-              >
-                {copied === active ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                {copied === active ? promptsContent.copied : promptsContent.copy}
-              </button>
+              <CopyButton copied={copied === active} onClick={() => handleCopy(active)} copyLabel={promptsContent.copy} copiedLabel={promptsContent.copied} className="h-11" />
             </div>
             <PromptBody content={activePrompt.content} />
           </motion.div>
@@ -117,6 +102,7 @@ export default function Prompts() {
                 <button
                   type="button"
                   onClick={() => setMobileOpen(isActive ? null : idx)}
+                  aria-expanded={isActive}
                   className="flex w-full items-center gap-4 p-5 text-left"
                 >
                   <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl ${isActive ? 'bg-electric text-white' : 'bg-apple-gray text-apple-text'}`}>
@@ -130,14 +116,7 @@ export default function Prompts() {
                 {isActive ? (
                   <div className="border-t border-[var(--border-subtle)] p-4">
                     <p className="mb-4 text-[14px] leading-relaxed text-apple-text-muted">{item.desc}</p>
-                    <button
-                      type="button"
-                      onClick={() => handleCopy(idx)}
-                      className="mb-4 inline-flex h-10 items-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-4 text-[13px] font-semibold text-[var(--button-primary-text)]"
-                    >
-                      {copied === idx ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                      {copied === idx ? promptsContent.copied : promptsContent.copy}
-                    </button>
+                    <CopyButton copied={copied === idx} onClick={() => handleCopy(idx)} copyLabel={promptsContent.copy} copiedLabel={promptsContent.copied} className="mb-4 h-10" />
                     <PromptBody content={item.content} />
                   </div>
                 ) : null}

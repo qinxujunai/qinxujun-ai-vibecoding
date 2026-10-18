@@ -1,67 +1,38 @@
-import type { ReactNode } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
-import claudeIcon from '../../assets/icons/claude.svg';
+import HeroTerminal from './HeroTerminal';
 import { useSiteSettings } from '../../context/SiteSettings';
-
-function ClaudeMark() {
-  return (
-    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-[#F3E8DF] shadow-sm ring-1 ring-black/10">
-      <img src={claudeIcon} alt="Claude" className="h-4.5 w-4.5" />
-    </span>
-  );
-}
-
-function TerminalLine({
-  marker,
-  children,
-  muted = false,
-}: {
-  marker: string;
-  children: ReactNode;
-  muted?: boolean;
-}) {
-  return (
-    <div className="grid grid-cols-[22px_1fr] gap-2">
-      <span className="select-none text-[#C7A18D]">{marker}</span>
-      <span className={muted ? 'text-white/48' : 'text-white/82'}>{children}</span>
-    </div>
-  );
-}
-
-const terminalSteps = [
-  ['$', 'claude --model opus'],
-  ['>', 'Interview the user before writing code.'],
-  ['•', 'Read(README.md, AGENTS.md, package.json)'],
-  ['•', 'Plan(scope, risks, tests)'],
-  ['✓', 'Build passed · browser checked · ready to ship'],
-];
+import { EASE } from '../ui/Section';
 
 export default function Hero() {
   const { content } = useSiteSettings();
   const { hero } = content;
 
   return (
-    <section id="top" className="relative flex flex-col items-center overflow-hidden px-4 pt-32 pb-20 text-center md:pt-36 md:pb-28">
+    <section id="top" className="relative flex flex-col items-center overflow-hidden px-4 pt-24 pb-16 text-center md:pt-32 md:pb-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.7, ease: EASE }}
         className="mx-auto max-w-4xl"
       >
+        <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-3.5 py-1.5 font-mono text-[11px] font-semibold tracking-wide text-apple-text-muted">
+          <span className="h-1.5 w-1.5 rounded-full bg-electric" />
+          {hero.eyebrow}
+        </p>
+
         <h1 className="mx-auto mb-6 flex w-full max-w-full flex-col items-center text-balance text-[40px] leading-[1.05] font-bold tracking-tight text-apple-text sm:text-5xl md:text-[64px] lg:text-[76px]">
           <span className="block min-w-0 max-w-full">{hero.titleTop}</span>
           <span className="block min-w-0 max-w-full text-electric">{hero.titleAccent}</span>
         </h1>
 
-        <p className="mx-auto mb-10 flex w-full max-w-2xl flex-col items-center text-balance text-xl leading-relaxed font-medium text-apple-text-muted md:text-2xl">
-          <span className="block min-w-0 max-w-full">{hero.eyebrow}</span>
-          <span className="block min-w-0 max-w-full">{hero.subtitle}</span>
+        <p className="mx-auto mb-10 max-w-2xl text-balance text-lg leading-relaxed font-medium text-apple-text-muted md:text-[22px]">
+          {hero.subtitle}
         </p>
 
-        <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="#concept"
+            href="#shift"
             className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-8 py-3.5 text-[17px] font-semibold text-[var(--button-primary-text)] shadow-md shadow-black/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--button-primary-hover)] hover:shadow-lg hover:shadow-black/15 active:translate-y-0 sm:w-auto"
           >
             {hero.primaryCta}
@@ -73,58 +44,18 @@ export default function Hero() {
             {hero.secondaryCta} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
+        <p className="mt-6 font-mono text-[12px] text-apple-text-muted">{hero.readingMeta}</p>
       </motion.div>
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="relative mt-20 w-full max-w-5xl overflow-hidden rounded-[28px] shadow-[var(--terminal-frame-shadow)] ring-1 ring-[var(--terminal-frame-border)] md:mt-24"
+        transition={{ duration: 1, delay: 0.2, ease: EASE }}
+        className="relative mt-16 w-full max-w-5xl overflow-hidden rounded-[28px] shadow-[var(--terminal-frame-shadow)] ring-1 ring-[var(--terminal-frame-border)] md:mt-20"
       >
         <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/18 via-transparent to-white/[0.02]" />
 
-        <div className="h-[340px] w-full overflow-hidden bg-[var(--terminal-shell-bg)] text-left text-white sm:h-[360px] md:h-[390px]">
-          <div className="flex h-11 items-center gap-2 border-b border-white/12 bg-[var(--terminal-title-bg)] px-4">
-            <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-            <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
-            <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-            <span className="mx-auto truncate pl-4 font-mono text-[11px] tracking-wide text-white/42 md:text-xs">
-              ~/projects/ai.vibecoding - claude
-            </span>
-          </div>
-
-          <div className="h-[calc(100%-44px)] overflow-hidden p-4 font-mono text-[12px] leading-relaxed md:p-6 md:text-[13px]">
-            <div className="mb-4 flex items-center gap-3">
-              <ClaudeMark />
-              <div className="min-w-0 flex-1">
-                <div className="text-[13px] font-semibold text-white">Claude Code</div>
-                <div className="truncate text-[11px] text-white/42">official CLI session · Opus 4.7 · xhigh</div>
-              </div>
-            </div>
-
-            <div className="mb-4 rounded-xl border border-white/10 bg-white/[0.035] p-3.5 text-white/80 md:p-4">
-              <div className="text-white/52">┌───────────────────────────┐</div>
-              <div>
-                <span className="text-white/52">│</span>
-                <span className="px-2 text-[#F3E8DF]">* Welcome to Claude Code</span>
-                <span className="text-white/52">│</span>
-              </div>
-              <div className="text-white/52">└───────────────────────────┘</div>
-            </div>
-
-            <div className="space-y-2.5">
-              {terminalSteps.map(([marker, text], idx) => (
-                <TerminalLine key={idx} marker={marker} muted={idx === 4}>
-                  {text}
-                </TerminalLine>
-              ))}
-            </div>
-
-            <div className="mt-5 rounded-xl border border-emerald-300/15 bg-emerald-300/5 px-3 py-2.5 text-[12px] text-emerald-100">
-              Ship only after the plan, build, browser check, and human review all agree.
-            </div>
-          </div>
-        </div>
+        <HeroTerminal />
       </motion.div>
     </section>
   );

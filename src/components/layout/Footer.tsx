@@ -138,6 +138,8 @@ export default function Footer() {
             <span>
               {footer.designed} <span className="text-gray-300 font-medium">Qin Xujun</span>
             </span>
+            <span className="w-1 h-1 rounded-full bg-gray-600"></span>
+            <span>{footer.updated}</span>
           </div>
         </div>
       </div>

@@ -43,7 +43,13 @@ npx netlify deploy --prod --build
 
 ## GitHub Pages 镜像
 
-GitHub Pages 当前使用 `gh-pages` 分支根目录作为发布源。发布时先运行 `npm run build`，再把 `dist/` 的静态产物同步到 `gh-pages` 分支。
+GitHub Pages 使用 `gh-pages` 分支根目录作为发布源，由 `.github/workflows/deploy.yml` 自动维护：
+
+1. 推送到 `main`（或在 Actions 页面手动触发）。
+2. Actions 执行 `npm ci` → `npm run lint` → `BASE_PATH=/qinxujun-ai-vibecoding npm run build`。
+3. `peaceiris/actions-gh-pages` 把 `dist/`（含 `.nojekyll`）推送到 `gh-pages`，GitHub 随后自动重建 Pages。
+
+不要手动编辑 `gh-pages` 分支。若 Pages 设置被改成 “GitHub Actions” 作为来源，需要改回 “Deploy from a branch: gh-pages / root”，否则这条流水线发布的内容不会生效。
 
 注意：GitHub Pages 发布可能有几分钟缓存延迟，最终地址以 GitHub Pages 设置为准。
 
