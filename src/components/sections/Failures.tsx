@@ -14,7 +14,12 @@ export default function Failures() {
           {failures.items.map((item, idx) => (
             <Reveal key={item.title} delay={(idx % 4) * 0.06} className="h-full">
               <article className="flex h-full flex-col rounded-[1.75rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-6">
-                <span className="font-mono text-[12px] font-semibold text-apple-text-muted">{String(idx + 1).padStart(2, '0')}</span>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[12px] font-semibold text-apple-text-muted">{String(idx + 1).padStart(2, '0')}</span>
+                  {item.official ? (
+                    <span className="rounded-full bg-electric/10 px-2 py-0.5 text-[11px] font-semibold text-electric">{failures.officialLabel} · Anthropic</span>
+                  ) : null}
+                </div>
                 <h3 className="mt-3 text-[18px] font-bold leading-snug tracking-tight text-apple-text">{item.title}</h3>
                 <div className="mt-4 border-l-2 border-danger/40 pl-3">
                   <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-danger">{failures.symptomLabel}</p>

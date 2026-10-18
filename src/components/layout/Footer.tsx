@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { MessageCircle, QrCode, X } from 'lucide-react';
+import { Download, MessageCircle, QrCode, Smartphone, X } from 'lucide-react';
 import wechatQr from '../../assets/qin-xujun-wechat-qr.png';
 import { useSiteSettings } from '../../context/SiteSettings';
+import { EASE } from '../ui/Section';
 
 function ContactModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { content } = useSiteSettings();
@@ -29,65 +30,75 @@ function ContactModal({ open, onClose }: { open: boolean; onClose: () => void })
     <AnimatePresence>
       {open ? (
         <motion.div
-          className="fixed inset-0 z-[80] flex items-end justify-center bg-black/35 px-4 pb-4 backdrop-blur-md sm:items-center sm:pb-0"
+          className="fixed inset-0 z-[80] flex items-end justify-center bg-black/40 backdrop-blur-md sm:items-center sm:px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.25, ease: EASE }}
           onClick={onClose}
         >
+          {/* Bottom sheet on phones, centered card on larger screens */}
           <motion.div
             role="dialog"
             aria-modal="true"
             aria-label={footer.modalLabel}
-            className="relative w-full max-w-sm overflow-hidden rounded-[2rem] border border-white/25 bg-[var(--surface-elevated)] p-4 shadow-[0_32px_100px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:max-w-md sm:p-5"
-            initial={{ opacity: 0, y: 28, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.98 }}
-            transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-full max-w-[400px] rounded-t-[2rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-3 text-apple-text shadow-[0_32px_100px_rgba(0,0,0,0.28)] sm:rounded-[2rem] sm:pb-6 sm:pt-6"
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 24 }}
+            transition={{ duration: 0.38, ease: EASE }}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_18%,rgba(0,102,255,0.16),transparent_32%),radial-gradient(circle_at_82%_12%,rgba(255,149,0,0.14),transparent_28%)]" />
-            <button
-              type="button"
-              onClick={onClose}
-              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-white/75 text-[#1D1D1F] shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:bg-white hover:shadow-md"
-              aria-label={footer.closeLabel}
-            >
-              <X className="h-4 w-4" />
-            </button>
+            <div aria-hidden className="mx-auto mb-4 h-1 w-10 rounded-full bg-[var(--border-soft)] sm:hidden" />
 
-            <div className="pr-12">
-              <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-[12px] font-semibold text-electric ring-1 ring-electric/10">
-                <QrCode className="h-3.5 w-3.5" />
-                WeChat
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#07C160]/10 px-2.5 py-1 text-[12px] font-semibold text-[#07A34F]">
+                  <QrCode className="h-3.5 w-3.5" />
+                  {footer.badge}
+                </span>
+                <h3 className="mt-3 text-[26px] font-bold leading-tight tracking-tight">{footer.name}</h3>
+                <p className="mt-1 font-mono text-[12px] text-apple-text-muted">{footer.role}</p>
               </div>
-              <h3 className="text-2xl font-bold tracking-tight text-apple-text">{footer.title}</h3>
-              <p className="mt-2 text-[14px] leading-relaxed text-apple-text-muted">
-                {footer.desc}
-              </p>
+              <button
+                type="button"
+                onClick={onClose}
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-apple-gray text-apple-text transition-colors duration-300 hover:bg-[var(--border-soft)]"
+                aria-label={footer.closeLabel}
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
 
-            <div className="mt-6 rounded-[1.6rem] bg-white p-3 shadow-[0_18px_55px_rgba(0,0,0,0.10)] ring-1 ring-black/5">
+            <p className="mt-4 text-[15px] leading-relaxed text-apple-text">{footer.desc}</p>
+
+            {/* The code stays on white in both themes so scanners can read it */}
+            <div className="mx-auto mt-5 w-full max-w-[280px] rounded-[1.5rem] bg-white p-3 shadow-[0_18px_50px_rgba(0,0,0,0.10)] ring-1 ring-black/5">
               <img
                 src={wechatQr}
-                alt="Qin Xujun WeChat QR code"
+                alt={`${footer.name} WeChat QR code`}
                 width="512"
                 height="512"
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
-                className="w-full rounded-[1.1rem] object-contain"
+                className="w-full rounded-[1rem] object-contain"
               />
             </div>
 
-            <div className="mt-4 flex items-center justify-between gap-4 px-1">
-              <div>
-                <div className="text-sm font-semibold text-apple-text">Qin Xujun</div>
-                <div className="mt-0.5 text-xs text-apple-text-muted">{footer.location}</div>
-              </div>
-              <span className="rounded-full bg-[var(--button-primary-bg)] px-3 py-1.5 text-xs font-semibold text-[var(--button-primary-text)]">{footer.connect}</span>
-            </div>
+            <p className="mt-5 flex gap-2 text-[13px] leading-relaxed text-apple-text-muted">
+              <Smartphone className="mt-0.5 h-4 w-4 shrink-0" />
+              {footer.hint}
+            </p>
+
+            <a
+              href={wechatQr}
+              download="qin-xujun-wechat-qr.png"
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-[var(--button-primary-bg)] py-3 text-[14px] font-semibold text-[var(--button-primary-text)] transition-all duration-300 hover:bg-[var(--button-primary-hover)]"
+            >
+              <Download className="h-4 w-4" />
+              {footer.save}
+            </a>
           </motion.div>
         </motion.div>
       ) : null}
@@ -112,34 +123,30 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer id="contact" className="bg-[#1D1D1F] text-apple-gray text-[13px]">
-      <div className="max-w-7xl mx-auto px-4 py-14 sm:px-6 lg:px-8">
+    <footer id="contact" className="bg-[#1D1D1F] text-[13px] text-apple-gray">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <div className="mb-4 flex items-center justify-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-white/80"></div>
-            <span className="font-bold text-[15px] text-white tracking-tight">ai.vibecoding</span>
+          <div className="mb-5 flex items-center justify-center gap-2">
+            <div className="h-2 w-2 rounded-full bg-white/80"></div>
+            <span className="text-[15px] font-bold tracking-tight text-white">ai.vibecoding</span>
           </div>
-          <p className="max-w-2xl text-[16px] font-medium leading-relaxed text-gray-300">
-            {footer.statement}
-          </p>
+          <p className="max-w-2xl text-balance text-[17px] font-medium leading-relaxed text-white/80">{footer.statement}</p>
 
           <button
             type="button"
             onClick={() => setContactOpen(true)}
-            className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white px-5 py-3 text-[14px] font-semibold text-[#1D1D1F] shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#F5F5F7] active:translate-y-0"
+            className="mt-9 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white px-5 py-3 text-[14px] font-semibold text-[#1D1D1F] shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#F5F5F7] active:translate-y-0"
           >
             <MessageCircle className="h-4 w-4" />
             {footer.contact}
           </button>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-gray-500 opacity-80">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 text-white/40">
             <span>&copy; {new Date().getFullYear()}</span>
-            <span className="w-1 h-1 rounded-full bg-gray-600"></span>
+            <span className="h-1 w-1 rounded-full bg-white/25"></span>
             <span>
-              {footer.designed} <span className="text-gray-300 font-medium">Qin Xujun</span>
+              {footer.designed} <span className="font-medium text-white/75">Qin Xujun</span>
             </span>
-            <span className="w-1 h-1 rounded-full bg-gray-600"></span>
-            <span>{footer.updated}</span>
           </div>
         </div>
       </div>

@@ -20,9 +20,8 @@ import Workflow from './components/sections/Workflow';
 import Failures from './components/sections/Failures';
 import Questions from './components/sections/Questions';
 import Prompts from './components/sections/Prompts';
-import Deployment from './components/sections/Deployment';
 import Manifesto from './components/sections/Manifesto';
-import Sources from './components/sections/Sources';
+import Reading from './components/sections/Reading';
 import { SiteSettingsProvider } from './context/SiteSettings';
 
 export default function App() {
@@ -64,9 +63,8 @@ export default function App() {
             <Failures />
             <Questions />
             <Prompts />
-            <Deployment />
             <Manifesto />
-            <Sources />
+            <Reading />
           </main>
           <Footer />
         </div>
