@@ -111,7 +111,7 @@ export default function Prompts() {
             <div className="mb-5 rounded-2xl bg-apple-gray/70 px-4 py-3.5">
               <PromptMeta item={activePrompt} sourcesLabel={promptsContent.sourcesLabel} whenLabel={promptsContent.whenLabel} />
             </div>
-            <pre className="max-h-[520px] overflow-auto whitespace-pre-wrap rounded-[1.5rem] bg-[var(--code-bg)] p-6 font-mono text-[13px] leading-relaxed text-white/80 selection:bg-electric selection:text-white md:p-8">
+            <pre tabIndex={0} className="max-h-[520px] overflow-auto whitespace-pre-wrap rounded-[1.5rem] bg-[var(--code-bg)] p-6 font-mono text-[13px] leading-relaxed text-white/80 selection:bg-electric selection:text-white md:p-8">
               {activePrompt.content}
             </pre>
           </motion.div>

@@ -141,7 +141,7 @@ export default function Footer() {
             {footer.contact}
           </button>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 text-white/40">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 text-white/60">
             <span>&copy; {new Date().getFullYear()}</span>
             <span className="h-1 w-1 rounded-full bg-white/25"></span>
             <span>

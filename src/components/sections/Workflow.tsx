@@ -7,7 +7,7 @@ import { EASE, Reveal } from '../ui/Section';
 const nodeCard =
   'flex items-center gap-4 bg-[var(--surface-card)] p-4 rounded-2xl shadow-sm border z-10 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md';
 const nodeDot = 'w-4 h-4 shrink-0 rounded-full border-4 border-[var(--surface-card)] shadow-sm';
-const gateBadge = 'absolute -left-3 top-1/2 -translate-y-1/2 px-2 py-0.5 bg-electric text-white text-[10px] font-bold rounded-md whitespace-nowrap hidden sm:block';
+const gateBadge = 'absolute -left-3 top-1/2 -translate-y-1/2 px-2 py-0.5 bg-electric text-[var(--on-accent)] text-[10px] font-bold rounded-md whitespace-nowrap hidden sm:block';
 
 export default function Workflow() {
   const { content } = useSiteSettings();
@@ -78,14 +78,14 @@ export default function Workflow() {
                 <div className={`${nodeCard} border-electric ml-5 relative`}>
                   <div className={gateBadge}>{workflow.reviewGate}</div>
                   <div className={`${nodeDot} bg-electric`}></div>
-                  <div className="font-mono text-xs text-electric/70 sm:pl-12">{workflow.diagramLabels[1]}</div>
+                  <div className="font-mono text-xs text-electric sm:pl-12">{workflow.diagramLabels[1]}</div>
                   <div className="ml-auto text-sm font-bold text-electric tracking-tight">{workflow.diagramCodes[1]}</div>
                 </div>
 
                 {/* Build ⇄ Verify loop: a failed check goes back to the patch */}
                 <div className="relative ml-10 mr-8 flex flex-col gap-3 sm:mr-0">
                   <div aria-hidden className="absolute -right-4 top-[25%] bottom-[25%] w-4 rounded-r-xl border-y-2 border-r-2 border-dashed border-danger/50" />
-                  <span className="absolute -right-4 top-1/2 z-20 translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-md bg-danger px-1.5 py-0.5 font-mono text-[10px] font-semibold text-white">{workflow.loopLabel}</span>
+                  <span className="absolute -right-4 top-1/2 z-20 translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-md bg-danger px-1.5 py-0.5 font-mono text-[10px] font-semibold text-[var(--on-accent)]">{workflow.loopLabel}</span>
                   <div className={`${nodeCard} border-[var(--border-subtle)]`}>
                     <div className={`${nodeDot} bg-apple-text ring-1 ring-[var(--border-soft)]`}></div>
                     <div className="font-mono text-xs text-apple-text-muted">{workflow.diagramLabels[2]}</div>
@@ -141,7 +141,7 @@ export default function Workflow() {
                       {cell || '—'}
                     </span>
                   ))}
-                  <span className={`justify-self-end rounded-full px-2.5 py-0.5 font-mono text-[12px] font-bold ${full ? 'bg-success/15 text-success' : 'bg-apple-gray text-apple-text-muted'}`}>
+                  <span className={`justify-self-end rounded-full px-2.5 py-0.5 font-mono text-[12px] font-bold ${full ? 'bg-success/10 text-success' : 'bg-apple-gray text-apple-text-muted'}`}>
                     {covered}/{total}
                   </span>
                 </div>
@@ -157,7 +157,7 @@ export default function Workflow() {
                 <div key={row.step} className="rounded-[1.5rem] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-5">
                   <div className="mb-3 flex items-center justify-between">
                     <span className="text-[16px] font-bold text-apple-text">{row.step}</span>
-                    <span className={`rounded-full px-2.5 py-0.5 font-mono text-[12px] font-bold ${full ? 'bg-success/15 text-success' : 'bg-apple-gray text-apple-text-muted'}`}>
+                    <span className={`rounded-full px-2.5 py-0.5 font-mono text-[12px] font-bold ${full ? 'bg-success/10 text-success' : 'bg-apple-gray text-apple-text-muted'}`}>
                       {covered}/{total}
                     </span>
                   </div>
