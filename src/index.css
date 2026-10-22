@@ -17,11 +17,16 @@
 
 :root {
   color-scheme: light;
-  --electric: #0066FF;
-  --electric-hover: #005ce6;
-  --danger: #E5484D;
-  --success: #1F9D55;
-  --warm: #D97757;
+  /* Accents darkened one step so small labels and links read at 4.5:1 on white and on tinted chips. */
+  --electric: #0058DD;
+  --electric-hover: #004EC2;
+  --danger: #CC2F35;
+  --success: #18794E;
+  --warm: #AD5233;
+  /* Text on a solid accent badge. */
+  --on-accent: #FFFFFF;
+  /* Large display text only needs 3:1, so the hero keeps the brighter brand blue. */
+  --electric-display: #0066FF;
   --page-bg: #FFFFFF;
   --surface-card: #FFFFFF;
   --surface-elevated: rgba(255, 255, 255, 0.82);
@@ -54,6 +59,8 @@ html[data-theme='dark'] {
   --danger: #FF6369;
   --success: #3DD68C;
   --warm: #E88A6A;
+  --on-accent: #000000;
+  --electric-display: #2997FF;
   --page-bg: #050506;
   --surface-card: #111113;
   --surface-elevated: rgba(24, 24, 26, 0.78);

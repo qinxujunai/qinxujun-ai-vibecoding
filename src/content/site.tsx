@@ -909,7 +909,7 @@ export const siteContent = {
       paragraphs: [
         <>在这个工具不断进化的时代，代码正在变得越来越容易被生成，想法也越来越容易被推到现实面前。</>,
         <>但我始终认为，<span className="text-electric">工具最终只是双手的延伸。</span>它可以帮你更快地试错、更快地抵达、更快地把模糊的想法变成可触碰的东西；却不能替你决定，什么值得创造，什么值得热爱，什么值得用时间去交换。</>,
-        <>你可以复制一份强大的 Prompt，也可以调用最先进的模型组合；<span className="opacity-60">但永远无法被复制的，是你读过的书、经历过的事、你对世界的独立理解，以及你敏锐感知并精确定义痛点的能力。</span></>,
+        <>你可以复制一份强大的 Prompt，也可以调用最先进的模型组合；<span className="opacity-70">但永远无法被复制的，是你读过的书、经历过的事、你对世界的独立理解，以及你敏锐感知并精确定义痛点的能力。</span></>,
         <>当机器拥有了越来越强的执行能力，生而为人的美感、品味、判断、共情与长期热爱，反而会变得更加珍贵。</>,
         <>AI 进化得越快，我们越需要慢下来。<br />沉下心去阅读真正好的书，去安静地体察生活，去想清楚自己为什么创造，又想把世界带向哪里。</>,
         <>当你清晰地定义了你想创造的世界，再用自然语言与这些工具赋予你的双手，把那些让世界变得更美好的想法付诸现实。</>,
@@ -1369,7 +1369,7 @@ export const siteContent = {
       paragraphs: [
         <>In this era of evolving tools, code is becoming easier to generate, and ideas are moving closer to reality.</>,
         <>But I still believe that <span className="text-electric">tools are only extensions of our hands.</span> They can help you test faster, arrive faster, and turn a vague idea into something tangible; they cannot decide what is worth creating, what is worth loving, or what deserves your time.</>,
-        <>You can copy a powerful prompt and combine the strongest models; <span className="opacity-60">what cannot be copied is what you have read, lived through, understood independently, and learned to perceive with precision.</span></>,
+        <>You can copy a powerful prompt and combine the strongest models; <span className="opacity-70">what cannot be copied is what you have read, lived through, understood independently, and learned to perceive with precision.</span></>,
         <>As machines gain stronger execution power, human taste, judgment, empathy, beauty, and long-term devotion become more precious.</>,
         <>The faster AI evolves, the more we need to slow down.<br />Read the books that actually change you. Observe life quietly. Ask why you create, and where you want to move the world.</>,
         <>When you can clearly define the world you want to build, use natural language and these tools as your extended hands to make better ideas real.</>,

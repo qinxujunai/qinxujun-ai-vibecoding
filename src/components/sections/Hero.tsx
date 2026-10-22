@@ -23,7 +23,7 @@ export default function Hero() {
 
         <h1 className="mx-auto mb-6 flex w-full max-w-full flex-col items-center text-balance text-[40px] leading-[1.05] font-bold tracking-tight text-apple-text sm:text-5xl md:text-[64px] lg:text-[76px]">
           <span className="block min-w-0 max-w-full">{hero.titleTop}</span>
-          <span className="block min-w-0 max-w-full text-electric">{hero.titleAccent}</span>
+          <span className="block min-w-0 max-w-full text-[var(--electric-display)]">{hero.titleAccent}</span>
         </h1>
 
         <p className="mx-auto mb-10 max-w-2xl text-balance text-lg leading-relaxed font-medium text-apple-text-muted md:text-[22px]">
