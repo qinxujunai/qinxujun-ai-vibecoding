@@ -625,7 +625,7 @@ export const siteContent = {
     },
     tools: {
       eyebrow: '03 · 生态矩阵',
-      titleTop: '不要迷信万能工具',
+      titleTop: '没有万能的工具',
       titleBottom: '按控制粒度与验证方式选型',
       desc: '工具之间的差别不在谁更聪明——底层模型都在快速迭代——而在协作形态：你需要多少控制，结果如何验证。',
       cards: {
@@ -885,7 +885,7 @@ export const siteContent = {
     },
     tools: {
       eyebrow: '03 · TOOLS',
-      titleTop: 'Do not worship one tool',
+      titleTop: 'There is no one right tool',
       titleBottom: 'Choose by control and verification',
       desc: 'The difference between tools is not who is smarter (the underlying models change monthly). It is the shape of collaboration: how much control you need and how results get verified.',
       cards: {
