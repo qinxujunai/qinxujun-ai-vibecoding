@@ -26,6 +26,22 @@ function useActiveSection() {
   return active;
 }
 
+// "‹ 返回" to the author's personal site, only for visitors who came from it: that site leaves 'qxj.back' in this
+// tab's sessionStorage when someone clicks through. A link opened directly shows nothing.
+// Contract: qinxujunai.github.io repository, docs/back-link.md.
+function useBackLink() {
+  const [back, setBack] = useState<string | null>(null);
+  useEffect(() => {
+    try {
+      const url = sessionStorage.getItem('qxj.back');
+      if (url && url.startsWith(`${window.location.origin}/`)) setBack(url);
+    } catch {
+      // Storage blocked: no back link.
+    }
+  }, []);
+  return back;
+}
+
 const iconButton =
   'grid h-10 place-items-center rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-apple-text shadow-sm shadow-black/5 transition-all duration-300 hover:bg-apple-gray focus:outline-none focus-visible:ring-2 focus-visible:ring-electric/50';
 
@@ -33,6 +49,7 @@ export default function Navbar() {
   const { content, locale, theme, toggleLocale, toggleTheme } = useSiteSettings();
   const { scrollYProgress } = useScroll();
   const active = useActiveSection();
+  const back = useBackLink();
   const [menuOpen, setMenuOpen] = useState(false);
   const nextLocale = locale === 'zh-CN' ? 'en-US' : 'zh-CN';
   const nextLocaleLabel = localeLabels[nextLocale];
@@ -56,14 +73,30 @@ export default function Navbar() {
       className="sticky top-0 z-50 w-full border-b border-[var(--nav-border)] bg-[var(--nav-bg)] backdrop-blur-xl"
     >
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <a
-          href="#top"
-          aria-label={content.nav.homeLabel}
-          className="flex shrink-0 items-center gap-2 rounded-full py-2 pr-3 transition-colors duration-300 hover:text-electric"
-        >
-          <span className="h-2.5 w-2.5 rounded-full bg-apple-text" />
-          <span className="text-[17px] font-bold tracking-tight text-apple-text">ai.vibecoding</span>
-        </a>
+        <div className="flex shrink-0 items-center gap-3">
+          {back ? (
+            <a
+              href={back}
+              onClick={(event) => {
+                if (document.referrer && document.referrer.split('#')[0] === back.split('#')[0]) {
+                  event.preventDefault();
+                  window.history.back();
+                }
+              }}
+              className="inline-flex min-h-11 items-center whitespace-nowrap text-[13px] font-medium text-apple-text-muted transition-colors duration-300 hover:text-apple-text"
+            >
+              ‹ {content.nav.back}
+            </a>
+          ) : null}
+          <a
+            href="#top"
+            aria-label={content.nav.homeLabel}
+            className="flex shrink-0 items-center gap-2 rounded-full py-2 pr-3 transition-colors duration-300 hover:text-electric"
+          >
+            <span className="h-2.5 w-2.5 rounded-full bg-apple-text" />
+            <span className="text-[17px] font-bold tracking-tight text-apple-text">ai.vibecoding</span>
+          </a>
+        </div>
 
         <div className="hidden items-center gap-0.5 text-[13px] font-medium text-apple-text-muted lg:flex">
           {primaryNav.map((id) => (
