@@ -26,13 +26,13 @@ export default function Hero() {
           <span className="block min-w-0 max-w-full text-[var(--electric-display)]">{hero.titleAccent}</span>
         </h1>
 
-        <p className="mx-auto mb-10 max-w-2xl text-balance text-lg leading-relaxed font-medium text-apple-text-muted md:text-[22px]">
+        <p className="mx-auto mb-10 max-w-2xl text-balance break-keep text-lg leading-relaxed font-medium text-apple-text-muted md:text-[22px]">
           {hero.subtitle}
         </p>
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="#start"
+            href="#concept"
             className="flex w-full items-center justify-center gap-2 rounded-full bg-[var(--button-primary-bg)] px-8 py-3.5 text-[17px] font-semibold text-[var(--button-primary-text)] shadow-md shadow-black/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--button-primary-hover)] hover:shadow-lg hover:shadow-black/15 active:translate-y-0 sm:w-auto"
           >
             {hero.primaryCta}
