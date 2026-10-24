@@ -10,13 +10,16 @@
 
 `ai.vibecoding` 是一个静态展示站，用来讲清楚自然语言编程、AI Agent 工作流、上下文工程与确定性交付之间的关系。
 
-它不是工具罗列页，也不是 Prompt 资料堆。核心命题：代码正在变得廉价，稀缺的是定义问题、组织上下文、验证结果的能力。页面用 10 章把读者从“Vibe Coding”带到“Agentic Engineering”，分三幕由浅入深：
+它不是工具罗列页，也不是 Prompt 资料堆。核心命题：代码正在变得廉价，稀缺的是定义问题、组织上下文、验证结果的能力。页面用 6 章把读者从“Vibe Coding”带到“Agentic Engineering”，骨架沿用作者 2026-05 的版本：
 
-- **认知**：01 范式跃迁（时间线 + 过去/现在对照）、02 第一性原理（交付质量 = 问题 × 上下文 × 验证）、03 模式光谱（出错代价 × 验证速度四象限）。
-- **装备**：04 前置基建（按系统切换的安装命令 + 第一个小时）、05 生态矩阵（三款代表工具 + 四种协作形态）、06 上下文外脑（上下文预算、AGENTS.md / Skills / MCP / Subagents / Hooks / Compaction、致命三要素）。
-- **实战**：07 交付管线（Spec → Plan → Build → Verify → Review → Ship，附五个来源的交叉验证矩阵）、08 失败模式（与 Anthropic 官方失败模式对齐）、09 升维问题、10 指令库（00 宪章 + 01–06，共七段可复制指令，每段标注交叉验证来源）。
+- 01 第一性原理（交付质量 = 问题 × 上下文 × 验证）
+- 02 前置基建（按系统切换的安装命令 + 第一个小时）
+- 03 生态矩阵（三款代表工具 + 四种协作形态）
+- 04 上下文外脑（上下文预算、AGENTS.md / Skills / MCP / Subagents / Hooks / Compaction、致命三要素）
+- 05 交付管线（Spec → Plan → Build → Verify → Review → Ship，附五个来源的交叉验证矩阵）
+- 06 指令库（00 宪章 + 01–06，共七段可复制指令，每段标注交叉验证来源）
 
-首屏下方依次是“四个改变判断的事实”和“选择你的起点”路线器（零基础 / 产品·创业者 / 工程师三条路线，并推荐 Datawhale easy-vibe 课程做系统学习）；页尾“精选必读”按组列出交叉验证过的一手资料，每条写明为什么值得读、印证本页哪一章。`public/llms.txt` 为 AI Agent 提供站点导航。站点包含中英文切换、日夜模式、移动端章节目录、阅读进度条、可复制命令与指令、二维码联系弹窗。所有页面文案统一维护在 `src/content/site.tsx`，避免界面、文档和提示词各写一份导致漂移。
+最后是“写在最后”，之后只有联系方式。页面上事实的一手出处列在 `SOURCES.md`，不放在页面上。`public/llms.txt` 为 AI Agent 提供站点导航。站点包含中英文切换、日夜模式、移动端章节目录、阅读进度条、可复制命令与指令、二维码联系弹窗。所有页面文案统一维护在 `src/content/site.tsx`，避免界面、文档和提示词各写一份导致漂移。
 
 章节顺序以 `src/content/site.tsx` 的 `sectionOrder` 为准，桌面导航显示 `primaryNav`。中英文导航、章节 eyebrow 编号和文档说明必须一起维护。
 
@@ -71,26 +74,19 @@ npm run build
 
 ```text
 Hero (+ HeroTerminal)
-Signals          四个改变判断的事实
-Paths            选择你的起点（三条阅读路线）
-Shift            01 范式跃迁
-Concept          02 第一性原理
-Spectrum         03 模式光谱
-Environment      04 前置基建
-Tools            05 生态矩阵
-ContextEngine    06 上下文外脑
-Workflow         07 交付管线
-Failures         08 失败模式
-Questions        09 升维问题
-Prompts          10 指令库
+Concept          01 第一性原理
+Environment      02 前置基建
+Tools            03 生态矩阵
+ContextEngine    04 上下文外脑
+Workflow         05 交付管线
+Prompts          06 指令库
 Manifesto        写在最后
-Reading          精选必读
-Footer
+Footer           联系（微信二维码）
 ```
 
 核心文件：
 
-- `src/content/site.tsx`：全站中英文内容、章节顺序、安装命令、外链、交叉验证矩阵、精选必读、提示词正文和页脚文案。
+- `src/content/site.tsx`：全站中英文内容、章节顺序、安装命令、外链、交叉验证矩阵、提示词正文和页脚文案。
 - `src/context/SiteSettings.tsx`：语言、主题、`html lang`、SEO meta 和本地偏好。
 - `src/index.css`：Tailwind v4 入口和主题变量。
 - `src/components/sections/Hero.tsx` / `HeroTerminal.tsx`：首页文案与 Claude Code v2 终端模拟。
