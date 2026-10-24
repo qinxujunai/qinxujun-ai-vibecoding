@@ -6,21 +6,18 @@ The site is a single static page. Each chapter is an anchor on the same URL.
 
 ## Chapters
 
-- [01 The Shift](#shift): how the human–AI split changed 2021–2026; before/now comparison of the developer's job.
-- [02 First Principles](#concept): Quality = Problem × Context × Verification; three laws with one concrete action each.
-- [03 Spectrum](#spectrum): choose a mode per task by cost of error × verification speed (human-led, agentic engineering, exploration, pure vibe).
-- [04 Setup](#environment): Node.js, Git, Claude Code install commands per OS, and the first hour after install.
-- [05 Tools](#tools): Claude Code, Codex, v0, plus four shapes of collaboration (terminal agent, AI IDE, app builder, cloud agent).
-- [06 Context Engine](#context-engine): context budget as reported by /context; AGENTS.md / CLAUDE.md, Skills, MCP, Subagents, Hooks, compaction; the lethal trifecta.
-- [07 Delivery Pipeline](#workflow): six gates (Spec, Plan, Build, Verify, Review, Ship) plus a once-per-project charter, cross-checked against Anthropic's Claude Code best practices, GitHub Spec Kit, obra/superpowers, Harper Reed, and Addy Osmani.
-- [08 Failure Modes](#failures): eight common failures with symptom and fix; five match Anthropic's documented failure patterns.
-- [09 Better Questions](#questions): common questions reframed into higher-leverage ones.
-- [10 Prompt Library](#prompts): seven copy-ready prompts, one per gate (00 charter, 01 spec, 02 plan, 03 build test-first, 04 verify with evidence, 05 fresh-session review, 06 ship), each listing its cross-checked sources.
-- [Reading list](#reading): curated, cross-checked primary sources with why each is worth reading.
+- [01 First Principles](#concept): Quality = Problem × Context × Verification; three laws with one concrete action each.
+- [02 Setup](#environment): Node.js, Git, Claude Code install commands per OS, and the first hour after install.
+- [03 Tools](#tools): Claude Code, Codex, v0, plus four shapes of collaboration (terminal agent, AI IDE, app builder, cloud agent).
+- [04 Context Engine](#context-engine): context budget as reported by /context; AGENTS.md / CLAUDE.md, Skills, MCP, Subagents, Hooks, compaction; the lethal trifecta.
+- [05 Delivery Pipeline](#workflow): six gates (Spec, Plan, Build, Verify, Review, Ship) plus a once-per-project charter, cross-checked against Anthropic's Claude Code best practices, GitHub Spec Kit, obra/superpowers, Harper Reed, and Addy Osmani.
+- [06 Prompt Library](#prompts): seven copy-ready prompts, one per gate (00 charter, 01 spec, 02 plan, 03 build test-first, 04 verify with evidence, 05 fresh-session review, 06 ship), each listing its cross-checked sources.
+- Epilogue, then contact (WeChat).
 
 ## Source of truth
 
 - Repository: https://github.com/qinxujunai/qinxujun-ai-vibecoding
 - All page copy and prompt text: src/content/site.tsx
 - Prompt library as Markdown: PROMPTS.md
+- Primary sources behind the page's claims: SOURCES.md
 - Agent rules for this repo: AGENTS.md
