@@ -17,6 +17,7 @@
 - 页面中的事实性判断（研究数据、标准、工作流对照）必须能在 `SOURCES.md` 中找到一手出处（写明为什么值得读）。出处只放在仓库文档里，不放回页面。不要在页面上写“内容更新于某日期”这类时间戳。
 - 交付管线与指令库以五个独立来源的交叉验证为准（Anthropic 官方、GitHub Spec Kit、obra/superpowers、Harper Reed、Addy Osmani），对照表在 `workflow.matrix`，来源列表在 `workflowSources`。改动管线步骤时，同步矩阵、七段指令（00 宪章 + 01–06）与 `PROMPTS.md`。
 - 西文字体为本地打包的 Inter（`@fontsource-variable/inter`，在 `src/main.tsx` 引入），中文回退到平台系统字体。不要再引入 Google Fonts 等外部字体请求（中国大陆访问会阻塞渲染）。
+- 导航栏左上角的「‹ 返回」只对从作者个人网站点进来的访客显示（`Navbar.tsx` 的 `useBackLink` 读 sessionStorage 的 `qxj.back`；约定见个人网站仓库 `docs/back-link.md`），直接打开本站看不到。
 - `public/llms.txt` 是给 AI Agent 的站点导航，章节变化时同步更新。
 - `README.md` 面向人类维护者，`AGENTS.md` 面向接管项目的 Agent，`CLAUDE.md` 只保留指向本文件的轻量入口，`PROMPTS.md` 记录指令库结构与来源，`SOURCES.md` 列出页面事实的一手出处。
 - 本仓库不依赖后端服务、数据库、Express、Gemini SDK 或运行时环境变量。
