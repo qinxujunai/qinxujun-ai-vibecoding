@@ -1,5 +1,7 @@
 # 全局 AI Assistant 守则与核心防腐层 (Agent Rules & Documentation)
 
+**提交者只有他一个人（2026-11-02 他的要求，所有仓库、以后每一次）**：作者和提交者都只能是 `qinxujunai <266454737+qinxujunai@users.noreply.github.com>`。智能体（Claude、Codex 等）、定时任务（不用 `github-actions[bot]`）、合并都一样；提交说明里不加 `Co-Authored-By`、`Claude-Session` 或任何工具署名。不要在网页上点合并（会让 GitHub 成为提交者），在本地合并后推送。
+
 > **自然语言是不确定的，但我们生成的代码必须是绝对确定的。** 
 > —— 这是你通过这份手册所背负的核心命题。
 
